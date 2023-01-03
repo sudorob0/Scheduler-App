@@ -32,11 +32,11 @@
       <TextField fx:id="usernameTextField" layoutX="269.0" layoutY="126.0" />
       <TextField fx:id="passwordTextField" layoutX="269.0" layoutY="167.0" />
       <TextField fx:id="locationTextField" layoutX="269.0" layoutY="211.0" />
-      <Button fx:id="loginButton" layoutX="313.0" layoutY="259.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: FFFBEB;" text="Login" textFill="#251749">
+      <Button fx:id="loginButton" layoutX="313.0" layoutY="259.0" mnemonicParsing="false" onAction="#loginButtonClicked" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: FFFBEB;" text="Login" textFill="#251749">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="cancelButton" layoutX="234.0" layoutY="259.0" mnemonicParsing="false" style="-fx-background-color: FFFBEB;" text="Cancel" textFill="#251749">
+      <Button fx:id="cancelButton" layoutX="234.0" layoutY="259.0" mnemonicParsing="false" onAction="#cancelButtonClicked" style="-fx-background-color: FFFBEB;" text="Cancel" textFill="#251749">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>

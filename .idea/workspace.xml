@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f68dc8a8-5112-4d09-b5e7-45b1628de8d3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/controllers/AppointmentsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controllers/CustomersController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controllers/MainMenuController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utilities/ChangeScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/Appointments.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Appointments.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/Customers.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Customers.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/MainMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +89,7 @@
       <updated>1672520408250</updated>
       <workItem from="1672520410086" duration="144000" />
       <workItem from="1672520587069" duration="7467000" />
-      <workItem from="1672600849556" duration="3849000" />
+      <workItem from="1672600849556" duration="9556000" />
     </task>
     <servers />
   </component>
