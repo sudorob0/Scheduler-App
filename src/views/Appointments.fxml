@@ -1,67 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="864.0" prefWidth="1137.0" style="-fx-background-color: #263159;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="584.0" prefWidth="1137.0" style="-fx-background-color: #263159;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="464.0" prefHeight="73.0" prefWidth="209.0" text="Appointments" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="34.0" layoutY="154.0" text="Appointment ID :" textFill="#fffbeb">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="741.0" layoutY="144.0" text="Type :" textFill="#fffbeb">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="383.0" layoutY="228.0" text="Contact :" textFill="#fffbeb">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="386.0" layoutY="192.0" text="Location :" textFill="#fffbeb">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="386.0" layoutY="153.0" text="Title :" textFill="#fffbeb">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="38.0" layoutY="227.0" text="User ID :" textFill="#fffbeb">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="36.0" layoutY="192.0" text="Customer ID :" textFill="#fffbeb">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Label>
-      <TextField fx:id="appointmentidTextField" editable="false" layoutX="172.0" layoutY="150.0" promptText="Auto-Generated" />
-      <TextField fx:id="titleTextField" layoutX="491.0" layoutY="150.0" prefHeight="25.0" prefWidth="161.0" />
-      <TextField fx:id="locationTextField" layoutX="490.0" layoutY="189.0" />
-      <TextField fx:id="descriptionTextField" layoutX="842.0" layoutY="189.0" prefHeight="165.0" prefWidth="254.0" />
-      <ComboBox fx:id="useridComboBox" layoutX="170.0" layoutY="225.0" prefHeight="25.0" prefWidth="164.0" />
-      <ComboBox fx:id="customeridComboBox" layoutX="170.0" layoutY="189.0" prefHeight="25.0" prefWidth="164.0" />
-      <TableView fx:id="appointmentsTable" layoutX="44.0" layoutY="478.0" prefHeight="310.0" prefWidth="1056.0">
+      <TableView fx:id="appointmentsTable" layoutX="40.0" layoutY="155.0" prefHeight="365.0" prefWidth="1058.0">
         <columns>
           <TableColumn prefWidth="91.0" text="Appointment ID" />
           <TableColumn prefWidth="98.0" text="Customer ID" />
@@ -75,8 +31,8 @@
             <TableColumn prefWidth="113.0" text="End Date/Time" />
         </columns>
       </TableView>
-      <Line endX="-5.0" endY="275.0" layoutX="158.0" layoutY="168.0" startX="825.0" startY="275.0" stroke="#495579" strokeLineCap="ROUND" strokeWidth="5.0" />
-      <Button fx:id="addButton" layoutX="484.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: FFFBEB;" text="Add">
+      <Line endX="253.0" endY="275.0" layoutX="142.0" layoutY="-202.0" startX="600.0" startY="275.0" stroke="#495579" strokeLineCap="ROUND" strokeWidth="5.0" />
+      <Button fx:id="addButton" layoutX="245.0" layoutY="531.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: FFFBEB;" text="Add">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
@@ -84,46 +40,15 @@
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="modifyButton" layoutX="484.0" layoutY="805.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="201.0" style="-fx-background-color: FFFBEB;" text="Modify">
+      <Button fx:id="modifyButton" layoutX="469.0" layoutY="531.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="201.0" style="-fx-background-color: FFFBEB;" text="Modify">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="deleteButton" layoutX="708.0" layoutY="805.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="86.0" style="-fx-background-color: FFFBEB;" text="Delete">
+      <Button fx:id="deleteButton" layoutX="695.0" layoutY="531.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="86.0" style="-fx-background-color: FFFBEB;" text="Delete">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
-      <ComboBox fx:id="typeComboBox" layoutX="842.0" layoutY="141.0" prefHeight="25.0" prefWidth="164.0" />
-      <ComboBox fx:id="contactComboBox" layoutX="489.0" layoutY="225.0" prefHeight="25.0" prefWidth="164.0" />
-      <Label layoutX="734.0" layoutY="192.0" text="Description :" textFill="#fffbeb">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="34.0" layoutY="328.0" text="Start Time :" textFill="#fffbeb">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="36.0" layoutY="291.0" text="Start Date :" textFill="#fffbeb">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="384.0" layoutY="291.0" text="End Date :" textFill="#fffbeb">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="383.0" layoutY="328.0" text="End Time :" textFill="#fffbeb">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Label>
-      <DatePicker fx:id="startDatePicker" layoutX="158.0" layoutY="289.0" prefHeight="25.0" prefWidth="179.0" />
-      <DatePicker fx:id="startTimePicker" layoutX="158.0" layoutY="325.0" prefHeight="25.0" prefWidth="179.0" />
-      <DatePicker fx:id="endDatePicker" layoutX="490.0" layoutY="289.0" />
-      <DatePicker fx:id="endTimePicker" layoutX="490.0" layoutY="325.0" />
-      <RadioButton fx:id="allAppsRadio" layoutX="307.0" layoutY="84.0" mnemonicParsing="false" onAction="#allAppsRadioSelected" selected="true" text="All Appointments" textFill="#fffbeb">
+      <RadioButton fx:id="allAppsRadio" layoutX="312.0" layoutY="104.0" mnemonicParsing="false" onAction="#allAppsRadioSelected" selected="true" text="All Appointments" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>
@@ -131,20 +56,15 @@
             <ToggleGroup fx:id="appointments" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="monthlyRadio" layoutX="526.0" layoutY="84.0" mnemonicParsing="false" onAction="#monthlyRadioSelected" text="Monthly" textFill="#fffbeb" toggleGroup="$appointments">
+      <RadioButton fx:id="monthlyRadio" layoutX="526.0" layoutY="104.0" mnemonicParsing="false" onAction="#monthlyRadioSelected" text="Monthly" textFill="#fffbeb" toggleGroup="$appointments">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="weeklyRadio" layoutX="686.0" layoutY="84.0" mnemonicParsing="false" onAction="#weeklyRadioSelected" text="Weekly" textFill="#fffbeb" toggleGroup="$appointments">
+      <RadioButton fx:id="weeklyRadio" layoutX="685.0" layoutY="104.0" mnemonicParsing="false" onAction="#weeklyRadioSelected" text="Weekly" textFill="#fffbeb" toggleGroup="$appointments">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>
       </RadioButton>
-      <Button fx:id="clearButton" layoutX="709.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: FFFBEB;" text="Clear">
-         <font>
-            <Font name="Arial Bold" size="15.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>
