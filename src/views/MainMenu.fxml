@@ -17,15 +17,15 @@
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font></Button>
-      <Button fx:id="appointmentsButton" layoutX="103.0" layoutY="182.0" mnemonicParsing="false" onAction="#appointmentsButtonClicked" style="-fx-background-color: #F9F5EB;" text="Appointments">
+      <Button fx:id="appointmentsButton" layoutX="103.0" layoutY="182.0" mnemonicParsing="false" onAction="#appointmentsButtonClicked" style="-fx-background-color: #263159;" text="Appointments" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font></Button>
-      <Button fx:id="reportsButton" layoutX="103.0" layoutY="239.0" mnemonicParsing="false" onAction="#reportsButtonClicked" prefHeight="37.0" prefWidth="161.0" style="-fx-background-color: #F9F5EB;" text="Reports">
+      <Button fx:id="reportsButton" layoutX="103.0" layoutY="239.0" mnemonicParsing="false" onAction="#reportsButtonClicked" prefHeight="37.0" prefWidth="161.0" style="-fx-background-color: #263159;" text="Reports" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font></Button>
-      <Button fx:id="exitButton" layoutX="102.0" layoutY="296.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="37.0" prefWidth="161.0" style="-fx-background-color: #F9F5EB;" text="Exit">
+      <Button fx:id="exitButton" layoutX="102.0" layoutY="296.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="37.0" prefWidth="161.0" style="-fx-background-color: #263159;" text="Exit" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font></Button>

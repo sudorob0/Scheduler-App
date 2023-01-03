@@ -19,7 +19,9 @@ public class CustomersController {
         mainMenuScene.stringToSceneChange(actionEvent, "MainMenu");
     }
 
-    public void addButtonClicked(ActionEvent actionEvent) {
+    public void addButtonClicked(ActionEvent actionEvent) throws IOException {
+        ChangeScene mainMenuScene = new ChangeScene();
+        mainMenuScene.stringToSceneChange(actionEvent, "AddCustomer");
     }
 
     public void modifyButtonClicked(ActionEvent actionEvent) {

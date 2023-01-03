@@ -44,8 +44,20 @@ public class ChangeScene {
             stage.setScene(scene);
             stage.show();
         }
+        else if (sceneName == "AddCustomer"){
+            Scene scene = new Scene(root, 500, 500);
+            stage.setTitle(sceneName);
+            stage.setScene(scene);
+            stage.show();
+        }
         else if (sceneName == "Appointments"){
             Scene scene = new Scene(root, 1150, 600);
+            stage.setTitle(sceneName);
+            stage.setScene(scene);
+            stage.show();
+        }
+        else if (sceneName == "AddAppointment"){
+            Scene scene = new Scene(root, 850, 500);
             stage.setTitle(sceneName);
             stage.setScene(scene);
             stage.show();

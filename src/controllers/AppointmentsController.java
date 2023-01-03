@@ -26,12 +26,8 @@ public class AppointmentsController {
     public RadioButton weeklyRadio;
 
     public void addButtonClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/views/MainMenu.fxml"));
-        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 360, 370);
-        stage.setTitle("Main Menu");
-        stage.setScene(scene);
-        stage.show();
+        ChangeScene mainMenuScene = new ChangeScene();
+        mainMenuScene.stringToSceneChange(actionEvent, "AddAppointment");
     }
 
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {
