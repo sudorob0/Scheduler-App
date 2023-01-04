@@ -1,6 +1,7 @@
 module app.code {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens controllers to javafx.fxml;

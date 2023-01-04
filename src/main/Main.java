@@ -1,5 +1,7 @@
 package main;
 
+import DAO.DBConnection;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,8 +27,9 @@ public class Main extends Application {
      * @param args
      */
     public static void main(String[] args) {
-        // this is used to add test data
-
+        // open db connection
+        DBConnection.openConnection();
         launch(args);
+        DBConnection.closeConnection();
     }
 }
