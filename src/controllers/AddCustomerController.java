@@ -32,4 +32,6 @@ public class AddCustomerController {
         ChangeScene mainMenuScene = new ChangeScene();
         mainMenuScene.stringToSceneChange(actionEvent, "Customers");
     }
+
+    public void showMe(ActionEvent actionEvent) { }
 }

@@ -7,31 +7,25 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="374.0" prefWidth="567.0" style="-fx-background-color: #263159;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="374.0" prefWidth="567.0" style="-fx-background-color: #263159;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <children>
-      <Label layoutX="56.0" layoutY="62.0" text="Appointment Management Application" textFill="#fffbeb">
+      <Label fx:id="titleLabel" layoutX="56.0" layoutY="62.0" text="Appointment Management Application" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="151.0" layoutY="130.0" text="UserName :" textFill="#fffbeb">
+      <Label fx:id="userNameLabel" layoutX="153.0" layoutY="158.0" text="UserName :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="154.0" layoutY="171.0" text="Password :" textFill="#fffbeb">
+      <Label fx:id="passwordLabel" layoutX="155.0" layoutY="197.0" text="Password :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="157.0" layoutY="215.0" text="Location :" textFill="#fffbeb">
-         <font>
-            <Font name="Arial Bold" size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="usernameTextField" layoutX="269.0" layoutY="126.0" />
-      <TextField fx:id="passwordTextField" layoutX="269.0" layoutY="167.0" />
-      <TextField fx:id="locationTextField" layoutX="269.0" layoutY="211.0" />
+      <TextField fx:id="usernameTextField" layoutX="271.0" layoutY="154.0" />
+      <TextField fx:id="passwordTextField" layoutX="271.0" layoutY="195.0" />
       <Button fx:id="loginButton" layoutX="313.0" layoutY="259.0" mnemonicParsing="false" onAction="#loginButtonClicked" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: FFFBEB;" text="Login" textFill="#251749">
          <font>
             <Font name="Arial Bold" size="15.0" />
