@@ -9,36 +9,31 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="374.0" prefWidth="567.0" style="-fx-background-color: #263159;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <children>
-      <Label fx:id="titleLabel" layoutX="56.0" layoutY="62.0" text="Appointment Management Application" textFill="#fffbeb">
+      <Label fx:id="titleLabel" layoutX="57.0" layoutY="90.0" text="Appointment Management Application" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="userNameLabel" layoutX="153.0" layoutY="158.0" text="UserName :" textFill="#fffbeb">
+      <Label fx:id="userNameLabel" layoutX="145.0" layoutY="191.0" text="UserName :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="passwordLabel" layoutX="155.0" layoutY="197.0" text="Password :" textFill="#fffbeb">
+      <Label fx:id="passwordLabel" layoutX="147.0" layoutY="230.0" text="Password :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameTextField" layoutX="271.0" layoutY="154.0" />
-      <TextField fx:id="passwordTextField" layoutX="271.0" layoutY="195.0" />
-      <Button fx:id="loginButton" layoutX="313.0" layoutY="259.0" mnemonicParsing="false" onAction="#loginButtonClicked" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: FFFBEB;" text="Login" textFill="#251749">
+      <TextField fx:id="usernameTextField" layoutX="263.0" layoutY="187.0" />
+      <TextField fx:id="passwordTextField" layoutX="263.0" layoutY="228.0" />
+      <Button fx:id="loginButton" layoutX="305.0" layoutY="292.0" mnemonicParsing="false" onAction="#loginButtonClicked" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: FFFBEB;" text="Login" textFill="#251749">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="cancelButton" layoutX="234.0" layoutY="259.0" mnemonicParsing="false" onAction="#cancelButtonClicked" style="-fx-background-color: FFFBEB;" text="Cancel" textFill="#251749">
+      <Button fx:id="exitButton" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#exitButtonClicked" style="-fx-background-color: FFFBEB;" text="X Exit" textFill="#251749">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
-      <Label layoutX="231.0" layoutY="14.0" text="RoBo" textFill="#b4cde6">
-         <font>
-            <Font name="Arial Bold" size="41.0" />
-         </font>
-      </Label>
-      <Line endX="100.0" layoutX="277.0" layoutY="106.0" startX="-100.0" stroke="#495579" strokeLineCap="ROUND" strokeWidth="5.0" />
+      <Line endX="100.0" layoutX="276.0" layoutY="143.0" startX="-100.0" stroke="#495579" strokeLineCap="ROUND" strokeWidth="5.0" />
    </children>
 </AnchorPane>

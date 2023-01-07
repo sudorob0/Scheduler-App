@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="376.0" prefWidth="365.0" style="-fx-background-color: #263159;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="376.0" prefWidth="365.0" style="-fx-background-color: #263159;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainMenuController">
    <children>
       <Label layoutX="73.0" layoutY="14.0" prefHeight="65.0" prefWidth="221.0" text="Main Menu" textFill="#fffbeb">
          <font>
@@ -16,19 +17,31 @@
       <Button fx:id="customersButton" layoutX="103.0" layoutY="125.0" mnemonicParsing="false" onAction="#customersButtonClicked" prefHeight="37.0" prefWidth="161.0" style="-fx-background-color: #263159;" text="Customers" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="20.0" />
-         </font></Button>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Button fx:id="appointmentsButton" layoutX="103.0" layoutY="182.0" mnemonicParsing="false" onAction="#appointmentsButtonClicked" style="-fx-background-color: #263159;" text="Appointments" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="20.0" />
-         </font></Button>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Button fx:id="reportsButton" layoutX="103.0" layoutY="239.0" mnemonicParsing="false" onAction="#reportsButtonClicked" prefHeight="37.0" prefWidth="161.0" style="-fx-background-color: #263159;" text="Reports" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="20.0" />
-         </font></Button>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Button fx:id="exitButton" layoutX="102.0" layoutY="296.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="37.0" prefWidth="161.0" style="-fx-background-color: #263159;" text="Exit" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="20.0" />
-         </font></Button>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Line endX="18.0" layoutX="223.0" layoutY="82.0" startX="-100.0" stroke="#495578" strokeLineCap="ROUND" strokeWidth="5.0" />
    </children>
 </AnchorPane>
