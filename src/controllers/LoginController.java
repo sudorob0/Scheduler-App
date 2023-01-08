@@ -4,6 +4,7 @@ import DAO.UserQuery;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,7 +22,7 @@ import java.time.ZoneId;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class LoginController {
+public class LoginController implements Initializable {
     public TextField usernameTextField;
     public TextField passwordTextField;
     public Button loginButton;
@@ -31,6 +32,12 @@ public class LoginController {
     public Button exitButton;
     public Label locationTextField;
 
+    /**
+     * This initialize method displays the text in the language that the user has set on their local machine and displays
+     * their location.
+     * @param url
+     * @param resourceBundle
+     */
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ResourceBundle rb = ResourceBundle.getBundle("languages/login", Locale.getDefault());
         titleLabel.setText(rb.getString("titleLabel"));
@@ -39,8 +46,16 @@ public class LoginController {
         loginButton.setText(rb.getString("loginButton"));
         exitButton.setText(rb.getString("exitButton"));
         locationTextField.setText(ZoneId.systemDefault().toString());
+
+
     }
 
+    /**
+     * This method runs a query on the users table and checks to make user the password for that user is correct.
+     * @param actionEvent login button clicked
+     * @throws IOException
+     * @throws SQLException
+     */
     public void loginButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
         String userNameString = usernameTextField.getText();
         String passwordString = passwordTextField.getText();
@@ -59,7 +74,10 @@ public class LoginController {
         }
     }
 
-
+    /**
+     * Method to close the application
+     * @param Exit requires the user to click the exit button
+     */
     public void exitButtonClicked(ActionEvent Exit) {
         Stage stage = (Stage) ((Node) Exit.getSource()).getScene().getWindow();
         stage.close();
