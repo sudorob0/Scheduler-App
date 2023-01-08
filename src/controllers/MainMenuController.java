@@ -15,19 +15,8 @@ public class MainMenuController {
     public Button customersButton;
     public Button appointmentsButton;
     public Button reportsButton;
-    public Button exitButton;
-/**
-    public void changeScene(ActionEvent actionEvent, String fxmlFile, int sceneWidth, int sceneHeight, String screenTitle) throws IOException {
-        String path = "/views/" + fxmlFile;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
-        Parent root = loader.load();
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, sceneWidth, sceneHeight);
-        stage.setTitle(screenTitle);
-        stage.setScene(scene);
-        stage.show();
-    }
- */
+    public Button logoutButton;
+
 
     public void customersButtonClicked(ActionEvent actionEvent) throws IOException {
         ChangeScene currentChange = new ChangeScene();
@@ -42,7 +31,7 @@ public class MainMenuController {
     public void reportsButtonClicked(ActionEvent actionEvent) {
     }
 
-    public void exitButtonClicked(ActionEvent actionEvent) throws IOException {
+    public void logoutButtonClicked(ActionEvent actionEvent) throws IOException {
         ChangeScene currentChange = new ChangeScene();
         currentChange.stringToSceneChange(actionEvent, "Login");
     }

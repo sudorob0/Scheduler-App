@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ChangeScene {
+
     public void changeScene(ActionEvent actionEvent, String fxmlFile, int sceneWidth, int sceneHeight, String screenTitle) throws IOException {
         String path = "/views/" + fxmlFile;
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));

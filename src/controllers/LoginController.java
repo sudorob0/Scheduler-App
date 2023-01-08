@@ -17,6 +17,7 @@ import utilities.PopUpBox;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.ZoneId;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -28,6 +29,7 @@ public class LoginController {
     public Label userNameLabel;
     public Label passwordLabel;
     public Button exitButton;
+    public Label locationTextField;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ResourceBundle rb = ResourceBundle.getBundle("languages/login", Locale.getDefault());
@@ -36,11 +38,13 @@ public class LoginController {
         passwordLabel.setText(rb.getString("passwordLabel"));
         loginButton.setText(rb.getString("loginButton"));
         exitButton.setText(rb.getString("exitButton"));
+        locationTextField.setText(ZoneId.systemDefault().toString());
     }
 
     public void loginButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
         String userNameString = usernameTextField.getText();
         String passwordString = passwordTextField.getText();
+        Boolean test = UserQuery.authenticateUser(userNameString, passwordString);
         // Input validation
         if (userNameString == "") {
             PopUpBox.errorBox("Please enter valid username");
@@ -51,7 +55,7 @@ public class LoginController {
             ChangeScene mainMenuScene = new ChangeScene();
             mainMenuScene.stringToSceneChange(actionEvent, "MainMenu");
         } else {
-            System.out.print("\nIncorrect username or password, please try again. If you continue to have issues contact your system admin.");
+            PopUpBox.errorBox("Incorrect username or password, please try again. If you continue to have issues contact your system admin.");
         }
     }
 

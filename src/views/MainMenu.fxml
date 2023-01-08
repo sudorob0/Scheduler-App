@@ -35,7 +35,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="exitButton" layoutX="102.0" layoutY="296.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="37.0" prefWidth="161.0" style="-fx-background-color: #263159;" text="Exit" textFill="#fffbeb">
+      <Button fx:id="logoutButton" layoutX="102.0" layoutY="296.0" mnemonicParsing="false" onAction="#logoutButtonClicked" prefHeight="37.0" prefWidth="161.0" style="-fx-background-color: #263159;" text="Logout" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>

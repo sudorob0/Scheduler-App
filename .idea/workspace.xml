@@ -92,14 +92,14 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/DAO/UserQuery.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="3" />
+          <url>file://$PROJECT_DIR$/src/controllers/LoginController.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/DAO/UserQuery.java</url>
-          <line>25</line>
-          <option name="timeStamp" value="4" />
+          <url>file://$PROJECT_DIR$/src/controllers/LoginController.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
