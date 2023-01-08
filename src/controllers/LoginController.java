@@ -15,10 +15,14 @@ import javafx.stage.Stage;
 import utilities.ChangeScene;
 import utilities.PopUpBox;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -67,9 +71,17 @@ public class LoginController implements Initializable {
             PopUpBox.errorBox("Please enter valid password");
             // Authenticate user with their username and password
         } else if (UserQuery.authenticateUser(userNameString, passwordString)) {
+            BufferedWriter log = new BufferedWriter(new FileWriter("user_auth_log.txt", true));
+            log.append(String.valueOf(ZonedDateTime.now(ZoneOffset.UTC))).append("UTC-Login Attempt - USERNAME:" + userNameString + " LOGIN SUCCESSFUL\n");
+            log.flush();
+            log.close();
             ChangeScene mainMenuScene = new ChangeScene();
             mainMenuScene.stringToSceneChange(actionEvent, "MainMenu");
         } else {
+            BufferedWriter log = new BufferedWriter(new FileWriter("user_auth_log.txt", true));
+            log.append(String.valueOf(ZonedDateTime.now(ZoneOffset.UTC))).append("UTC-Login Attempt - USERNAME:" + userNameString + " LOGIN FAILED\n");
+            log.flush();
+            log.close();
             PopUpBox.errorBox("Incorrect username or password, please try again. If you continue to have issues contact your system admin.");
         }
     }

@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import DAO.AppointmentQuery.*;
 import models.Appointment;
@@ -25,13 +27,18 @@ public class MainMenuController implements Initializable {
     public Button logoutButton;
 
     public void initialize(URL url, ResourceBundle resourceBundle){
-        for (Appointment appointment: AppointmentQuery.getAllAppointments()) {
-            AppointmentStartDateTime = appointment.getAppointmentStartDateTime();
-            if ((startTime.isAfter(minus15MinutesFromTime) || startTime.isEqual(minus15MinutesFromTime)) && (startTime.isBefore(add15MinutesToTime) || (startTime.isEqual(add15MinutesToTime)))) {
-                getAppointmentID = appointment.getAppointmentID();
-                appointmentStartingTime = startTime;
-                appointmentIn15Minutes = true;
+       /**
+        try {
+            for (Appointment appointment: AppointmentQuery.getAllAppointments()) {
+                AppointmentStartDateTime = appointment.getAppointmentStartDateTime();
+                if ((startTime.isAfter(LocalDateTime.now().minusMinutes(15)) || startTime.isEqual(minus15MinutesFromTime)) && (startTime.isBefore(add15MinutesToTime) || (startTime.isEqual(add15MinutesToTime)))) {
+                    getAppointmentID = appointment.getAppointmentID();
+                    appointmentStartingTime = startTime;
+                    appointmentIn15Minutes = true;
+                }
             }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         if (appointmentIn15Minutes) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
@@ -49,8 +56,8 @@ public class MainMenuController implements Initializable {
             alert.showAndWait();
         }
         PopUpBox.errorBox("sdf");
+        */
     }
-
     public void customersButtonClicked(ActionEvent actionEvent) throws IOException {
         ChangeScene currentChange = new ChangeScene();
         currentChange.stringToSceneChange(actionEvent, "Customers");

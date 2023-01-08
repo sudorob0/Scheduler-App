@@ -96,12 +96,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/controllers/LoginController.java</url>
-          <line>68</line>
+          <line>72</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/controllers/LoginController.java</url>
-          <line>71</line>
+          <line>79</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
