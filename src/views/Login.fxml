@@ -9,9 +9,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="374.0" prefWidth="567.0" style="-fx-background-color: #263159;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <children>
-      <Label fx:id="titleLabel" layoutX="9.0" layoutY="64.0" text="Appointment Management Application" textFill="#fffbeb">
+      <Label fx:id="titleLabel" layoutX="67.0" layoutY="68.0" text="Appointment Management Application" textFill="#fffbeb">
          <font>
-            <Font name="Arial Bold" size="30.0" />
+            <Font name="Arial Bold" size="26.0" />
          </font>
       </Label>
       <Label fx:id="userNameLabel" layoutX="145.0" layoutY="191.0" text="UserName :" textFill="#fffbeb">
@@ -35,7 +35,7 @@
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
       <Line endX="100.0" layoutX="283.0" layoutY="162.0" startX="-100.0" stroke="#495579" strokeLineCap="ROUND" strokeWidth="5.0" />
-      <Label fx:id="locationTextField" layoutX="242.0" layoutY="110.0" text="Location" textFill="#fffbeb">
+      <Label fx:id="locationTextField" layoutX="223.0" layoutY="115.0" text="Country/City" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>

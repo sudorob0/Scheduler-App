@@ -19,16 +19,16 @@
       </Label>
       <TableView fx:id="appointmentsTable" layoutX="40.0" layoutY="155.0" prefHeight="365.0" prefWidth="1058.0">
         <columns>
-          <TableColumn prefWidth="91.0" text="Appointment ID" />
-          <TableColumn prefWidth="98.0" text="Customer ID" />
-            <TableColumn prefWidth="112.0" text="User ID" />
-            <TableColumn prefWidth="81.0" text="Title" />
-            <TableColumn minWidth="0.0" prefWidth="211.0" text="Description" />
-            <TableColumn prefWidth="73.0" text="Location" />
-            <TableColumn prefWidth="94.0" text="Contact ID" />
-            <TableColumn prefWidth="85.0" text="Type" />
-            <TableColumn prefWidth="97.0" text="Start Date/Time" />
-            <TableColumn prefWidth="113.0" text="End Date/Time" />
+          <TableColumn fx:id="appointmentidCol" prefWidth="98.0" text="Appointment ID" />
+          <TableColumn fx:id="customeridCol" prefWidth="100.0" text="Customer ID" />
+            <TableColumn fx:id="useridCol" prefWidth="103.0" text="User ID" />
+            <TableColumn fx:id="titleCol" prefWidth="81.0" text="Title" />
+            <TableColumn fx:id="descriptionCol" minWidth="0.0" prefWidth="211.0" text="Description" />
+            <TableColumn fx:id="locationCol" prefWidth="73.0" text="Location" />
+            <TableColumn fx:id="contactidCol" prefWidth="94.0" text="Contact ID" />
+            <TableColumn fx:id="typeCol" prefWidth="85.0" text="Type" />
+            <TableColumn fx:id="startDateTimeCol" prefWidth="97.0" text="Start Date/Time" />
+            <TableColumn fx:id="endDateTimeCol" prefWidth="113.0" text="End Date/Time" />
         </columns>
       </TableView>
       <Line endX="253.0" endY="275.0" layoutX="142.0" layoutY="-202.0" startX="600.0" startY="275.0" stroke="#495579" strokeLineCap="ROUND" strokeWidth="5.0" />

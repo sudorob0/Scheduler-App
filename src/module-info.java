@@ -11,5 +11,8 @@ module app.code {
     opens main to javafx.fxml;
     exports main;
 
+    opens models to javafx.fxml;
+    exports models;
+
 
 }

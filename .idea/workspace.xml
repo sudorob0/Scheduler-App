@@ -95,14 +95,9 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/controllers/LoginController.java</url>
-          <line>72</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/controllers/LoginController.java</url>
-          <line>79</line>
-          <option name="timeStamp" value="7" />
+          <url>file://$PROJECT_DIR$/src/controllers/AppointmentsController.java</url>
+          <line>47</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
