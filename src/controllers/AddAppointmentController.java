@@ -6,6 +6,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import utilities.ChangeScene;
+import utilities.PopUpBox;
 
 import java.io.IOException;
 
@@ -27,8 +28,10 @@ public class AddAppointmentController {
     public Button clearButton;
 
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {
-        ChangeScene mainMenuScene = new ChangeScene();
-        mainMenuScene.stringToSceneChange(actionEvent, "Appointments");
+        if (PopUpBox.optionBox("Are you sure you want to return to the previous screen without saving?")){
+            ChangeScene mainMenuScene = new ChangeScene();
+            mainMenuScene.stringToSceneChange(actionEvent, "Appointments");
+        }
     }
 
     public void addButtonClicked(ActionEvent actionEvent) {

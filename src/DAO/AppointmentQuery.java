@@ -6,34 +6,47 @@ import models.Appointment;
 import java.sql.*;
 
 import java.sql.PreparedStatement;
-import java.time.LocalDateTime;
 
 public class AppointmentQuery {
-    public static ObservableList<Appointment> getAllAppointments() throws SQLException {
+    public static ObservableList<Appointment> makeAppointmentQuery(String sqlQuery) throws SQLException {
         ObservableList<Appointment> appointmentsList = FXCollections.observableArrayList();
-        String sqlQuery = "SELECT * FROM appointments";
         PreparedStatement ps = DBConnection.getConnection().prepareStatement(sqlQuery);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            int appointmentID = rs.getInt("Appointment_ID");
-            String appointmentTitle = rs.getString("Title");
-            String appointmentDescription = rs.getString("Description");
-            String appointmentLocation = rs.getString("Location");
-            String appointmentType = rs.getString("Type");
-            LocalDateTime appointmentStart = rs.getTimestamp("Start").toLocalDateTime();
-            LocalDateTime appointmentEnd = rs.getTimestamp("End").toLocalDateTime();
-            int customerID = rs.getInt("Customer_ID");
-            int userID = rs.getInt("User_ID");
-            int contactID = rs.getInt("Contact_ID");
-            Appointment appointment = new Appointment(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, customerID, userID, contactID);
+            Appointment appointment = new Appointment(
+            rs.getInt("Appointment_ID"),
+            rs.getString("Title"),
+            rs.getString("Description"),
+            rs.getString("Location"),
+            rs.getString("Type"),
+            rs.getTimestamp("Start").toLocalDateTime(),
+            rs.getTimestamp("End").toLocalDateTime(),
+            rs.getInt("Customer_ID"),
+            rs.getInt("User_ID"),
+            rs.getInt("Contact_ID"));
             appointmentsList.add(appointment);
         }
         return appointmentsList;
     }
 
-    public static ObservableList<Appointment> getAppointmentsByMonth() {
-        ObservableList<Appointment> AppointmentsByMonth = FXCollections.observableArrayList();
+    public static ObservableList<Appointment> getAllAppointments() throws SQLException {
+        ObservableList<Appointment> appointmentList = makeAppointmentQuery("SELECT * FROM appointments");
+        return appointmentList;
+    }
 
-        String sqlQuery = "SELECT * FROM client_schedule.appointments WHERE Start >= (CURRENT_DATE) + INTERVAL 1 DAY - INTERVAL 1 MONTH AND Start < LAST_DAY(CURRENT_DATE) + INTERVAL 1 DAY;";
+    public static ObservableList<Appointment> getAppointmentsByMonth() throws SQLException {
+        ObservableList<Appointment> appointmentList = makeAppointmentQuery("SELECT * FROM client_schedule.appointments WHERE Start >= (CURRENT_DATE) + INTERVAL 1 DAY - INTERVAL 1 MONTH AND Start < LAST_DAY(CURRENT_DATE) + INTERVAL 1 DAY;");
+        return appointmentList;
+    }
+
+    public static ObservableList<Appointment> getAppointmentsByWeek() throws SQLException {
+        ObservableList<Appointment> appointmentList = makeAppointmentQuery("SELECT * FROM client_schedule.appointments WHERE Start >= (CURRENT_DATE) + INTERVAL 1 DAY - INTERVAL 1 WEEK AND Start < LAST_DAY(CURRENT_DATE) + INTERVAL 1 DAY;");
+        return appointmentList;
+    }
+
+    public static void deleteAppointment(int appointmentID) throws SQLException {
+        String deleteStatement = "DELETE from appointments WHERE Appointment_ID=" +appointmentID;
+        PreparedStatement ps = DBConnection.getConnection().prepareStatement(deleteStatement);
+        ps.execute();
     }
 }
