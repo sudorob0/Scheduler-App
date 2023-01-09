@@ -41,6 +41,11 @@ public class AppointmentsController implements Initializable {
     public TableColumn endDateTimeCol;
     public TableColumn typeCol;
 
+    /**
+     * This initialize method loads the appointment table.
+     * @param url
+     * @param resourceBundle
+     */
     public void initialize(URL url, ResourceBundle resourceBundle){
         try {
             ObservableList<Appointment> appointmentsList = AppointmentQuery.getAllAppointments();
@@ -79,6 +84,23 @@ public class AppointmentsController implements Initializable {
     }
 
     public void allAppsRadioSelected(ActionEvent actionEvent) {
+        try {
+            ObservableList<Appointment> appointmentsList = AppointmentQuery.getAllAppointments();
+            System.out.print(appointmentsList);
+            appointmentsTable.setItems(AppointmentQuery.getAllAppointments());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        appointmentidCol.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
+        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
+        locationCol.setCellValueFactory(new PropertyValueFactory<>("appointmentLocation"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
+        startDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentStartDateTime"));
+        endDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentEndDateTime"));
+        customeridCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        useridCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
+        contactidCol.setCellValueFactory(new PropertyValueFactory<>("contactID"));
     }
 
     public void monthlyRadioSelected(ActionEvent actionEvent) {

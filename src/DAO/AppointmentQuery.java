@@ -30,4 +30,10 @@ public class AppointmentQuery {
         }
         return appointmentsList;
     }
+
+    public static ObservableList<Appointment> getAppointmentsByMonth() {
+        ObservableList<Appointment> AppointmentsByMonth = FXCollections.observableArrayList();
+
+        String sqlQuery = "SELECT * FROM client_schedule.appointments WHERE Start >= (CURRENT_DATE) + INTERVAL 1 DAY - INTERVAL 1 MONTH AND Start < LAST_DAY(CURRENT_DATE) + INTERVAL 1 DAY;";
+    }
 }
