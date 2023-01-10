@@ -11,7 +11,7 @@ import java.sql.SQLException;
 /**
  * Class to make user queries
  */
-public class UserQuery {
+public class UserSQL {
 
     /**
      * This method queries the database for any rows that have the entered username and returns TRUE if the password
@@ -28,7 +28,6 @@ public class UserQuery {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 String userPassword = rs.getString("Password");
-                System.out.print(userPassword);
                 // Will return TRUE if they match
                 return userPassword.equals(enteredPassword);
             }

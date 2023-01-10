@@ -2,25 +2,18 @@ package controllers;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import models.Appointment;
 import utilities.ChangeScene;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import DAO.AppointmentQuery;
-import utilities.ChangeScene;
+import DAO.AppointmentSQL;
 import utilities.PopUpBox;
-import utilities.PopUpBox.*;
 
 public class AppointmentsController implements Initializable {
     public TableView appointmentsTable;
@@ -43,15 +36,19 @@ public class AppointmentsController implements Initializable {
     public TableColumn endDateTimeCol;
     public TableColumn typeCol;
 
+    /**
+     * This method checks which radio button is selected and then refreshes the appointmentTable.
+     * @throws SQLException
+     */
     public void refreshAppointmentsTable() throws SQLException {
         if (allAppsRadio.isSelected()){
-            ObservableList<Appointment> appointmentsList = AppointmentQuery.getAllAppointments();
+            ObservableList<Appointment> appointmentsList = AppointmentSQL.getAllAppointments();
             appointmentsTable.setItems(appointmentsList);
         } else if (monthlyRadio.isSelected()) {
-            ObservableList<Appointment> appointmentsList = AppointmentQuery.getAppointmentsByMonth();
+            ObservableList<Appointment> appointmentsList = AppointmentSQL.getAppointmentsByMonth();
             appointmentsTable.setItems(appointmentsList);
         } else if (weeklyRadio.isSelected()) {
-            ObservableList<Appointment> appointmentsList = AppointmentQuery.getAppointmentsByWeek();
+            ObservableList<Appointment> appointmentsList = AppointmentSQL.getAppointmentsByWeek();
             appointmentsTable.setItems(appointmentsList);
         }
         appointmentidCol.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
@@ -101,7 +98,7 @@ public class AppointmentsController implements Initializable {
         } else {
             String popUpString = "Are you sure you want to delete this Appointment?\nID: " + selectedAppointment.getAppointmentID() + "\nName: " + selectedAppointment.getAppointmentTitle();
             if (PopUpBox.optionBox(popUpString)){
-                AppointmentQuery.deleteAppointment(selectedAppointment.getAppointmentID());
+                AppointmentSQL.deleteAppointment(selectedAppointment.getAppointmentID());
                 refreshAppointmentsTable();
             }
         }

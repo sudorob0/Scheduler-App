@@ -7,7 +7,7 @@ import java.sql.*;
 
 import java.sql.PreparedStatement;
 
-public class AppointmentQuery {
+public class AppointmentSQL {
     public static ObservableList<Appointment> makeAppointmentQuery(String sqlQuery) throws SQLException {
         ObservableList<Appointment> appointmentsList = FXCollections.observableArrayList();
         PreparedStatement ps = DBConnection.getConnection().prepareStatement(sqlQuery);

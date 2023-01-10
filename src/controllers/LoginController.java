@@ -1,13 +1,9 @@
 package controllers;
 
-import DAO.UserQuery;
-import javafx.collections.ObservableList;
+import DAO.UserSQL;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -63,22 +59,22 @@ public class LoginController implements Initializable {
     public void loginButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
         String userNameString = usernameTextField.getText();
         String passwordString = passwordTextField.getText();
-        Boolean test = UserQuery.authenticateUser(userNameString, passwordString);
+        Boolean test = UserSQL.authenticateUser(userNameString, passwordString);
         // Input validation
         if (userNameString == "") {
             PopUpBox.errorBox("Please enter valid username");
         } else if (passwordString == "") {
             PopUpBox.errorBox("Please enter valid password");
             // Authenticate user with their username and password
-        } else if (UserQuery.authenticateUser(userNameString, passwordString)) {
-            BufferedWriter log = new BufferedWriter(new FileWriter("user_auth_log.txt", true));
+        } else if (UserSQL.authenticateUser(userNameString, passwordString)) {
+            BufferedWriter log = new BufferedWriter(new FileWriter("login_activity.txt", true));
             log.append(String.valueOf(ZonedDateTime.now(ZoneOffset.UTC))).append("UTC-Login Attempt - USERNAME:" + userNameString + " LOGIN SUCCESSFUL\n");
             log.flush();
             log.close();
             ChangeScene mainMenuScene = new ChangeScene();
             mainMenuScene.stringToSceneChange(actionEvent, "MainMenu");
         } else {
-            BufferedWriter log = new BufferedWriter(new FileWriter("user_auth_log.txt", true));
+            BufferedWriter log = new BufferedWriter(new FileWriter("login_activity.txt", true));
             log.append(String.valueOf(ZonedDateTime.now(ZoneOffset.UTC))).append("UTC-Login Attempt - USERNAME:" + userNameString + " LOGIN FAILED\n");
             log.flush();
             log.close();
