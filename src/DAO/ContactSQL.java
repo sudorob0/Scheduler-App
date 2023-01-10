@@ -30,4 +30,11 @@ public class ContactSQL {
         }
         return contactsList;
     }
+
+    public static Integer getContactID(String contactName) throws SQLException {
+        PreparedStatement ps = DBConnection.getConnection().prepareStatement("SELECT * from contacts WHERE Contact_Name = '" + contactName + "';");
+        ResultSet rs = ps.executeQuery();
+        Integer contactID = rs.getInt("Contact_ID");
+        return contactID;
+    }
 }

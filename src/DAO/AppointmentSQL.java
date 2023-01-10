@@ -3,9 +3,12 @@ package DAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Appointment;
+import models.Contact;
+
 import java.sql.*;
 
 import java.sql.PreparedStatement;
+import java.time.LocalDateTime;
 
 public class AppointmentSQL {
     public static ObservableList<Appointment> makeAppointmentQuery(String sqlQuery) throws SQLException {
@@ -48,5 +51,11 @@ public class AppointmentSQL {
         String deleteStatement = "DELETE from appointments WHERE Appointment_ID=" +appointmentID;
         PreparedStatement ps = DBConnection.getConnection().prepareStatement(deleteStatement);
         ps.execute();
+    }
+
+    public static boolean addAppointment(String contactName, String title, String location, String type, LocalDateTime start, LocalDateTime end, Integer customerId, Integer userID) throws SQLException {
+        Integer contactID = ContactSQL.getContactID(contactName);
+        System.out.print(contactID);
+        return Boolean.TRUE;
     }
 }

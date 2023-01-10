@@ -11,11 +11,12 @@ public class User {
 
     /**
      * Create user object
+     * @param userID
      * @param userName is a string that sets the userName
      * @param password Is a string that sets the users Password
      */
-    public User( String userName, String password) {
-
+    public User(int userID, String userName, String password) {
+        this.userID = userID;
         this.userName = userName;
         this.password = password;
 

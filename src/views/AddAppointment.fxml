@@ -94,8 +94,8 @@
          </font>
       </Label>
       <DatePicker fx:id="startDatePicker" layoutX="222.0" layoutY="266.0" prefHeight="25.0" prefWidth="179.0" />
-      <DatePicker fx:id="startTimePicker" layoutX="222.0" layoutY="302.0" prefHeight="25.0" prefWidth="179.0" />
-      <DatePicker fx:id="endDatePicker" layoutX="554.0" layoutY="266.0" />
-      <DatePicker fx:id="endTimePicker" layoutX="554.0" layoutY="302.0" />
+      <DatePicker fx:id="endDatePicker" layoutX="554.0" layoutY="266.0" prefHeight="25.0" prefWidth="179.0" />
+      <ComboBox fx:id="startTimeComboBox" layoutX="220.0" layoutY="303.0" prefHeight="25.0" prefWidth="179.0" />
+      <ComboBox fx:id="endTimeComboBox" layoutX="554.0" layoutY="303.0" prefHeight="25.0" prefWidth="179.0" />
    </children>
 </AnchorPane>

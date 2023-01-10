@@ -18,13 +18,13 @@ public class Customer {
 
     /**
      * Creates a customer object
-     * @param customerID sets the ID of the customer.
+     * @param customerID sets the ID of the customer as an integer.
      *  @param customerName sets the name of the customer as a string.
      *  @param customerAddress sets the customer address.
      *  @param customerZipCode sets the customer postal code.
      *  @param customerPhone sets the customer phone number.
-     *  @param customerDivision sets the customer division based on the country selection.
-     *  @param divisionID sets the customer division ID based on the division selection.
+     *  @param customerDivision sets the customer division using the country selection.
+     *  @param divisionID sets the customer division ID using the division selection as an integer.
      *  @param customerCountry sets the customer country. */
     public Customer(int customerID, String customerName, String customerAddress, String customerZipCode,
                     String customerPhone, String customerDivision, int divisionID, String customerCountry) {
@@ -43,7 +43,6 @@ public class Customer {
      * @return the ID of the customer.
      */
     public int getCustomerID() {
-
         return customerID;
     }
 
@@ -52,7 +51,6 @@ public class Customer {
      * @param customerID Setter for the ID of the customer.
      */
     public void setCustomerID(int customerID) {
-
         this.customerID = customerID;
     }
 
@@ -61,7 +59,6 @@ public class Customer {
      * @return the name of the customer.
      */
     public String getCustomerName() {
-
         return customerName;
     }
 
@@ -70,7 +67,6 @@ public class Customer {
      * @param customerName Setter for customerName.
      */
     public void setCustomerName(String customerName) {
-
         this.customerName = customerName;
     }
 
@@ -79,7 +75,6 @@ public class Customer {
      * @return the address of the customer.
      */
     public String getCustomerAddress() {
-
         return customerAddress;
     }
 
@@ -88,7 +83,6 @@ public class Customer {
      * @param customerAddress Setter for customerAddress.
      */
     public void setCustomerAddress(String customerAddress) {
-
         this.customerAddress = customerAddress;
     }
 
@@ -97,7 +91,6 @@ public class Customer {
      * @return the Zip code of the customer.
      */
     public String getCustomerZipCode() {
-
         return customerZipCode;
     }
 
@@ -106,7 +99,6 @@ public class Customer {
      * @param customerZipCode Setter for customerZipCode.
      */
     public void setCustomerZipCode(String customerZipCode) {
-
         this.customerZipCode = customerZipCode;
     }
 
@@ -115,7 +107,6 @@ public class Customer {
      * @return the phone number of the customer.
      */
     public String getCustomerPhone() {
-
         return customerPhone;
     }
 
@@ -124,7 +115,6 @@ public class Customer {
      * @param customerPhone Setter for customerPhone.
      */
     public void setCustomerPhone(String customerPhone) {
-
         this.customerPhone = customerPhone;
     }
 
@@ -133,7 +123,6 @@ public class Customer {
      * @return the ID of the selected division.
      */
     public int getDivisionID() {
-
         return divisionID;
     }
 
@@ -142,7 +131,6 @@ public class Customer {
      * @param divisionID Setter for divisionID.
      */
     public void setDivisionID(int divisionID) {
-
         this.divisionID = divisionID;
     }
 
@@ -151,7 +139,6 @@ public class Customer {
      * @return the division of the selected customer.
      */
     public String getCustomerDivision() {
-
         return customerDivision;
     }
 
@@ -160,7 +147,6 @@ public class Customer {
      * @param customerDivision Setter for customerDivision.
      */
     public void setCustomerDivision(String customerDivision) {
-
         this.customerDivision = customerDivision;
     }
 
@@ -169,7 +155,6 @@ public class Customer {
      * @return the country of the selected customer.
      */
     public String getCustomerCountry() {
-
         return customerCountry;
     }
 
@@ -178,7 +163,6 @@ public class Customer {
      * @param customerCountry Setter for customerCountry.
      */
     public void setCustomerCountry(String customerCountry) {
-
         this.customerCountry = customerCountry;
     }
 

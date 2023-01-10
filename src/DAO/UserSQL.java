@@ -36,4 +36,23 @@ public class UserSQL {
         }
         return Boolean.FALSE;
     }
+
+    public static ObservableList<User> getAllUsers() throws SQLException {
+        ObservableList<User> usersList = FXCollections.observableArrayList();
+        String sqlFindUser = "SELECT * FROM users;";
+        try {
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sqlFindUser);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                User newUser = new User(
+                        rs.getInt("User_ID"),
+                        rs.getString("User_Name"),
+                        rs.getString("Password"));
+                usersList.add(newUser);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return usersList;
+    }
 }
