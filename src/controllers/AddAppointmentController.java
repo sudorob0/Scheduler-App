@@ -39,9 +39,9 @@ public class AddAppointmentController implements Initializable {
     public ComboBox typeComboBox;
     public ComboBox contactComboBox;
     public DatePicker startDatePicker;
-    public DatePicker startTimePicker;
     public DatePicker endDatePicker;
-    public DatePicker endTimePicker;
+    public ComboBox startTimeComboBox;
+    public ComboBox endTimeComboBox;
 
     public void initialize(URL url, ResourceBundle resourceBundle){
         // Populates the type combo box
@@ -78,6 +78,18 @@ public class AddAppointmentController implements Initializable {
             throwables.printStackTrace();
         }
 
+        // Populate the start and end times with available appointment times with 15 minute increments
+        ObservableList<String> time = FXCollections.observableArrayList();
+        LocalTime startTime = LocalTime.of(8,0);
+        LocalTime endTime = LocalTime.of(22, 0);
+        time.add(startTime.toString());
+        while (startTime.isBefore(endTime)){
+            startTime = startTime.plusMinutes(15);
+            time.add(startTime.toString());
+        }
+        startTimeComboBox.setItems(time);
+        endTimeComboBox.setItems(time);
+
 
     }
     private ZonedDateTime convertToEst(LocalDateTime time) {
@@ -92,18 +104,32 @@ public class AddAppointmentController implements Initializable {
     }
 
     public void addButtonClicked(ActionEvent actionEvent) {
+
+        if (titleTextField.getText() == ""){PopUpBox.errorBox("The title field must be filled out to continue");}
+        else if (locationTextField.getText() == ""){PopUpBox.errorBox("The location field must be filled out to continue");}
+        else if (useridComboBox.getSelectionModel().getSelectedItem() == null){PopUpBox.errorBox("The user ID field must be filled out to continue");}
+        else if (customeridComboBox.getSelectionModel().getSelectedItem() == null){PopUpBox.errorBox("The customer ID field must be filled out to continue");}
+        else if (typeComboBox.getSelectionModel().getSelectedItem() == null){PopUpBox.errorBox("The appointment type field must be filled out to continue");}
+        else if (contactComboBox.getSelectionModel().getSelectedItem() == null){PopUpBox.errorBox("The contact field must be filled out to continue");}
+        else{
+
+        }
+
+
+
         String enteredTitle = titleTextField.getText();
         String enteredLocation = locationTextField.getText();
-        String enteredDesctiption = descriptionTextField.getText();
+        String enteredDescription = descriptionTextField.getText();
         Integer enteredUserID = (Integer) useridComboBox.getSelectionModel().getSelectedItem();
         Integer enteredCustomerID = (Integer) customeridComboBox.getSelectionModel().getSelectedItem();
         String enteredType = (String) typeComboBox.getSelectionModel().getSelectedItem();
         String enteredContact = (String) contactComboBox.getSelectionModel().getSelectedItem();
-        LocalDateTime enteredStartTime = LocalDateTime.of(startDatePicker.getValue(), startTimePicker.getValue());
-        startTimePicker.getValue();
-        endDatePicker.getValue();
-        endTimePicker.getValue();
-        AppointmentSQL.addAppointment("'Daddy Warbucks'");
+        //LocalTime enteredStartTime = (LocalTime) startTimeComboBox.getValue();
+        //LocalTime enteredEndTime = (LocalTime) endTimeComboBox.getValue();
+        //LocalDateTime enteredStartDT = LocalDateTime.of(startDatePicker.getValue(), enteredStartTime);
+        //LocalDateTime enteredEndDT = LocalDateTime.of(endDatePicker.getValue(), enteredEndTime);
+
+        //AppointmentSQL.addAppointment("'Daddy Warbucks'");
     }
 
 }
