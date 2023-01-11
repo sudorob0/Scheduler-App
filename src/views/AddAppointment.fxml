@@ -4,61 +4,61 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="820.0" style="-fx-background-color: #263159;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddAppointmentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="820.0" style="-fx-background-color: #263159;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddAppointmentController">
    <children>
       <Label layoutX="285.0" layoutY="1.0" prefHeight="73.0" prefWidth="269.0" text="Add Appointment" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="102.0" layoutY="109.0" text="Appointment ID :" textFill="#fffbeb">
+      <Label layoutX="93.0" layoutY="104.0" text="Appointment ID :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="486.0" layoutY="172.0" text="Type :" textFill="#fffbeb">
+      <Label layoutX="507.0" layoutY="209.0" text="Type :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="465.0" layoutY="138.0" text="Contact :" textFill="#fffbeb">
+      <Label layoutX="486.0" layoutY="175.0" text="Contact :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="461.0" layoutY="102.0" text="Location :" textFill="#fffbeb">
+      <Label layoutX="141.0" layoutY="175.0" text="Location :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="185.0" layoutY="219.0" text="Title :" textFill="#fffbeb">
+      <Label layoutX="177.0" layoutY="139.0" text="Title :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="161.0" layoutY="182.0" text="User ID :" textFill="#fffbeb">
+      <Label layoutX="498.0" layoutY="138.0" text="User ID :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="126.0" layoutY="148.0" text="Customer ID :" textFill="#fffbeb">
+      <Label layoutX="463.0" layoutY="104.0" text="Customer ID :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="appointmentidTextField" editable="false" layoutX="240.0" layoutY="105.0" promptText="Auto-Generated" />
-      <TextField fx:id="titleTextField" layoutX="237.0" layoutY="216.0" prefHeight="25.0" prefWidth="164.0" />
-      <TextField fx:id="locationTextField" layoutX="555.0" layoutY="99.0" prefHeight="25.0" prefWidth="164.0" />
-      <TextField fx:id="descriptionTextField" layoutX="220.0" layoutY="343.0" prefHeight="73.0" prefWidth="538.0" />
-      <ComboBox fx:id="useridComboBox" layoutX="238.0" layoutY="180.0" prefHeight="25.0" prefWidth="164.0" />
-      <ComboBox fx:id="customeridComboBox" layoutX="238.0" layoutY="144.0" prefHeight="25.0" prefWidth="164.0" />
+      <TextField fx:id="appointmentidTextField" editable="false" layoutX="235.0" layoutY="100.0" prefHeight="25.0" prefWidth="164.0" promptText="Auto-Generated" />
+      <TextField fx:id="titleTextField" layoutX="233.0" layoutY="136.0" prefHeight="25.0" prefWidth="164.0" />
+      <TextField fx:id="locationTextField" layoutX="233.0" layoutY="173.0" prefHeight="25.0" prefWidth="164.0" />
+      <ComboBox fx:id="useridComboBox" layoutX="575.0" layoutY="136.0" prefHeight="25.0" prefWidth="164.0" />
+      <ComboBox fx:id="customeridComboBox" layoutX="575.0" layoutY="100.0" prefHeight="25.0" prefWidth="164.0" />
       <Line endX="-5.0" endY="275.0" layoutX="233.0" layoutY="-201.0" startX="377.0" startY="275.0" stroke="#495579" strokeLineCap="ROUND" strokeWidth="5.0" />
-      <Button fx:id="addButton" layoutX="552.0" layoutY="436.0" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: FFFBEB;" text="Add">
+      <Button fx:id="addButton" layoutX="538.0" layoutY="461.0" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: FFFBEB;" text="Add">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
@@ -66,8 +66,8 @@
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
-      <ComboBox fx:id="typeComboBox" layoutX="554.0" layoutY="170.0" prefHeight="25.0" prefWidth="164.0" />
-      <ComboBox fx:id="contactComboBox" layoutX="554.0" layoutY="135.0" prefHeight="25.0" prefWidth="164.0" />
+      <ComboBox fx:id="typeComboBox" layoutX="575.0" layoutY="207.0" prefHeight="25.0" prefWidth="164.0" />
+      <ComboBox fx:id="contactComboBox" layoutX="575.0" layoutY="172.0" prefHeight="25.0" prefWidth="164.0" />
       <Label layoutX="108.0" layoutY="349.0" text="Description :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="16.0" />
@@ -78,12 +78,12 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="124.0" layoutY="269.0" text="Start Date :" textFill="#fffbeb">
+      <Label layoutX="125.0" layoutY="259.0" text="Start Date :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="459.0" layoutY="269.0" text="End Date :" textFill="#fffbeb">
+      <Label layoutX="458.0" layoutY="259.0" text="End Date :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
@@ -93,9 +93,20 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <DatePicker fx:id="startDatePicker" layoutX="222.0" layoutY="266.0" prefHeight="25.0" prefWidth="179.0" />
-      <DatePicker fx:id="endDatePicker" layoutX="554.0" layoutY="266.0" prefHeight="25.0" prefWidth="179.0" />
-      <ComboBox fx:id="startTimeComboBox" layoutX="220.0" layoutY="303.0" prefHeight="25.0" prefWidth="179.0" />
+      <DatePicker fx:id="startDatePicker" layoutX="225.0" layoutY="257.0" prefHeight="25.0" prefWidth="179.0" />
+      <DatePicker fx:id="endDatePicker" layoutX="554.0" layoutY="257.0" prefHeight="25.0" prefWidth="179.0" />
+      <ComboBox fx:id="startTimeComboBox" layoutX="225.0" layoutY="303.0" prefHeight="25.0" prefWidth="179.0" />
       <ComboBox fx:id="endTimeComboBox" layoutX="554.0" layoutY="303.0" prefHeight="25.0" prefWidth="179.0" />
+      <Label layoutX="134.0" layoutY="370.0" text="(optional)" textFill="#fffbeb">
+         <font>
+            <Font name="Arial Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="471.0" layoutY="282.0" text="(optional)" textFill="#fffbeb">
+         <font>
+            <Font name="Arial Italic" size="14.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="descriptionTextArea" layoutX="220.0" layoutY="341.0" prefHeight="98.0" prefWidth="517.0" />
    </children>
 </AnchorPane>
