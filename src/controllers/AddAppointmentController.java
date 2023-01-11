@@ -1,5 +1,6 @@
 package controllers;
 
+import DAO.AppointmentSQL;
 import DAO.ContactSQL;
 import DAO.CustomerSQL;
 import DAO.UserSQL;
@@ -17,10 +18,7 @@ import utilities.PopUpBox;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.util.ResourceBundle;
 
 public class AddAppointmentController implements Initializable {
@@ -94,50 +92,56 @@ public class AddAppointmentController implements Initializable {
 
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {
         if (PopUpBox.optionBox("Are you sure you want to return to the previous screen without saving?")){
-            ChangeScene mainMenuScene = new ChangeScene();
-            mainMenuScene.stringToSceneChange(actionEvent, "Appointments");
+            ChangeScene newScene = new ChangeScene();
+            newScene.stringToSceneChange(actionEvent, "Appointments");
         }
     }
 
-    public void addButtonClicked(ActionEvent actionEvent) {
+    public void addButtonClicked(ActionEvent actionEvent) throws SQLException, IOException {
 
-        if (titleTextField.getText() == ""){PopUpBox.errorBox("The title field must be filled out to continue");}
-        else if (locationTextField.getText() == ""){PopUpBox.errorBox("The location field must be filled out to continue");}
-        else if (useridComboBox.getSelectionModel().getSelectedItem() == null){PopUpBox.errorBox("The user ID field must be filled out to continue");}
-        else if (customeridComboBox.getSelectionModel().getSelectedItem() == null){PopUpBox.errorBox("The customer ID field must be filled out to continue");}
-        else if (typeComboBox.getSelectionModel().getSelectedItem() == null){PopUpBox.errorBox("The appointment type field must be filled out to continue");}
-        else if (contactComboBox.getSelectionModel().getSelectedItem() == null){PopUpBox.errorBox("The contact field must be filled out to continue");}
-        else if (startDatePicker.getValue() == null){PopUpBox.errorBox("The start date field must be filled out to continue");}
-        else if (startTimeComboBox.getSelectionModel().getSelectedItem() == null){PopUpBox.errorBox("The start time field must be filled out to continue");}
-        else if (endTimeComboBox.getSelectionModel().getSelectedItem() == null){PopUpBox.errorBox("The end time field must be filled out to continue");}
-        else{
-            // If no end date is provided then use the start date
-            if (endDatePicker.getValue() == null){endDatePicker.setValue(startDatePicker.getValue());}
-            // Save full start and end date/times to one variable
-            LocalDateTime enteredStartDT = LocalDateTime.of(startDatePicker.getValue(), LocalTime.parse((CharSequence) startTimeComboBox.getSelectionModel().getSelectedItem()));
-            LocalDateTime enteredEndDT = LocalDateTime.of(endDatePicker.getValue(),  LocalTime.parse((CharSequence) endTimeComboBox.getSelectionModel().getSelectedItem()));
-            // Verify end date/time is after start date/time
-            if (enteredStartDT.isAfter(enteredEndDT)){
-                PopUpBox.errorBox("The start date/time has to be before the end data/time");
-            }
-            System.out.print("That it the correct format!");
-
-        }
-
-
-
+        // assign variables
         String enteredTitle = titleTextField.getText();
         String enteredLocation = locationTextField.getText();
         Integer enteredUserID = (Integer) useridComboBox.getSelectionModel().getSelectedItem();
         Integer enteredCustomerID = (Integer) customeridComboBox.getSelectionModel().getSelectedItem();
         String enteredType = (String) typeComboBox.getSelectionModel().getSelectedItem();
         String enteredContact = (String) contactComboBox.getSelectionModel().getSelectedItem();
-        //LocalTime enteredStartTime = (LocalTime) startTimeComboBox.getValue();
-        //LocalTime enteredEndTime = (LocalTime) endTimeComboBox.getValue();
-        //LocalDateTime enteredStartDT = LocalDateTime.of(startDatePicker.getValue(), (LocalTime) startTimeComboBox.getValue());
-        //LocalDateTime enteredEndDT = LocalDateTime.of(endDatePicker.getValue(), (LocalTime) endTimeComboBox.getValue());
 
-        //AppointmentSQL.addAppointment("'Daddy Warbucks'");
+        // Validating all required fields are filled out
+        if (enteredTitle == ""){PopUpBox.errorBox("The title field must be filled out to continue");}
+        else if (enteredLocation == ""){PopUpBox.errorBox("The location field must be filled out to continue");}
+        else if (enteredUserID == null){PopUpBox.errorBox("The user ID field must be filled out to continue");}
+        else if (enteredCustomerID == null){PopUpBox.errorBox("The customer ID field must be filled out to continue");}
+        else if (enteredType == null){PopUpBox.errorBox("The appointment type field must be filled out to continue");}
+        else if (enteredContact == null){PopUpBox.errorBox("The contact field must be filled out to continue");}
+        else if (startDatePicker.getValue() == null){PopUpBox.errorBox("The start date field must be filled out to continue");}
+        else if (startTimeComboBox.getSelectionModel().getSelectedItem() == null){PopUpBox.errorBox("The start time field must be filled out to continue");}
+        else if (endTimeComboBox.getSelectionModel().getSelectedItem() == null){PopUpBox.errorBox("The end time field must be filled out to continue");}
+        else {
+            // If no end date is provided then use the start date
+            if (endDatePicker.getValue() == null) {
+                endDatePicker.setValue(startDatePicker.getValue());
+            }
+            // Save full start and end date/times to one variable
+            LocalDateTime enteredStartDT = LocalDateTime.of(startDatePicker.getValue(), LocalTime.parse((CharSequence) startTimeComboBox.getSelectionModel().getSelectedItem()));
+            LocalDateTime enteredEndDT = LocalDateTime.of(endDatePicker.getValue(), LocalTime.parse((CharSequence) endTimeComboBox.getSelectionModel().getSelectedItem()));
+            // Verify end date/time is after start date/time
+            if (enteredStartDT.isAfter(enteredEndDT) || enteredStartDT.isEqual(enteredEndDT)) {
+                PopUpBox.errorBox("The end date/time has to be after the end data/time");
+            }
+            // Verify that appointment does not take place in the past
+            else if (enteredStartDT.isBefore(LocalDateTime.now())){
+                PopUpBox.errorBox("Appointments can not be scheduled in the past. Please select a time in the future.");
+            }
+            // Add the appointment
+            if (AppointmentSQL.addAppointment(enteredContact, enteredTitle, descriptionTextArea.getText(), enteredLocation, enteredType, enteredCustomerID, enteredUserID, enteredStartDT, enteredEndDT)){
+                PopUpBox.infoBox("Appointment has been successfully saved");
+                ChangeScene newScene = new ChangeScene();
+                newScene.stringToSceneChange(actionEvent, "Appointments");
+            } else { PopUpBox.errorBox("There has been an error adding your appointment. Please try again.");}
+
+        }
+
     }
 
 }

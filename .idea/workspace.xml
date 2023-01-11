@@ -102,6 +102,10 @@
           <line>21</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <breakpoint type="java-exception">
+          <properties class="java.sql.SQLException" package="java.sql" />
+          <option name="timeStamp" value="28" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

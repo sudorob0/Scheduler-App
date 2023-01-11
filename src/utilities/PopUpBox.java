@@ -15,7 +15,7 @@ public class PopUpBox {
      * @param message string that will be displayed in error message
      */
     public static void infoBox(String message){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setContentText(message);
         alert.showAndWait();

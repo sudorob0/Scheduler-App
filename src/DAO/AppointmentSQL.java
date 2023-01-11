@@ -58,10 +58,27 @@ public class AppointmentSQL {
         ps.execute();
     }
 
-    public static boolean addAppointment(String contactName, String title, String location, String type, Integer customerId, Integer userID, LocalDateTime start, LocalDateTime end) throws SQLException {
+    public static boolean addAppointment(String contactName, String title, String description, String location, String type, Integer customerId, Integer userID, LocalDateTime start, LocalDateTime end) throws SQLException {
         Integer contactID = ContactSQL.getContactID(contactName);
-        System.out.print(contactID);
-        return Boolean.TRUE;
+        String insertStatement = "INSERT INTO appointments(Title, Description, Location, Type, Start, End, Create_Date, Customer_ID, Contact_ID, User_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps = DBConnection.getConnection().prepareStatement(insertStatement);
+        ps.setString(1, title);
+        ps.setString(2, description);
+        ps.setString(3, location);
+        ps.setString(4, type);
+        ps.setTimestamp(5, Timestamp.valueOf(start));
+        ps.setTimestamp(6, Timestamp.valueOf(end));
+        ps.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
+        ps.setInt(8, customerId);
+        ps.setInt(9, userID);
+        ps.setInt(10, contactID);
+        try{
+            ps.execute();
+            return Boolean.TRUE;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return Boolean.FALSE;
+        }
     }
 
     /**
@@ -74,4 +91,5 @@ public class AppointmentSQL {
         Integer newAppointmentID = appointmentList.get(-1).getAppointmentID() + 1;
         return newAppointmentID;
     }
+
 }
