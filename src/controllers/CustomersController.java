@@ -72,22 +72,26 @@ public class CustomersController implements Initializable {
     }
 
     public void modifyButtonClicked(ActionEvent actionEvent) {
-        Customer selectedCustomer = (Customer) customersTable.getSelectionModel().getSelectedItem();
-        int currentIndex = customersTable.getSelectionModel().getSelectedIndex();
+        if (customersTable.getSelectionModel().getSelectedItem() == null) {
+            PopUpBox.errorBox("Please select customer to edit");
+        } else {
+            Customer selectedCustomer = (Customer) customersTable.getSelectionModel().getSelectedItem();
+            int currentIndex = customersTable.getSelectionModel().getSelectedIndex();
 
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ModifyCustomer.fxml"));
-            Parent root = loader.load();
-            ModifyCustomerController modifyCustomerController = loader.getController();
-            modifyCustomerController.customerToModify(currentIndex, selectedCustomer);
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, 400, 500);
-            stage.setTitle("Modify Part");
-            stage.setScene(scene);
-            stage.show();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ModifyCustomer.fxml"));
+                Parent root = loader.load();
+                ModifyCustomerController modifyCustomerController = loader.getController();
+                modifyCustomerController.customerToModify(currentIndex, selectedCustomer);
+                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root, 500, 500);
+                stage.setTitle("Modify Part");
+                stage.setScene(scene);
+                stage.show();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import models.Country;
+import models.Customer;
 import models.User;
 import utilities.ChangeScene;
 import utilities.PopUpBox;
@@ -33,6 +34,8 @@ public class ModifyCustomerController implements Initializable {
     public Button backButton;
     public TextField postalCodeField;
     public Button saveButton;
+    private Customer selectedCustomer;
+    private int currentIndex = 0;
 
     public void initialize(URL url, ResourceBundle resourceBundle){
 
@@ -43,6 +46,18 @@ public class ModifyCustomerController implements Initializable {
 
     }
 
+    public void customerToModify(int currentIndex, Customer customer) {
+        this.selectedCustomer = customer;
+        this.currentIndex = currentIndex;
+        customeridTextField.setText(String.valueOf(selectedCustomer.getCustomerID()));
+        nameTextField.setText(selectedCustomer.getCustomerName());
+        telephoneTextField.setText(selectedCustomer.getCustomerPhone());
+        countryComboBox.setValue(selectedCustomer.getCustomerCountry());
+        divisionComboBox.setValue(selectedCustomer.getCustomerDivision());
+        addressTextField.setText(selectedCustomer.getCustomerAddress());
+        postalCodeField.setText(selectedCustomer.getCustomerPostalCode());
+    }
+
     public void saveButtonClicked(ActionEvent actionEvent) throws SQLException, IOException {
         if (nameTextField.getText() == ""){PopUpBox.errorBox("The name field must be filled out to continue");}
         else if (telephoneTextField.getText() == ""){PopUpBox.errorBox("The telephone field must be filled out to continue");}
@@ -51,12 +66,12 @@ public class ModifyCustomerController implements Initializable {
         else if (addressTextField.getText() == ""){PopUpBox.errorBox("The address field must be filled out to continue");}
         else if (postalCodeField.getText() == ""){PopUpBox.errorBox("The postal code ID field must be filled out to continue");}
         else {
-            if (CustomerSQL.modifyCustomer(nameTextField.getText(), telephoneTextField.getText(), (String) divisionComboBox.getSelectionModel().getSelectedItem(), addressTextField.getText(), postalCodeField.getText())){
-                PopUpBox.infoBox("Customer has been successfully added");
+            if (CustomerSQL.modifyCustomer(customeridTextField.getText(), nameTextField.getText(), telephoneTextField.getText(), (String) divisionComboBox.getSelectionModel().getSelectedItem(), addressTextField.getText(), postalCodeField.getText())){
+                PopUpBox.infoBox("Customer has been successfully changed");
                 ChangeScene backScene = new ChangeScene();
                 backScene.stringToSceneChange(actionEvent, "Customers");
             } else{
-                PopUpBox.infoBox("There was a problem adding customer, please try again");
+                PopUpBox.infoBox("There was a problem editing the customer, please try again");
             }
         }
     }
