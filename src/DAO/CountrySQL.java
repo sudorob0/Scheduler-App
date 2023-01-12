@@ -49,6 +49,16 @@ public class CountrySQL {
         return null;
     }
 
+    public static String getDivisionID(String divisionName) throws SQLException {
+        PreparedStatement ps = DBConnection.getConnection().prepareStatement("SELECT * from first_level_divisions WHERE Division = '" + divisionName + "';");
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()){
+            String divisionID = rs.getString("Division_ID");
+            return divisionID;
+        }
+        return null;
+    }
+
     public static ObservableList<String> getDivisionNames(Integer countryID) throws SQLException {
         ObservableList<String> divisionNames = FXCollections.observableArrayList();
         PreparedStatement ps = DBConnection.getConnection().prepareStatement("SELECT * from first_level_divisions WHERE Country_ID = '" + countryID + "';");

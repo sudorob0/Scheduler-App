@@ -20,7 +20,7 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="152.0" layoutY="338.0" text="Zipcode :" textFill="#fffbeb">
+      <Label layoutX="118.0" layoutY="339.0" text="Postal Code :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
@@ -30,7 +30,7 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="137.0" layoutY="302.0" text="Address :" textFill="#fffbeb">
+      <Label layoutX="145.0" layoutY="303.0" text="Address :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
@@ -55,7 +55,7 @@
       <ComboBox fx:id="countryComboBox" layoutX="238.0" layoutY="226.0" onAction="#countrySelected" prefHeight="25.0" prefWidth="164.0" />
       <ComboBox fx:id="divisionComboBox" layoutX="237.0" layoutY="262.0" prefHeight="25.0" prefWidth="164.0" />
       <TextField fx:id="addressTextField" layoutX="237.0" layoutY="300.0" prefHeight="25.0" prefWidth="164.0" />
-      <TextField fx:id="zipcodeField" layoutX="237.0" layoutY="336.0" prefHeight="25.0" prefWidth="164.0" />
+      <TextField fx:id="postalCodeField" layoutX="237.0" layoutY="336.0" prefHeight="25.0" prefWidth="164.0" />
       <Line endX="311.0" endY="-86.0" layoutX="124.0" layoutY="161.0" startX="-5.0" startY="-86.0" stroke="#495579" strokeLineCap="ROUND" strokeWidth="5.0" />
       <Button fx:id="addButton" layoutX="297.0" layoutY="397.0" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="25.0" prefWidth="114.0" style="-fx-background-color: FFFBEB;" text="Add">
          <font>

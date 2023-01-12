@@ -41,4 +41,21 @@ public class CustomerSQL {
             return false;
         }
     }
+
+    public static boolean addCustomer(String name, String telephone, String division, String address, String postalCode) throws SQLException {
+        String insertStatement = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement ps = DBConnection.getConnection().prepareStatement(insertStatement);
+        ps.setString(1, name);
+        ps.setString(2, address);
+        ps.setString(3, postalCode);
+        ps.setString(4, telephone);
+        ps.setString(5, CountrySQL.getDivisionID(division));
+        try{
+            ps.execute();
+            return Boolean.TRUE;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return Boolean.FALSE;
+        }
+    }
 }
