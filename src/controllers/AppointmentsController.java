@@ -38,7 +38,7 @@ public class AppointmentsController implements Initializable {
 
     /**
      * This method checks which radio button is selected and then refreshes the appointmentTable.
-     * @throws SQLException
+     * @throws SQLException for any SQL errors
      */
     public void refreshAppointmentsTable() throws SQLException {
         if (allAppsRadio.isSelected()){

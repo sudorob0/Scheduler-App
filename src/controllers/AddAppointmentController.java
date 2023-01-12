@@ -98,8 +98,8 @@ public class AddAppointmentController implements Initializable {
      * @param time provide local time
      * @return time converted to eastern
      */
-    private ZonedDateTime convertToEst(LocalDateTime time) {
-        return ZonedDateTime.of(time, ZoneId.of("America/New_York"));
+    private LocalTime convertToEst(LocalDateTime time) {
+        return LocalTime.from(ZonedDateTime.of(time, ZoneId.of("America/New_York")));
     }
 
     /**
@@ -144,7 +144,7 @@ public class AddAppointmentController implements Initializable {
      * This method first validates that all fields are filled out, it then validates that the appointment start and end
      * date/times are valid. If everything is correct it will create an appointment in the sql database.
      * @param actionEvent add button clicked
-     * @throws SQLException catches sql errors for sql statment
+     * @throws SQLException catches sql errors for sql statement
      * @throws IOException catches IO errors for scene change
      */
     public void addButtonClicked(ActionEvent actionEvent) throws SQLException, IOException {
@@ -177,13 +177,16 @@ public class AddAppointmentController implements Initializable {
             // Save full start and end date/times to one variable
             LocalDateTime enteredStartDT = LocalDateTime.of(startDatePicker.getValue(), enteredStartTime);
             LocalDateTime enteredEndDT = LocalDateTime.of(endDatePicker.getValue(), enteredEndTime);
+            LocalTime enteredStartTimeEst = convertToEst(enteredStartDT);
+            LocalTime enteredEndTimeEst = convertToEst(enteredEndDT);
+
             // Validate that appointment is within business hours
-            if (enteredStartTime.isBefore(LocalTime.of(8, 0)) || enteredEndTime.isBefore(LocalTime.of(8, 0)) || enteredStartTime.isAfter(LocalTime.of(22, 0)) || enteredEndTime.isAfter(LocalTime.of(22, 0))) {
+            if (enteredStartTimeEst.isBefore(LocalTime.of(8,0)) || enteredEndTimeEst.isBefore(LocalTime.of(8, 0)) || enteredStartTimeEst.isAfter(LocalTime.of(22, 0)) || enteredEndTimeEst.isAfter(LocalTime.of(22, 0))) {
                 PopUpBox.errorBox("Appointments can only be scheduled within the business hours of 8am to 10pm EST.");
             }
             // Validate end date/time is after start date/time
             else if (enteredStartDT.isAfter(enteredEndDT) || enteredStartDT.isEqual(enteredEndDT)) {
-                PopUpBox.errorBox("The end date/time has to be after the end data/time");
+                PopUpBox.errorBox("The end date/time has to be after the start data/time");
             }
             // Validate that appointment does not take place in the past
             else if (enteredStartDT.isBefore(LocalDateTime.now())) {

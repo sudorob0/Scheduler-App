@@ -52,7 +52,7 @@
       </Label>
       <TextField fx:id="nameTextField" layoutX="240.0" layoutY="146.0" prefHeight="25.0" prefWidth="164.0" />
       <TextField fx:id="telephoneTextField" layoutX="240.0" layoutY="188.0" prefHeight="25.0" prefWidth="164.0" />
-      <ComboBox fx:id="countryComboBox" layoutX="238.0" layoutY="226.0" prefHeight="25.0" prefWidth="164.0" />
+      <ComboBox fx:id="countryComboBox" layoutX="238.0" layoutY="226.0" onAction="#countrySelected" prefHeight="25.0" prefWidth="164.0" />
       <ComboBox fx:id="divisionComboBox" layoutX="237.0" layoutY="262.0" prefHeight="25.0" prefWidth="164.0" />
       <TextField fx:id="addressTextField" layoutX="237.0" layoutY="300.0" prefHeight="25.0" prefWidth="164.0" />
       <TextField fx:id="zipcodeField" layoutX="237.0" layoutY="336.0" prefHeight="25.0" prefWidth="164.0" />

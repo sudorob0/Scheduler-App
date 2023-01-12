@@ -21,7 +21,7 @@ public class CountrySQL {
         ObservableList<Country> countriesList = FXCollections.observableArrayList();
 
         try{
-            String sql = "SELEC * from countries";
+            String sql = "SELECT * from countries";
 
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
 
@@ -39,21 +39,24 @@ public class CountrySQL {
         return countriesList;
     }
 
-    /**
-     * check if date conversion is working
-     */
-    public static void checkDateConversion(){
-        System.out.println("Create Date Test");
-        String sql = "select Create_Date from countries";
-        try {
-            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Timestamp ts = rs.getTimestamp("Create_Date");
-                System.out.println(("CD: " + ts.toLocalDateTime().toString()));
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+    public static Integer getCountryID(String countryName) throws SQLException {
+        PreparedStatement ps = DBConnection.getConnection().prepareStatement("SELECT * from countries WHERE Country = '" + countryName + "';");
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()){
+            Integer countryID = rs.getInt("Country_ID");
+            return countryID;
         }
+        return null;
+    }
+
+    public static ObservableList<String> getDivisionNames(Integer countryID) throws SQLException {
+        ObservableList<String> divisionNames = FXCollections.observableArrayList();
+        PreparedStatement ps = DBConnection.getConnection().prepareStatement("SELECT * from first_level_divisions WHERE Country_ID = '" + countryID + "';");
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()){
+            String countryName = rs.getString("Division");
+            divisionNames.add(countryName);
+        }
+        return divisionNames;
     }
 }
