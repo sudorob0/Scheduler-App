@@ -4,11 +4,17 @@ import DAO.AppointmentSQL;
 import DAO.CustomerSQL;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import models.Appointment;
 import models.Customer;
 import utilities.ChangeScene;
@@ -66,6 +72,23 @@ public class CustomersController implements Initializable {
     }
 
     public void modifyButtonClicked(ActionEvent actionEvent) {
+        Customer selectedCustomer = (Customer) customersTable.getSelectionModel().getSelectedItem();
+        int currentIndex = customersTable.getSelectionModel().getSelectedIndex();
+
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ModifyCustomer.fxml"));
+            Parent root = loader.load();
+            ModifyCustomerController modifyCustomerController = loader.getController();
+            modifyCustomerController.customerToModify(currentIndex, selectedCustomer);
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 400, 500);
+            stage.setTitle("Modify Part");
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteButtonClicked(ActionEvent actionEvent) throws SQLException {
