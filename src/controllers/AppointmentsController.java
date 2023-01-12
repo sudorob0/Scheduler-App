@@ -100,6 +100,8 @@ public class AppointmentsController implements Initializable {
             if (PopUpBox.optionBox(popUpString)){
                 AppointmentSQL.deleteAppointment(selectedAppointment.getAppointmentID());
                 refreshAppointmentsTable();
+                //3a2
+                PopUpBox.infoBox("Appointment successfully canceled.\n Appointment ID: " + selectedAppointment.getAppointmentID() + ", Type: " + selectedAppointment.getAppointmentType());
             }
         }
     }

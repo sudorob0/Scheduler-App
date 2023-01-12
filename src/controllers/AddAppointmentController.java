@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import models.Appointment;
 import models.Contact;
 import models.Customer;
 import models.User;
@@ -37,9 +38,14 @@ public class AddAppointmentController implements Initializable {
     public ComboBox endTimeComboBox;
     public TextArea descriptionTextArea;
 
+    /**
+     * The initialize populates all of the combo boxes
+     * @param url
+     * @param resourceBundle
+     */
     public void initialize(URL url, ResourceBundle resourceBundle){
         // Populates the type combo box
-        ObservableList<String> allTypes = FXCollections.observableArrayList("Planning Session", "De-Briefing", "Follow-up", "Other");
+        ObservableList<String> allTypes = FXCollections.observableArrayList("Planning Session", "De-Briefing", "Follow-up", "1 on 1", "Other");
         typeComboBox.setItems(allTypes);
 
         // Populate the contact combo box
@@ -74,8 +80,8 @@ public class AddAppointmentController implements Initializable {
 
         // Populate the start and end times with available appointment times with 15 minute increments
         ObservableList<String> time = FXCollections.observableArrayList();
-        LocalTime startTime = LocalTime.of(8,0);
-        LocalTime endTime = LocalTime.of(22, 0);
+        LocalTime startTime = LocalTime.of(7,0);
+        LocalTime endTime = LocalTime.of(23, 0);
         time.add(startTime.toString());
         while (startTime.isBefore(endTime)){
             startTime = startTime.plusMinutes(15);
@@ -86,10 +92,47 @@ public class AddAppointmentController implements Initializable {
 
 
     }
+
+    /**
+     * this method converts from the users local time to eastern time
+     * @param time provide local time
+     * @return time converted to eastern
+     */
     private ZonedDateTime convertToEst(LocalDateTime time) {
         return ZonedDateTime.of(time, ZoneId.of("America/New_York"));
     }
 
+    /**
+     * This method check for any overlapping appointments and will display an error message telling the user to change
+     * their appointment time
+     * @param enteredStartDT this is the entered start date/time
+     * @param enteredEndDT this is the entered end date/time
+     * @return this returns true if there are NO overlapping appointments and false if there are overlapping appointments
+     * @throws SQLException for sql errors
+     */
+    private boolean checkForOverlap(LocalDateTime enteredStartDT, LocalDateTime enteredEndDT) throws SQLException {
+        ObservableList<Appointment> allAppointmentsList = AppointmentSQL.getAllAppointments();
+        for (Appointment appointment: allAppointmentsList){
+            LocalDateTime previousAppointmentStart = appointment.getAppointmentStartDateTime();
+            LocalDateTime previousAppointmentEnd = appointment.getAppointmentEndDateTime();
+            String errorMessage = ("This appointment overlaps with a previously scheduled appointment.\nOverlapping Appointment ID: " + appointment.getAppointmentID() + "\nStart time: " + previousAppointmentStart + "\nEnd time: " + previousAppointmentEnd);
+            if (previousAppointmentStart.isAfter(enteredStartDT) && previousAppointmentStart.isBefore(enteredEndDT)){
+                PopUpBox.errorBox(errorMessage);
+                return false;
+            } else if (previousAppointmentEnd.isAfter(enteredStartDT) && previousAppointmentEnd.isBefore(enteredEndDT)) {
+                PopUpBox.errorBox(errorMessage);
+                return false;
+            }
+        }
+        // return true if no overlap is found
+        return true;
+    }
+
+    /**
+     * this method takes the user back one screen when the back button is clicked
+     * @param actionEvent the back button being clicked
+     * @throws IOException for IO errors
+     */
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {
         if (PopUpBox.optionBox("Are you sure you want to return to the previous screen without saving?")){
             ChangeScene newScene = new ChangeScene();
@@ -97,6 +140,13 @@ public class AddAppointmentController implements Initializable {
         }
     }
 
+    /**
+     * This method first validates that all fields are filled out, it then validates that the appointment start and end
+     * date/times are valid. If everything is correct it will create an appointment in the sql database.
+     * @param actionEvent add button clicked
+     * @throws SQLException catches sql errors for sql statment
+     * @throws IOException catches IO errors for scene change
+     */
     public void addButtonClicked(ActionEvent actionEvent) throws SQLException, IOException {
 
         // assign variables
@@ -122,26 +172,34 @@ public class AddAppointmentController implements Initializable {
             if (endDatePicker.getValue() == null) {
                 endDatePicker.setValue(startDatePicker.getValue());
             }
+            LocalTime enteredStartTime = LocalTime.parse((CharSequence) startTimeComboBox.getSelectionModel().getSelectedItem());
+            LocalTime enteredEndTime = LocalTime.parse((CharSequence) endTimeComboBox.getSelectionModel().getSelectedItem());
             // Save full start and end date/times to one variable
-            LocalDateTime enteredStartDT = LocalDateTime.of(startDatePicker.getValue(), LocalTime.parse((CharSequence) startTimeComboBox.getSelectionModel().getSelectedItem()));
-            LocalDateTime enteredEndDT = LocalDateTime.of(endDatePicker.getValue(), LocalTime.parse((CharSequence) endTimeComboBox.getSelectionModel().getSelectedItem()));
-            // Verify end date/time is after start date/time
-            if (enteredStartDT.isAfter(enteredEndDT) || enteredStartDT.isEqual(enteredEndDT)) {
+            LocalDateTime enteredStartDT = LocalDateTime.of(startDatePicker.getValue(), enteredStartTime);
+            LocalDateTime enteredEndDT = LocalDateTime.of(endDatePicker.getValue(), enteredEndTime);
+            // Validate that appointment is within business hours
+            if (enteredStartTime.isBefore(LocalTime.of(8, 0)) || enteredEndTime.isBefore(LocalTime.of(8, 0)) || enteredStartTime.isAfter(LocalTime.of(22, 0)) || enteredEndTime.isAfter(LocalTime.of(22, 0))) {
+                PopUpBox.errorBox("Appointments can only be scheduled within the business hours of 8am to 10pm EST.");
+            }
+            // Validate end date/time is after start date/time
+            else if (enteredStartDT.isAfter(enteredEndDT) || enteredStartDT.isEqual(enteredEndDT)) {
                 PopUpBox.errorBox("The end date/time has to be after the end data/time");
             }
-            // Verify that appointment does not take place in the past
-            else if (enteredStartDT.isBefore(LocalDateTime.now())){
+            // Validate that appointment does not take place in the past
+            else if (enteredStartDT.isBefore(LocalDateTime.now())) {
                 PopUpBox.errorBox("Appointments can not be scheduled in the past. Please select a time in the future.");
             }
-            // Add the appointment
-            if (AppointmentSQL.addAppointment(enteredContact, enteredTitle, descriptionTextArea.getText(), enteredLocation, enteredType, enteredCustomerID, enteredUserID, enteredStartDT, enteredEndDT)){
-                PopUpBox.infoBox("Appointment has been successfully saved");
-                ChangeScene newScene = new ChangeScene();
-                newScene.stringToSceneChange(actionEvent, "Appointments");
-            } else { PopUpBox.errorBox("There has been an error adding your appointment. Please try again.");}
-
+            // Check for appointment overlapping
+            else if (checkForOverlap(enteredStartDT, enteredEndDT)) {
+                // add appointment
+                if (AppointmentSQL.addAppointment(enteredContact, enteredTitle, descriptionTextArea.getText(), enteredLocation, enteredType, enteredCustomerID, enteredUserID, enteredStartDT, enteredEndDT)) {
+                    PopUpBox.infoBox("Appointment has been successfully saved");
+                    ChangeScene newScene = new ChangeScene();
+                    newScene.stringToSceneChange(actionEvent, "Appointments");
+                } else {
+                    PopUpBox.errorBox("There has been an error adding your appointment. Please try again.");
+                }
+            }
         }
-
     }
-
 }
