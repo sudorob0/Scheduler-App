@@ -29,4 +29,16 @@ public class CustomerSQL {
         }
         return customerList;
     }
+
+    public static boolean deleteCustomer(int customerID) throws SQLException {
+        try {
+            String deleteStatement = "DELETE from customers WHERE Customer_ID=" + customerID;
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(deleteStatement);
+            ps.execute();
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

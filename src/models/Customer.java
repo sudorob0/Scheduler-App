@@ -9,7 +9,7 @@ public class Customer {
     private int customerID;
     private String customerName;
     private String customerAddress;
-    private String customerZipCode;
+    private String customerPostalCode;
     private String customerPhone;
     private String customerDivision;
     private int divisionID;
@@ -31,7 +31,7 @@ public class Customer {
         this.customerID = customerID;
         this.customerName = customerName;
         this.customerAddress = customerAddress;
-        this.customerZipCode = customerZipCode;
+        this.customerPostalCode = customerZipCode;
         this.customerPhone = customerPhone;
         this.customerDivision = customerDivision;
         this.divisionID = divisionID;
@@ -88,18 +88,18 @@ public class Customer {
 
     /**
      * Getter for customerPostalCode,
-     * @return the Zip code of the customer.
+     * @return the Postal code of the customer.
      */
-    public String getCustomerZipCode() {
-        return customerZipCode;
+    public String getCustomerPostalCode() {
+        return customerPostalCode;
     }
 
     /**
-     * Setter for customerZipCode
-     * @param customerZipCode Setter for customerZipCode.
+     * Setter for customerPostalCode
+     * @param customerPostalCode Setter for customerZipCode.
      */
-    public void setCustomerZipCode(String customerZipCode) {
-        this.customerZipCode = customerZipCode;
+    public void setCustomerPostalCode(String customerPostalCode) {
+        this.customerPostalCode = customerPostalCode;
     }
 
     /**

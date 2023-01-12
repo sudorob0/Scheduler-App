@@ -52,10 +52,28 @@ public class AppointmentSQL {
         return appointmentList;
     }
 
-    public static void deleteAppointment(int appointmentID) throws SQLException {
-        String deleteStatement = "DELETE from appointments WHERE Appointment_ID=" + appointmentID;
-        PreparedStatement ps = DBConnection.getConnection().prepareStatement(deleteStatement);
-        ps.execute();
+    public static boolean deleteAppointment(int appointmentID) throws SQLException {
+        try {
+            String deleteStatement = "DELETE from appointments WHERE Appointment_ID=" + appointmentID;
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(deleteStatement);
+            ps.execute();
+            return true;
+        } catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean deleteCustomerAppointments(int customerID) throws SQLException {
+        try {
+            String deleteStatement = "DELETE from appointments WHERE Customer_ID=" + customerID;
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(deleteStatement);
+            ps.execute();
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public static boolean addAppointment(String contactName, String title, String description, String location, String type, Integer customerId, Integer userID, LocalDateTime start, LocalDateTime end) throws SQLException {

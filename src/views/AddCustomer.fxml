@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="524.0" style="-fx-background-color: #263159;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddCustomerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="524.0" style="-fx-background-color: #263159;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddCustomerController">
    <children>
       <Label layoutX="164.0" layoutY="2.0" prefHeight="74.0" prefWidth="227.0" text="Add Customer" textFill="#fffbeb">
          <font>
@@ -25,12 +25,12 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="151.0" layoutY="302.0" text="Division :" textFill="#fffbeb">
+      <Label layoutX="150.0" layoutY="265.0" text="Division :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="151.0" layoutY="265.0" text="Address :" textFill="#fffbeb">
+      <Label layoutX="137.0" layoutY="302.0" text="Address :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
@@ -50,13 +50,12 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="customeridTextField" editable="false" layoutX="240.0" layoutY="101.0" promptText="Auto-Generated" />
-      <TextField fx:id="nameTextField" layoutX="240.0" layoutY="146.0" />
-      <TextField fx:id="telephoneTextField" layoutX="240.0" layoutY="188.0" />
-      <TextField fx:id="addressTextField" layoutX="240.0" layoutY="262.0" />
-      <TextField fx:id="zipcodeField" layoutX="240.0" layoutY="335.0" />
+      <TextField fx:id="nameTextField" layoutX="240.0" layoutY="146.0" prefHeight="25.0" prefWidth="164.0" />
+      <TextField fx:id="telephoneTextField" layoutX="240.0" layoutY="188.0" prefHeight="25.0" prefWidth="164.0" />
       <ComboBox fx:id="countryComboBox" layoutX="238.0" layoutY="226.0" prefHeight="25.0" prefWidth="164.0" />
-      <ComboBox fx:id="divisionComboBox" layoutX="238.0" layoutY="299.0" prefHeight="25.0" prefWidth="164.0" />
+      <ComboBox fx:id="divisionComboBox" layoutX="237.0" layoutY="262.0" prefHeight="25.0" prefWidth="164.0" />
+      <TextField fx:id="addressTextField" layoutX="237.0" layoutY="300.0" prefHeight="25.0" prefWidth="164.0" />
+      <TextField fx:id="zipcodeField" layoutX="237.0" layoutY="336.0" prefHeight="25.0" prefWidth="164.0" />
       <Line endX="311.0" endY="-86.0" layoutX="124.0" layoutY="161.0" startX="-5.0" startY="-86.0" stroke="#495579" strokeLineCap="ROUND" strokeWidth="5.0" />
       <Button fx:id="addButton" layoutX="297.0" layoutY="397.0" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="25.0" prefWidth="114.0" style="-fx-background-color: FFFBEB;" text="Add">
          <font>
@@ -66,9 +65,6 @@
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="cancelButton" layoutX="195.0" layoutY="397.0" mnemonicParsing="false" onAction="#cancelButtonClicked" prefHeight="25.0" prefWidth="82.0" style="-fx-background-color: FFFBEB;" text="Cancel">
-         <font>
-            <Font name="Arial Bold" size="15.0" />
-         </font></Button>
+      <TextField fx:id="customeridTextField" editable="false" layoutX="240.0" layoutY="101.0" prefHeight="25.0" prefWidth="164.0" promptText="Auto-Generated" />
    </children>
 </AnchorPane>

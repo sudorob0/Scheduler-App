@@ -40,7 +40,7 @@ public class ChangeScene {
             stage.show();
         }
         else if (sceneName == "Customers"){
-            Scene scene = new Scene(root, 1060, 600);
+            Scene scene = new Scene(root, 1170, 600);
             stage.setTitle(sceneName);
             stage.setScene(scene);
             stage.show();
