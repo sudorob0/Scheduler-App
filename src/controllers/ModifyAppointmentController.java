@@ -28,7 +28,7 @@ public class ModifyAppointmentController implements Initializable {
     public TextField locationTextField;
     public ComboBox useridComboBox;
     public ComboBox customeridComboBox;
-    public Button addButton;
+    public Button saveButton;
     public Button backButton;
     public ComboBox typeComboBox;
     public ComboBox contactComboBox;
@@ -37,6 +37,8 @@ public class ModifyAppointmentController implements Initializable {
     public ComboBox startTimeComboBox;
     public ComboBox endTimeComboBox;
     public TextArea descriptionTextArea;
+    private Appointment selectedAppointment;
+    private int currentIndex = 0;
 
     /**
      * The initialize populates all of the combo boxes
@@ -93,6 +95,24 @@ public class ModifyAppointmentController implements Initializable {
 
     }
 
+    public void appointmentToModify(int currentIndex, Appointment appointment) throws SQLException {
+        this.selectedAppointment = appointment;
+        this.currentIndex = currentIndex;
+        appointmentidTextField.setText(String.valueOf(selectedAppointment.getAppointmentID()));
+        titleTextField.setText(selectedAppointment.getAppointmentTitle());
+        locationTextField.setText(selectedAppointment.getAppointmentLocation());
+        useridComboBox.setValue(selectedAppointment.getUserID());
+        customeridComboBox.setValue(selectedAppointment.getCustomerID());
+        typeComboBox.setValue(selectedAppointment.getAppointmentType());
+        contactComboBox.setValue(ContactSQL.getContactName(selectedAppointment.getContactID()));
+        startDatePicker.setValue(selectedAppointment.getAppointmentStartDateTime().toLocalDate());
+        endDatePicker.setValue(selectedAppointment.getAppointmentEndDateTime().toLocalDate());
+        startTimeComboBox.setValue(selectedAppointment.getAppointmentStartDateTime().toLocalTime().toString());
+        endTimeComboBox.setValue(selectedAppointment.getAppointmentEndDateTime().toLocalTime().toString());
+        descriptionTextArea.setText(selectedAppointment.getAppointmentDescription());
+    }
+
+
     /**
      * this method converts from the users local time to eastern time
      * @param time provide local time
@@ -147,7 +167,7 @@ public class ModifyAppointmentController implements Initializable {
      * @throws SQLException catches sql errors for sql statement
      * @throws IOException catches IO errors for scene change
      */
-    public void addButtonClicked(ActionEvent actionEvent) throws SQLException, IOException {
+    public void saveButtonClicked(ActionEvent actionEvent) throws SQLException, IOException {
 
         // assign variables
         String enteredTitle = titleTextField.getText();
@@ -196,7 +216,7 @@ public class ModifyAppointmentController implements Initializable {
             // Check for appointment overlapping
             else if (checkForOverlap(enteredStartDT, enteredEndDT)) {
                 // add appointment
-                if (AppointmentSQL.addAppointment(enteredContact, enteredTitle, descriptionTextArea.getText(), enteredLocation, enteredType, enteredCustomerID, enteredUserID, enteredStartDT, enteredEndDT)) {
+                if (AppointmentSQL.modifyAppointment(appointmentidTextField.getText(), ContactSQL.getContactID(enteredContact), enteredTitle, descriptionTextArea.getText(), enteredLocation, enteredType, enteredCustomerID, enteredUserID, enteredStartDT, enteredEndDT)) {
                     PopUpBox.infoBox("Appointment has been successfully saved");
                     ChangeScene newScene = new ChangeScene();
                     newScene.stringToSceneChange(actionEvent, "Appointments");

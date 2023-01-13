@@ -85,7 +85,7 @@ public class CustomersController implements Initializable {
                 modifyCustomerController.customerToModify(currentIndex, selectedCustomer);
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root, 500, 500);
-                stage.setTitle("Modify Part");
+                stage.setTitle("Modify Customer");
                 stage.setScene(scene);
                 stage.show();
 

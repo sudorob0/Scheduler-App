@@ -40,4 +40,14 @@ public class ContactSQL {
         }
         return null;
     }
+
+    public static String getContactName(Integer contactID) throws SQLException {
+        PreparedStatement ps = DBConnection.getConnection().prepareStatement("SELECT * from contacts WHERE Contact_ID = '" + contactID + "';");
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()){
+            String contactName = rs.getString("Contact_Name");
+            return contactName;
+        }
+        return null;
+    }
 }

@@ -8,6 +8,8 @@ import models.Customer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class CustomerSQL {
 
@@ -43,13 +45,15 @@ public class CustomerSQL {
     }
 
     public static boolean addCustomer(String name, String phone, String division, String address, String postalCode) throws SQLException {
-        String insertStatement = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES (?, ?, ?, ?, ?)";
+        String insertStatement = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Division_ID, Create_Date) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = DBConnection.getConnection().prepareStatement(insertStatement);
         ps.setString(1, name);
         ps.setString(2, address);
         ps.setString(3, postalCode);
         ps.setString(4, phone);
         ps.setString(5, CountrySQL.getDivisionID(division));
+        ps.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
+
         try{
             ps.execute();
             return Boolean.TRUE;
@@ -60,14 +64,15 @@ public class CustomerSQL {
     }
 
     public static boolean modifyCustomer(String customerID, String name, String phone, String division, String address, String postalCode) throws SQLException {
-        String insertStatement = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
+        String insertStatement = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ?, Last_Update = ? WHERE Customer_ID = ?";
         PreparedStatement ps = DBConnection.getConnection().prepareStatement(insertStatement);
         ps.setString(1, name);
         ps.setString(2, address);
         ps.setString(3, postalCode);
         ps.setString(4, phone);
         ps.setString(5, CountrySQL.getDivisionID(division));
-        ps.setString(6, customerID);
+        ps.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
+        ps.setString(7, customerID);
         try{
             ps.execute();
             return Boolean.TRUE;

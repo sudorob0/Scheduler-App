@@ -110,4 +110,27 @@ public class AppointmentSQL {
         return newAppointmentID;
     }
 
+    public static boolean modifyAppointment(String appointmentID, Integer contact, String title, String description, String location, String type, Integer customerID, Integer userID, LocalDateTime startDateTime, LocalDateTime endDateTime) throws SQLException {
+        String insertStatement = "UPDATE Appointments SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Last_Update = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
+        PreparedStatement ps = DBConnection.getConnection().prepareStatement(insertStatement);
+        ps.setString(1, title);
+        ps.setString(2, description);
+        ps.setString(3, location);
+        ps.setString(4, type);
+        ps.setTimestamp(5, Timestamp.valueOf(startDateTime));
+        ps.setTimestamp(6, Timestamp.valueOf(endDateTime));
+        ps.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
+        ps.setInt(8, customerID);
+        ps.setInt(9, userID);
+        ps.setInt(10, contact);
+        ps.setString(11, appointmentID);
+
+        try{
+            ps.execute();
+            return Boolean.TRUE;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return Boolean.FALSE;
+        }
+    }
 }

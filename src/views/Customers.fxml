@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="1113.0" style="-fx-background-color: #263159;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CustomersController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="565.0" prefWidth="1113.0" style="-fx-background-color: #263159;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CustomersController">
    <children>
       <Label layoutX="502.0" layoutY="1.0" prefHeight="73.0" prefWidth="164.0" text="Customers" textFill="#fffbeb">
          <font>
@@ -27,7 +27,7 @@
         </columns>
       </TableView>
       <Line endX="328.0" endY="-86.0" layoutX="414.0" layoutY="160.0" startX="-5.0" startY="-86.0" stroke="#495579" strokeLineCap="ROUND" strokeWidth="5.0" />
-      <Button fx:id="addButton" layoutX="495.0" layoutY="501.0" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="27.0" prefWidth="161.0" style="-fx-background-color: FFFBEB;" text="Add">
+      <Button fx:id="addButton" layoutX="463.0" layoutY="501.0" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="27.0" prefWidth="187.0" style="-fx-background-color: FFFBEB;" text="Add">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
@@ -35,11 +35,11 @@
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="modifyButton" layoutX="366.0" layoutY="501.0" mnemonicParsing="false" onAction="#modifyButtonClicked" prefHeight="27.0" prefWidth="82.0" style="-fx-background-color: FFFBEB;" text="Modify">
+      <Button fx:id="modifyButton" layoutX="299.0" layoutY="501.0" mnemonicParsing="false" onAction="#modifyButtonClicked" prefHeight="27.0" prefWidth="108.0" style="-fx-background-color: FFFBEB;" text="Modify">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="deleteButton" layoutX="697.0" layoutY="501.0" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="25.0" prefWidth="82.0" style="-fx-background-color: FFFBEB;" text="Delete">
+      <Button fx:id="deleteButton" layoutX="697.0" layoutY="501.0" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="27.0" prefWidth="108.0" style="-fx-background-color: FFFBEB;" text="Delete">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
