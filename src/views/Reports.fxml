@@ -16,7 +16,7 @@
             </font>
         </Label>
         <Line endX="253.0" endY="275.0" layoutX="142.0" layoutY="-202.0" startX="600.0" startY="275.0" stroke="#495579" strokeLineCap="ROUND" strokeWidth="5.0" />
-        <Button fx:id="generateButton" layoutX="428.0" layoutY="263.0" mnemonicParsing="false" onAction="#generateButtonClicked" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: FFFBEB;" text="Generate Report">
+        <Button fx:id="generateButton" layoutX="541.0" layoutY="263.0" mnemonicParsing="false" onAction="#generateButtonClicked" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: FFFBEB;" text="Generate Report">
             <font>
                 <Font name="Arial Bold" size="15.0" />
             </font></Button>
@@ -24,12 +24,12 @@
             <font>
                 <Font name="Arial Bold" size="15.0" />
             </font></Button>
-        <Button fx:id="clearButton" layoutX="660.0" layoutY="263.0" mnemonicParsing="false" onAction="#clearButtonClicked" prefHeight="27.0" prefWidth="127.0" style="-fx-background-color: FFFBEB;" text="Clear">
+        <Button fx:id="clearButton" layoutX="384.0" layoutY="263.0" mnemonicParsing="false" onAction="#clearButtonClicked" prefHeight="27.0" prefWidth="127.0" style="-fx-background-color: FFFBEB;" text="Clear">
             <font>
                 <Font name="Arial Bold" size="15.0" />
             </font></Button>
-        <ComboBox fx:id="reportTypeComboBox" layoutX="428.0" layoutY="112.0" onAction="#reportTypeSelected" prefHeight="25.0" prefWidth="201.0" />
-        <Label layoutX="286.0" layoutY="113.0" text="Report Type :" textFill="#fffbeb">
+        <ComboBox fx:id="reportTypeComboBox" layoutX="541.0" layoutY="112.0" onAction="#reportTypeSelected" prefHeight="25.0" prefWidth="201.0" />
+        <Label layoutX="399.0" layoutY="113.0" text="Report Type :" textFill="#fffbeb">
             <font>
                 <Font name="Arial Bold" size="20.0" />
             </font>
@@ -40,19 +40,19 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="firstFilterLabel" layoutX="289.0" layoutY="164.0" prefHeight="23.0" prefWidth="127.0" text="Filter :" textFill="#fffbeb">
+      <Label fx:id="firstFilterLabel" layoutX="402.0" layoutY="164.0" prefHeight="23.0" prefWidth="127.0" text="Filter :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <ComboBox fx:id="firstFilterComboBox" layoutX="428.0" layoutY="163.0" prefHeight="25.0" prefWidth="201.0" />
+      <ComboBox fx:id="firstFilterComboBox" layoutX="541.0" layoutY="163.0" prefHeight="25.0" prefWidth="201.0" />
       <Label fx:id="totalEntriesLabel" layoutX="187.0" layoutY="276.0" text="0" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <ComboBox fx:id="secondFilterComboBox" layoutX="428.0" layoutY="211.0" prefHeight="25.0" prefWidth="201.0" />
-      <Label fx:id="secondFilterLabel" layoutX="289.0" layoutY="212.0" prefHeight="23.0" prefWidth="127.0" text="Filter :" textFill="#fffbeb">
+      <ComboBox fx:id="secondFilterComboBox" layoutX="541.0" layoutY="211.0" prefHeight="25.0" prefWidth="201.0" />
+      <Label fx:id="secondFilterLabel" layoutX="402.0" layoutY="212.0" prefHeight="23.0" prefWidth="127.0" text="Filter :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>

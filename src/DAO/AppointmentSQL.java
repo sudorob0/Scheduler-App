@@ -45,14 +45,40 @@ public class AppointmentSQL {
     }
 
     public static ObservableList<Appointment> getAppointmentsByMonth() throws SQLException {
-        String nextMonth = LocalDate.now().plusMonths(1).toString();
-        ObservableList<Appointment> appointmentList = makeAppointmentQuery("SELECT * FROM client_schedule.appointments WHERE Start between (CURRENT_DATE) and ('" + nextMonth + "');");
+        String thisYear = String.valueOf(LocalDate.now().getYear());
+        String thisMonth = String.valueOf(LocalDate.now().getMonthValue());
+        String nextMonth = String.valueOf(LocalDate.now().getMonthValue() + 1);
+        String sqlQuery = "SELECT * FROM client_schedule.appointments WHERE Start between ('"+thisYear+"-"+thisMonth+"-1') and ('"+thisYear+"-"+nextMonth+"-1 01:00:00');";
+        System.out.print(nextMonth);
+        // EXAMPLE: SELECT * FROM client_schedule.appointments WHERE Start between ('2023-1-1') and ('2023-2-1 01:00:00');
+        ObservableList<Appointment> appointmentList = makeAppointmentQuery(sqlQuery);
         return appointmentList;
     }
 
     public static ObservableList<Appointment> getAppointmentsByWeek() throws SQLException {
-        String nextWeek = LocalDate.now().plusWeeks(1).toString();
-        ObservableList<Appointment> appointmentList = makeAppointmentQuery("SELECT * FROM client_schedule.appointments WHERE Start between (CURRENT_DATE) and ('" + nextWeek + "');");
+        String dayOfWeek = LocalDate.now().getDayOfWeek().toString();
+        int daysUntilEndOfWeek = 0;
+            switch (dayOfWeek) {
+                case "Sunday":  daysUntilEndOfWeek=6;
+                    break;
+                case "Monday":  daysUntilEndOfWeek=5;
+                    break;
+                case "Tuesday":  daysUntilEndOfWeek=4;
+                    break;
+                case "Wednesday":  daysUntilEndOfWeek=3;
+                    break;
+                case "Thursday":  daysUntilEndOfWeek=2;
+                    break;
+                case "Friday":  daysUntilEndOfWeek=1;
+                    break;
+                case "Saturday":  daysUntilEndOfWeek=0;
+                    break;
+            }
+        String endOfWeek = String.valueOf(LocalDate.now().plusDays(daysUntilEndOfWeek));
+        String beginningOfWeek = String.valueOf(LocalDate.now().plusDays(daysUntilEndOfWeek-6));
+        // EXAMPLE VALUE: SELECT * FROM client_schedule.appointments WHERE Start between ('2023-01-08') and ('2023-01-14');
+        String sqlQuery = "SELECT * FROM client_schedule.appointments WHERE Start between ('"+beginningOfWeek+"') and ('"+endOfWeek+"');";
+        ObservableList<Appointment> appointmentList = makeAppointmentQuery(sqlQuery);
         return appointmentList;
     }
 

@@ -2,6 +2,7 @@ package controllers;
 
 import DAO.CustomerSQL;
 import DAO.DBConnection;
+import DAO.UserSQL;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -11,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.util.Callback;
 import models.Customer;
+import models.User;
 import utilities.ChangeScene;
 import utilities.PopUpBox;
 
@@ -37,7 +39,7 @@ public class ReportsController implements Initializable {
     public Label secondFilterLabel;
 
     public void initialize(URL url, ResourceBundle resourceBundle){
-        ObservableList<String> allTypes = FXCollections.observableArrayList("Appointments", "Customer Appointments", "Location Appointments");
+        ObservableList<String> allTypes = FXCollections.observableArrayList("Appointments", "Customer Appointments", "User Appointments");
         reportTypeComboBox.setItems(allTypes);
     }
 
@@ -84,8 +86,13 @@ public class ReportsController implements Initializable {
 
 
     public void generateButtonClicked(ActionEvent actionEvent) {
-        tableViewDisplayData(generateSQL());
-        reportsTable.refresh();
+        String sqlQuery = generateSQL();
+        if (sqlQuery != "") {
+            tableViewDisplayData(generateSQL());
+            reportsTable.refresh();
+        } else {
+            PopUpBox.errorBox("Please make valid selection");
+        }
     }
 
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {
@@ -103,6 +110,10 @@ public class ReportsController implements Initializable {
 
     public void reportTypeSelected(ActionEvent actionEvent) {
         String reportTypeSelected = (String) reportTypeComboBox.getSelectionModel().getSelectedItem();
+        firstFilterComboBox.getSelectionModel().clearSelection();
+        secondFilterComboBox.getSelectionModel().clearSelection();
+        firstFilterComboBox.getItems().clear();
+        secondFilterComboBox.getItems().clear();
         if (reportTypeSelected == "Appointments"){
             firstFilterLabel.setText("Type Filter :");
             ObservableList<String> allTypes = FXCollections.observableArrayList("Planning Session", "De-Briefing", "Follow-up", "1 on 1", "Other");
@@ -123,25 +134,26 @@ public class ReportsController implements Initializable {
             }
 
             secondFilterLabel.setText("No Filter");
-        } else if (reportTypeSelected == "Location Appointments") {
-            firstFilterLabel.setText("Country Filter :");
+        } else if (reportTypeSelected == "User Appointments") {
+            firstFilterLabel.setText("ID Filter :");
             try {
-                ObservableList<Integer> customersIDList = FXCollections.observableArrayList();
-                ObservableList<Customer> customersList = CustomerSQL.getAllCustomers();
-                customersList.forEach(customer -> customersIDList.add(customer.getCustomerID()));
-                firstFilterComboBox.setItems(customersIDList);
+                ObservableList<Integer> userIDList = FXCollections.observableArrayList();
+                ObservableList<User> userList = UserSQL.getAllUsers();
+                userList.forEach(user -> userIDList.add(user.getUserID()));
+                firstFilterComboBox.setItems(userIDList);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-
-            secondFilterLabel.setText("Division Filter");
+            secondFilterLabel.setText("No Filter");
         }
     }
 
     public String generateSQL(){
-        String reportType = reportTypeComboBox.getSelectionModel().getSelectedItem().toString();
-        if (reportType == "Appointments"){
-            String appointmentQuery = "SELECT * FROM Appointments";
+        Object reportType = reportTypeComboBox.getSelectionModel().getSelectedItem();
+        String appointmentQuery = "SELECT * FROM Appointments";
+        if (reportType == null) {
+            return "";
+        } else if (reportType == "Appointments"){
             Object typeFilter = firstFilterComboBox.getSelectionModel().getSelectedItem();
             Object monthFilter = secondFilterComboBox.getSelectionModel().getSelectedItem();
             if (typeFilter != null && monthFilter != null) {
@@ -166,12 +178,14 @@ public class ReportsController implements Initializable {
                 return appointmentQuery;
             }
         } else if (reportType == "Customer Appointments"){
+            if (firstFilterComboBox.getSelectionModel().getSelectedItem() == null){return appointmentQuery;}
             String customerID = firstFilterComboBox.getSelectionModel().getSelectedItem().toString();
-            String totalQuery = "SELECT * FROM Appointments WHERE Customer_ID = '" + customerID + "';";
+            String totalQuery = appointmentQuery + " WHERE Customer_ID = '" + customerID + "';";
             return totalQuery;
-        } else if (reportType == "Location Appointments") {
-            String customerID = firstFilterComboBox.getSelectionModel().getSelectedItem().toString();
-            String totalQuery = "SELECT * FROM Appointments WHERE Customer_ID = '" + customerID + "';";
+        } else if (reportType == "User Appointments") {
+            if (firstFilterComboBox.getSelectionModel().getSelectedItem() == null){return appointmentQuery;}
+            String userID = firstFilterComboBox.getSelectionModel().getSelectedItem().toString();
+            String totalQuery = appointmentQuery + " WHERE User_ID = '" + userID + "';";
             return totalQuery;
         } else {
             return "";
