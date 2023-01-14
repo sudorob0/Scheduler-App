@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -55,10 +56,21 @@ public class LoginController implements Initializable {
     }
 
     /**
+     * This method is used to display an error message
+     * @param message string you want displayed
+     */
+    public void errorBox(String message){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(rb.getString("error"));
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    /**
      * This method runs a query on the users table and checks to make user the password for that user is correct.
      * @param actionEvent login button clicked
-     * @throws IOException
-     * @throws SQLException
+     * @throws IOException for file errors
+     * @throws SQLException for sql errors
      */
     public void loginButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
         String userNameString = usernameTextField.getText();
@@ -66,9 +78,9 @@ public class LoginController implements Initializable {
         Boolean test = UserSQL.authenticateUser(userNameString, passwordString);
         // Input validation
         if (userNameString == "") {
-            PopUpBox.errorBox(rb.getString("enterValidUsername"));
+            errorBox(rb.getString("enterValidUsername"));
         } else if (passwordString == "") {
-            PopUpBox.errorBox(rb.getString("enterValidPassword"));
+            errorBox(rb.getString("enterValidPassword"));
             BufferedWriter log = new BufferedWriter(new FileWriter("login_activity.txt", true));
             log.append(String.valueOf(ZonedDateTime.now(ZoneOffset.UTC))).append("UTC-Login Attempt - USERNAME:" + userNameString + " NULL PASSWORD\n");
             log.flush();
@@ -87,18 +99,29 @@ public class LoginController implements Initializable {
             log.append(String.valueOf(ZonedDateTime.now(ZoneOffset.UTC))).append("UTC-Login Attempt - USERNAME:" + userNameString + " LOGIN FAILED\n");
             log.flush();
             log.close();
-            PopUpBox.errorBox(rb.getString("incorrectUsernamePassword"));
+            errorBox(rb.getString("incorrectUsernamePassword"));
         }
     }
 
+    /**
+     * this method displays an alert for any appointments the user has in the next 15 mins
+     * @param userName username of user login in
+     * @throws SQLException fo sql errors
+     */
     private void appointmentAlert(String userName) throws SQLException {
         ObservableList<Appointment> appointmentsInFifteenMins = AppointmentSQL.getAppointmentsWithinFifteenMins(UserSQL.getUserID(userName));
         if (appointmentsInFifteenMins.size() == 0) {
-            PopUpBox.infoBox(rb.getString("noAppointments"));
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle(rb.getString("information"));
+            alert.setContentText(rb.getString("noAppointments"));
+            alert.showAndWait();
         } else {
             for (Appointment appointment: appointmentsInFifteenMins){
                 String alertString = rb.getString("upcomingAppointment") + appointment.getAppointmentID()+ rb.getString("at") + appointment.getAppointmentStartDateTime();
-                PopUpBox.infoBox(alertString);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle(rb.getString("information"));
+                alert.setContentText(alertString);
+                alert.showAndWait();
             }
         }
     }

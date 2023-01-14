@@ -11,7 +11,10 @@ import javafx.stage.Stage;
 
 import java.util.Locale;
 
-
+/**
+ *
+ * Author Robert Uhl
+ */
 public class Main extends Application {
     /**
      * This method is to initialize the stage for the application
@@ -26,12 +29,12 @@ public class Main extends Application {
         primaryStage.show();
     }
     /**
-     * Launches application
+     * Launches application and establishes a database connection
      * @param args
      */
     public static void main(String[] args) {
         // language testing
-        Locale.setDefault(new Locale("fr"));
+        //Locale.setDefault(new Locale("fr"));
         // open db connection
         DBConnection.openConnection();
         launch(args);
