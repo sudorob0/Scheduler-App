@@ -28,7 +28,9 @@ public class MainMenuController implements Initializable {
         currentChange.stringToSceneChange(actionEvent, "Appointments");
     }
 
-    public void reportsButtonClicked(ActionEvent actionEvent) {
+    public void reportsButtonClicked(ActionEvent actionEvent) throws IOException {
+        ChangeScene currentChange = new ChangeScene();
+        currentChange.stringToSceneChange(actionEvent, "Reports");
     }
 
     public void logoutButtonClicked(ActionEvent actionEvent) throws IOException {

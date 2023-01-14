@@ -84,8 +84,8 @@ public class AppointmentsController implements Initializable {
     }
 
     public void addButtonClicked(ActionEvent actionEvent) throws IOException {
-        ChangeScene mainMenuScene = new ChangeScene();
-        mainMenuScene.stringToSceneChange(actionEvent, "AddAppointment");
+        ChangeScene changeScene = new ChangeScene();
+        changeScene.stringToSceneChange(actionEvent, "AddAppointment");
     }
 
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {

@@ -63,6 +63,12 @@ public class ChangeScene {
             stage.setScene(scene);
             stage.show();
         }
+        else if (sceneName == "Reports"){
+            Scene scene = new Scene(root, 1200, 800);
+            stage.setTitle(sceneName);
+            stage.setScene(scene);
+            stage.show();
+        }
         else {
             Scene scene = new Scene(root, 1200, 600);
             stage.setTitle(sceneName);
