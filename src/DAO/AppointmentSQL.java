@@ -7,6 +7,7 @@ import models.Appointment;
 import java.sql.*;
 
 import java.sql.PreparedStatement;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class AppointmentSQL {
@@ -43,12 +44,14 @@ public class AppointmentSQL {
     }
 
     public static ObservableList<Appointment> getAppointmentsByMonth() throws SQLException {
-        ObservableList<Appointment> appointmentList = makeAppointmentQuery("SELECT * FROM client_schedule.appointments WHERE Start >= (CURRENT_DATE) + INTERVAL 1 DAY - INTERVAL 1 MONTH AND Start < LAST_DAY(CURRENT_DATE) + INTERVAL 1 DAY;");
+        String nextMonth = LocalDate.now().plusMonths(1).toString();
+        ObservableList<Appointment> appointmentList = makeAppointmentQuery("SELECT * FROM client_schedule.appointments WHERE Start between (CURRENT_DATE) and ('" + nextMonth + "');");
         return appointmentList;
     }
 
     public static ObservableList<Appointment> getAppointmentsByWeek() throws SQLException {
-        ObservableList<Appointment> appointmentList = makeAppointmentQuery("SELECT * FROM client_schedule.appointments WHERE Start >= (CURRENT_DATE) + INTERVAL 1 DAY - INTERVAL 1 WEEK AND Start < LAST_DAY(CURRENT_DATE) + INTERVAL 1 DAY;");
+        String nextWeek = LocalDate.now().plusWeeks(1).toString();
+        ObservableList<Appointment> appointmentList = makeAppointmentQuery("SELECT * FROM client_schedule.appointments WHERE Start between (CURRENT_DATE) and ('" + nextWeek + "');");
         return appointmentList;
     }
 
