@@ -9,6 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Locale;
+
 
 public class Main extends Application {
     /**
@@ -19,7 +21,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/views/Login.fxml"));
-        primaryStage.setTitle("Login");
+        primaryStage.setTitle("");
         primaryStage.setScene(new Scene(root, 580, 390));
         primaryStage.show();
     }
@@ -28,6 +30,8 @@ public class Main extends Application {
      * @param args
      */
     public static void main(String[] args) {
+        // language testing
+        Locale.setDefault(new Locale("fr"));
         // open db connection
         DBConnection.openConnection();
         launch(args);

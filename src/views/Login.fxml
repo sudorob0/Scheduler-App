@@ -14,12 +14,12 @@
             <Font name="Arial Bold" size="26.0" />
          </font>
       </Label>
-      <Label fx:id="userNameLabel" layoutX="145.0" layoutY="191.0" text="UserName :" textFill="#fffbeb">
+      <Label fx:id="userNameLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="78.0" layoutY="189.0" prefHeight="21.0" prefWidth="166.0" text="UserName :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="passwordLabel" layoutX="147.0" layoutY="230.0" text="Password :" textFill="#fffbeb">
+      <Label fx:id="passwordLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="78.0" layoutY="230.0" prefHeight="21.0" prefWidth="166.0" text="Password :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>

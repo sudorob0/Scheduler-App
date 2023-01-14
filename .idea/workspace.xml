@@ -161,6 +161,11 @@
           <line>194</line>
           <option name="timeStamp" value="47" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/DAO/AppointmentSQL.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.sql.SQLException" package="java.sql" />
           <option name="timeStamp" value="28" />

@@ -2,6 +2,8 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 public abstract class DBConnection {
     private static final String protocol = "jdbc";
@@ -47,5 +49,10 @@ public abstract class DBConnection {
             // System.out.println("Error:" + e.getMessage());
             // closing application, no need to do anything
         }
+    }
+
+    public static ZonedDateTime convertToDBTime(ZonedDateTime localZonedTime) {
+        ZonedDateTime dbTime = localZonedTime.withZoneSameInstant(ZoneId.of("-00:00"));
+        return dbTime;
     }
 }

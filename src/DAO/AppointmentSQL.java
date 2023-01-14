@@ -7,8 +7,7 @@ import models.Appointment;
 import java.sql.*;
 
 import java.sql.PreparedStatement;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 
 public class AppointmentSQL {
     /**
@@ -44,12 +43,22 @@ public class AppointmentSQL {
         return appointmentList;
     }
 
+    public static ObservableList<Appointment> getAppointmentsWithinFifteenMins(Integer userID) throws SQLException {
+        //convert to UTC-0 since that is what the database is on
+        ZonedDateTime currentDBtime = DBConnection.convertToDBTime(ZonedDateTime.now());
+        String rightNow = String.valueOf(currentDBtime);
+        String inFifteenMins = String.valueOf(currentDBtime.plusMinutes(15));
+        String sqlQuery = "SELECT * FROM Appointments WHERE Start between ('"+rightNow+"') and ('"+inFifteenMins+"') and User_id = '"+userID+"';";
+        //EXAMPLE QUERY: SELECT * FROM Appointments WHERE Start between ('2023-01-14T20:41:16.298123900Z') and ('2023-01-14T20:56:16.298123900Z') and User_id = '1';
+        ObservableList<Appointment> appointmentList = makeAppointmentQuery(sqlQuery);
+        return appointmentList;
+    }
+
     public static ObservableList<Appointment> getAppointmentsByMonth() throws SQLException {
         String thisYear = String.valueOf(LocalDate.now().getYear());
         String thisMonth = String.valueOf(LocalDate.now().getMonthValue());
         String nextMonth = String.valueOf(LocalDate.now().getMonthValue() + 1);
-        String sqlQuery = "SELECT * FROM client_schedule.appointments WHERE Start between ('"+thisYear+"-"+thisMonth+"-1') and ('"+thisYear+"-"+nextMonth+"-1 01:00:00');";
-        System.out.print(nextMonth);
+        String sqlQuery = "SELECT * FROM appointments WHERE Start between ('"+thisYear+"-"+thisMonth+"-1') and ('"+thisYear+"-"+nextMonth+"-1 01:00:00');";
         // EXAMPLE: SELECT * FROM client_schedule.appointments WHERE Start between ('2023-1-1') and ('2023-2-1 01:00:00');
         ObservableList<Appointment> appointmentList = makeAppointmentQuery(sqlQuery);
         return appointmentList;
@@ -77,7 +86,7 @@ public class AppointmentSQL {
         String endOfWeek = String.valueOf(LocalDate.now().plusDays(daysUntilEndOfWeek));
         String beginningOfWeek = String.valueOf(LocalDate.now().plusDays(daysUntilEndOfWeek-6));
         // EXAMPLE VALUE: SELECT * FROM client_schedule.appointments WHERE Start between ('2023-01-08') and ('2023-01-14');
-        String sqlQuery = "SELECT * FROM client_schedule.appointments WHERE Start between ('"+beginningOfWeek+"') and ('"+endOfWeek+"');";
+        String sqlQuery = "SELECT * FROM appointments WHERE Start between ('"+beginningOfWeek+"') and ('"+endOfWeek+"');";
         ObservableList<Appointment> appointmentList = makeAppointmentQuery(sqlQuery);
         return appointmentList;
     }

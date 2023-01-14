@@ -55,4 +55,14 @@ public class UserSQL {
         }
         return usersList;
     }
+
+    public static Integer getUserID(String userName) throws SQLException {
+        PreparedStatement ps = DBConnection.getConnection().prepareStatement("SELECT * from users WHERE User_Name = '" + userName + "';");
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()){
+            Integer userID = rs.getInt("User_ID");
+            return userID;
+        }
+        return null;
+    }
 }

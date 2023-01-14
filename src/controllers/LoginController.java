@@ -1,6 +1,9 @@
 package controllers;
 
+import DAO.AppointmentSQL;
+import DAO.DBConnection;
 import DAO.UserSQL;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -8,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import models.Appointment;
 import utilities.ChangeScene;
 import utilities.PopUpBox;
 
@@ -16,6 +20,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -23,6 +28,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
+    public ResourceBundle rb;
     public TextField usernameTextField;
     public TextField passwordTextField;
     public Button loginButton;
@@ -39,15 +45,13 @@ public class LoginController implements Initializable {
      * @param resourceBundle
      */
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ResourceBundle rb = ResourceBundle.getBundle("languages/login", Locale.getDefault());
+        rb = ResourceBundle.getBundle("languages/login", Locale.getDefault());
         titleLabel.setText(rb.getString("titleLabel"));
         userNameLabel.setText(rb.getString("userNameLabel"));
         passwordLabel.setText(rb.getString("passwordLabel"));
         loginButton.setText(rb.getString("loginButton"));
         exitButton.setText(rb.getString("exitButton"));
         locationTextField.setText(ZoneId.systemDefault().toString());
-
-
     }
 
     /**
@@ -62,15 +66,20 @@ public class LoginController implements Initializable {
         Boolean test = UserSQL.authenticateUser(userNameString, passwordString);
         // Input validation
         if (userNameString == "") {
-            PopUpBox.errorBox("Please enter valid username");
+            PopUpBox.errorBox(rb.getString("enterValidUsername"));
         } else if (passwordString == "") {
-            PopUpBox.errorBox("Please enter valid password");
+            PopUpBox.errorBox(rb.getString("enterValidPassword"));
+            BufferedWriter log = new BufferedWriter(new FileWriter("login_activity.txt", true));
+            log.append(String.valueOf(ZonedDateTime.now(ZoneOffset.UTC))).append("UTC-Login Attempt - USERNAME:" + userNameString + " NULL PASSWORD\n");
+            log.flush();
+            log.close();
             // Authenticate user with their username and password
         } else if (UserSQL.authenticateUser(userNameString, passwordString)) {
             BufferedWriter log = new BufferedWriter(new FileWriter("login_activity.txt", true));
             log.append(String.valueOf(ZonedDateTime.now(ZoneOffset.UTC))).append("UTC-Login Attempt - USERNAME:" + userNameString + " LOGIN SUCCESSFUL\n");
             log.flush();
             log.close();
+            appointmentAlert(userNameString);
             ChangeScene mainMenuScene = new ChangeScene();
             mainMenuScene.stringToSceneChange(actionEvent, "MainMenu");
         } else {
@@ -78,7 +87,19 @@ public class LoginController implements Initializable {
             log.append(String.valueOf(ZonedDateTime.now(ZoneOffset.UTC))).append("UTC-Login Attempt - USERNAME:" + userNameString + " LOGIN FAILED\n");
             log.flush();
             log.close();
-            PopUpBox.errorBox("Incorrect username or password, please try again. If you continue to have issues contact your system admin.");
+            PopUpBox.errorBox(rb.getString("incorrectUsernamePassword"));
+        }
+    }
+
+    private void appointmentAlert(String userName) throws SQLException {
+        ObservableList<Appointment> appointmentsInFifteenMins = AppointmentSQL.getAppointmentsWithinFifteenMins(UserSQL.getUserID(userName));
+        if (appointmentsInFifteenMins.size() == 0) {
+            PopUpBox.infoBox(rb.getString("noAppointments"));
+        } else {
+            for (Appointment appointment: appointmentsInFifteenMins){
+                String alertString = rb.getString("upcomingAppointment") + appointment.getAppointmentID()+ rb.getString("at") + appointment.getAppointmentStartDateTime();
+                PopUpBox.infoBox(alertString);
+            }
         }
     }
 
