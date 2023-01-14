@@ -40,21 +40,19 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="324.0" layoutY="163.0" text="Filter by :" textFill="#fffbeb">
+      <Label fx:id="firstFilterLabel" layoutX="289.0" layoutY="164.0" prefHeight="23.0" prefWidth="127.0" text="Filter :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <ComboBox fx:id="filterComboBox1" layoutX="428.0" layoutY="163.0" prefHeight="25.0" prefWidth="201.0" />
+      <ComboBox fx:id="firstFilterComboBox" layoutX="428.0" layoutY="163.0" prefHeight="25.0" prefWidth="201.0" />
       <Label fx:id="totalEntriesLabel" layoutX="187.0" layoutY="276.0" text="0" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <ComboBox fx:id="filterComboBox11" layoutX="644.0" layoutY="163.0" prefHeight="25.0" prefWidth="201.0" />
-      <ComboBox fx:id="filterComboBox111" layoutX="428.0" layoutY="211.0" prefHeight="25.0" prefWidth="201.0" />
-      <ComboBox fx:id="filterComboBox112" layoutX="644.0" layoutY="211.0" prefHeight="25.0" prefWidth="201.0" />
-      <Label layoutX="276.0" layoutY="212.0" text="Second Filter :" textFill="#fffbeb">
+      <ComboBox fx:id="secondFilterComboBox" layoutX="428.0" layoutY="211.0" prefHeight="25.0" prefWidth="201.0" />
+      <Label fx:id="secondFilterLabel" layoutX="289.0" layoutY="212.0" prefHeight="23.0" prefWidth="127.0" text="Filter :" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>

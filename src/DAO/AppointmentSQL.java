@@ -18,6 +18,7 @@ public class AppointmentSQL {
      * @throws SQLException for sql errors
      */
     public static ObservableList<Appointment> makeAppointmentQuery(String sqlQuery) throws SQLException {
+        //System.out.print(sqlQuery);
         ObservableList<Appointment> appointmentsList = FXCollections.observableArrayList();
         PreparedStatement ps = DBConnection.getConnection().prepareStatement(sqlQuery);
         ResultSet rs = ps.executeQuery();
