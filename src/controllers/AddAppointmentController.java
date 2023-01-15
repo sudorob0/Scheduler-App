@@ -52,6 +52,10 @@ public class AddAppointmentController implements Initializable {
         try {
             ObservableList<Contact>contactsList = ContactSQL.getAllContacts();
             ObservableList<String> contactStringList = FXCollections.observableArrayList();
+            /**
+             * LAMBDA EXPRESSION: created a lambda expression to loop through the contacts list and get the contact name
+             * in String format to add to the contactStringList. This list will be used to populate the combo boxes.
+             */
             contactsList.forEach(contact -> contactStringList.add(contact.getContactName()));
             contactComboBox.setItems(contactStringList);
         } catch (SQLException throwables) {

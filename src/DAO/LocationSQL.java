@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 
-public class CountrySQL {
+public class LocationSQL {
 
     /**
      * Get all countries from the sql database and return an observable list

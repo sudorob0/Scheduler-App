@@ -3,9 +3,7 @@ package DAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Appointment;
-
 import java.sql.*;
-
 import java.sql.PreparedStatement;
 import java.time.*;
 

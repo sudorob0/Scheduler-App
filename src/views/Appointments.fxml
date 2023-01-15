@@ -48,7 +48,7 @@
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
-      <RadioButton fx:id="allAppsRadio" layoutX="312.0" layoutY="104.0" mnemonicParsing="false" onAction="#allAppsRadioSelected" selected="true" text="All Appointments" textFill="#fffbeb">
+      <RadioButton fx:id="allAppsRadio" layoutX="312.0" layoutY="104.0" mnemonicParsing="false" selected="true" text="All Appointments" textFill="#fffbeb">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>
@@ -56,12 +56,12 @@
             <ToggleGroup fx:id="appointments" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="monthlyRadio" layoutX="526.0" layoutY="104.0" mnemonicParsing="false" onAction="#monthlyRadioSelected" text="Monthly" textFill="#fffbeb" toggleGroup="$appointments">
+      <RadioButton fx:id="monthlyRadio" layoutX="526.0" layoutY="104.0" mnemonicParsing="false" text="Monthly" textFill="#fffbeb" toggleGroup="$appointments">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="weeklyRadio" layoutX="685.0" layoutY="104.0" mnemonicParsing="false" onAction="#weeklyRadioSelected" text="Weekly" textFill="#fffbeb" toggleGroup="$appointments">
+      <RadioButton fx:id="weeklyRadio" layoutX="685.0" layoutY="104.0" mnemonicParsing="false" text="Weekly" textFill="#fffbeb" toggleGroup="$appointments">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>

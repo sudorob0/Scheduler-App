@@ -2,7 +2,6 @@ package DAO;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import models.Contact;
 import models.Customer;
 
 import java.sql.PreparedStatement;
@@ -51,7 +50,7 @@ public class CustomerSQL {
         ps.setString(2, address);
         ps.setString(3, postalCode);
         ps.setString(4, phone);
-        ps.setString(5, CountrySQL.getDivisionID(division));
+        ps.setString(5, LocationSQL.getDivisionID(division));
         ps.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
 
         try{
@@ -70,7 +69,7 @@ public class CustomerSQL {
         ps.setString(2, address);
         ps.setString(3, postalCode);
         ps.setString(4, phone);
-        ps.setString(5, CountrySQL.getDivisionID(division));
+        ps.setString(5, LocationSQL.getDivisionID(division));
         ps.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
         ps.setString(7, customerID);
         try{

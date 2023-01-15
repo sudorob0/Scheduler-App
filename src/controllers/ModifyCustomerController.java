@@ -1,6 +1,6 @@
 package controllers;
 
-import DAO.CountrySQL;
+import DAO.LocationSQL;
 import DAO.CustomerSQL;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,7 +39,7 @@ public class ModifyCustomerController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle){
 
         ObservableList<String> countryNames = FXCollections.observableArrayList();
-        ObservableList<Country> countriesObjectList = CountrySQL.getAllCountries();
+        ObservableList<Country> countriesObjectList = LocationSQL.getAllCountries();
         countriesObjectList.forEach(country -> countryNames.add(country.getCountry()));
         countryComboBox.setItems(countryNames);
 
@@ -100,8 +100,8 @@ public class ModifyCustomerController implements Initializable {
     public void countrySelected() throws SQLException {
         divisionComboBox.getSelectionModel().clearSelection();
         String countryName = countryComboBox.getSelectionModel().getSelectedItem();
-        Integer countryID = CountrySQL.getCountryID(countryName);
-        divisionComboBox.setItems(CountrySQL.getDivisionNames(countryID));
+        Integer countryID = LocationSQL.getCountryID(countryName);
+        divisionComboBox.setItems(LocationSQL.getDivisionNames(countryID));
     }
 }
 

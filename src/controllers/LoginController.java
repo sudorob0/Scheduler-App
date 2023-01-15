@@ -36,6 +36,7 @@ public class LoginController implements Initializable {
     public Button exitButton;
     public Label locationTextField;
 
+
     /**
      * This initialize method displays the text in the language that the user has set on their local machine and displays
      * their location.
@@ -50,6 +51,8 @@ public class LoginController implements Initializable {
         loginButton.setText(rb.getString("loginButton"));
         exitButton.setText(rb.getString("exitButton"));
         locationTextField.setText(ZoneId.systemDefault().toString());
+        // LAMBDA FUNCTION: this lambda function exits the application, before I added this I had a hold method for the exit button
+        exitButton.setOnAction(e-> System.exit(0));
     }
 
     /**
@@ -121,14 +124,5 @@ public class LoginController implements Initializable {
                 alert.showAndWait();
             }
         }
-    }
-
-    /**
-     * Method to close the application
-     * @param Exit requires the user to click the exit button
-     */
-    public void exitButtonClicked(ActionEvent Exit) {
-        Stage stage = (Stage) ((Node) Exit.getSource()).getScene().getWindow();
-        stage.close();
     }
 }

@@ -46,6 +46,12 @@ public class AppointmentsController implements Initializable {
      * @throws SQLException for any SQL errors
      */
     public void refreshAppointmentsTable() throws SQLException {
+        /**
+         * LAMBDA EXPRESSION: These lambda expressions call this method when one of the radio buttons are selected
+         */
+        allAppsRadio.setOnAction(e -> { try { refreshAppointmentsTable(); } catch (SQLException throwables) { throwables.printStackTrace(); } });
+        monthlyRadio.setOnAction(e -> { try { refreshAppointmentsTable(); } catch (SQLException throwables) { throwables.printStackTrace(); } });
+        weeklyRadio.setOnAction(e -> { try { refreshAppointmentsTable(); } catch (SQLException throwables) { throwables.printStackTrace(); } });
         if (allAppsRadio.isSelected()){
             ObservableList<Appointment> appointmentsList = AppointmentSQL.getAllAppointments();
             appointmentsTable.setItems(appointmentsList);
@@ -149,26 +155,29 @@ public class AppointmentsController implements Initializable {
             }
         }
     }
-
+// all this was replaced with a Lambda expression
     /**
      * this method is just a trigger for the refresh table method
      * @throws SQLException for sql errors
-     */
+
     public void allAppsRadioSelected() throws SQLException {
         refreshAppointmentsTable();
     }
     /**
      * this method is just a trigger for the refresh table method
      * @throws SQLException for sql errors
-     */
+
+
     public void monthlyRadioSelected() throws SQLException {
         refreshAppointmentsTable();
     }
     /**
      * this method is just a trigger for the refresh table method
      * @throws SQLException for sql errors
-     */
+
     public void weeklyRadioSelected() throws SQLException {
         refreshAppointmentsTable();
     }
+*/
 }
+

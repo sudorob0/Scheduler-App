@@ -30,7 +30,7 @@
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="exitButton" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#exitButtonClicked" style="-fx-background-color: FFFBEB;" text="X Exit" textFill="#251749">
+      <Button fx:id="exitButton" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: FFFBEB;" text="X Exit" textFill="#251749">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
