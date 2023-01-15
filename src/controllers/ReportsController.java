@@ -31,18 +31,27 @@ public class ReportsController implements Initializable {
     public ComboBox filterComboBox;
     public TextField filterTextField;
     public TableView reportsTable;
-    public ComboBox reportTypeComboBox;
+    public ComboBox<String> reportTypeComboBox;
     public Label totalEntriesLabel;
     public Label firstFilterLabel;
     public ComboBox firstFilterComboBox;
-    public ComboBox secondFilterComboBox;
+    public ComboBox<String> secondFilterComboBox;
     public Label secondFilterLabel;
 
+    /**
+     * Initialize method to load the report type combo box
+     * @param url
+     * @param resourceBundle
+     */
     public void initialize(URL url, ResourceBundle resourceBundle){
         ObservableList<String> allTypes = FXCollections.observableArrayList("Appointments", "Customer Appointments", "User Appointments");
         reportTypeComboBox.setItems(allTypes);
     }
 
+    /**
+     * This method dynamicly displays data from the sql database to the table view
+     * @param sqlQuery
+     */
     public void tableViewDisplayData(String sqlQuery) {
         Connection connection;
         ObservableList<Object> data = FXCollections.observableArrayList();
@@ -87,7 +96,7 @@ public class ReportsController implements Initializable {
 
     public void generateButtonClicked(ActionEvent actionEvent) {
         String sqlQuery = generateSQL();
-        if (sqlQuery != "") {
+        if (!sqlQuery.equals("")) {
             tableViewDisplayData(generateSQL());
             reportsTable.refresh();
         } else {
@@ -109,12 +118,12 @@ public class ReportsController implements Initializable {
     }
 
     public void reportTypeSelected(ActionEvent actionEvent) {
-        String reportTypeSelected = (String) reportTypeComboBox.getSelectionModel().getSelectedItem();
+        String reportTypeSelected = reportTypeComboBox.getSelectionModel().getSelectedItem();
         firstFilterComboBox.getSelectionModel().clearSelection();
         secondFilterComboBox.getSelectionModel().clearSelection();
         firstFilterComboBox.getItems().clear();
         secondFilterComboBox.getItems().clear();
-        if (reportTypeSelected == "Appointments"){
+        if (reportTypeSelected.equals("Appointments")){
             firstFilterLabel.setText("Type Filter :");
             ObservableList<String> allTypes = FXCollections.observableArrayList("Planning Session", "De-Briefing", "Follow-up", "1 on 1", "Other");
             firstFilterComboBox.setItems(allTypes);
@@ -122,7 +131,7 @@ public class ReportsController implements Initializable {
             secondFilterLabel.setText("Month Filter :");
             ObservableList<String> months = FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
             secondFilterComboBox.setItems(months);
-        } else if (reportTypeSelected == "Customer Appointments") {
+        } else if (reportTypeSelected.equals("Customer Appointments")) {
             firstFilterLabel.setText("ID Filter :");
             try {
                 ObservableList<Integer> customersIDList = FXCollections.observableArrayList();
@@ -134,7 +143,7 @@ public class ReportsController implements Initializable {
             }
 
             secondFilterLabel.setText("No Filter");
-        } else if (reportTypeSelected == "User Appointments") {
+        } else if (reportTypeSelected.equals("User Appointments")) {
             firstFilterLabel.setText("ID Filter :");
             try {
                 ObservableList<Integer> userIDList = FXCollections.observableArrayList();

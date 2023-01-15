@@ -54,6 +54,31 @@ public class AppointmentSQL {
         return appointmentList;
     }
 
+    /**
+     * This method does a query to find overlapping appointments and returns any overlapping appointments
+     * @param startDT provide start date time of the appointment
+     * @param endDT provide end date time of the appointment
+     * @return a list of appointment that overlap
+     * @throws SQLException for sql errors
+     */
+    public static ObservableList<Appointment> findOverLappingAppointments(ZonedDateTime startDT, ZonedDateTime endDT) throws SQLException {
+        //convert to UTC-0 since that is what the database is on
+        String startDateTime = String.valueOf(DBConnection.convertToDBTime(startDT));
+        String endDateTime = String.valueOf(DBConnection.convertToDBTime(endDT));
+        // EXAMPLE QUERY: SELECT * FROM client_schedule.appointments WHERE Start > ('2023-01-15 15:50:00') and Start < ('2023-01-15 16:10:00');
+        String sqlQuery = "SELECT * FROM appointments WHERE Start > ('"+startDateTime+"') and Start < ('"+endDateTime+"');";
+        //EXAMPLE QUERY: SELECT * FROM Appointments WHERE Start between ('2023-01-14T20:41:16.298123900Z') and ('2023-01-14T20:56:16.298123900Z') and User_id = '1';
+        ObservableList<Appointment> appointmentList = makeAppointmentQuery(sqlQuery);
+        if (appointmentList.size() > 0) {
+            return appointmentList;
+        } else {
+            sqlQuery = "SELECT * FROM appointments WHERE End > ('"+startDateTime+"') and End < ('"+endDateTime+"');";
+            //EXAMPLE QUERY: SELECT * FROM Appointments WHERE Start between ('2023-01-14T20:41:16.298123900Z') and ('2023-01-14T20:56:16.298123900Z') and User_id = '1';
+            appointmentList = makeAppointmentQuery(sqlQuery);
+            return appointmentList;
+        }
+    }
+
     public static ObservableList<Appointment> getAppointmentsByMonth() throws SQLException {
         String thisYear = String.valueOf(LocalDate.now().getYear());
         String thisMonth = String.valueOf(LocalDate.now().getMonthValue());
@@ -138,16 +163,6 @@ public class AppointmentSQL {
         }
     }
 
-    /**
-     * generates an appointment id by retrieving a list ordered by appointment ids and the adding 1 to the last id in the list
-     * @return appointment id integer
-     * @throws SQLException for sql errors
-     */
-    public static int generateAppointmentID() throws SQLException {
-        ObservableList<Appointment> appointmentList = getAllAppointments();
-        Integer newAppointmentID = appointmentList.get(-1).getAppointmentID() + 1;
-        return newAppointmentID;
-    }
 
     public static boolean modifyAppointment(String appointmentID, Integer contact, String title, String description, String location, String type, Integer customerID, Integer userID, LocalDateTime startDateTime, LocalDateTime endDateTime) throws SQLException {
         String insertStatement = "UPDATE Appointments SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Last_Update = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";

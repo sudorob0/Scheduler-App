@@ -13,9 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.*;
 import javafx.stage.Stage;
-import models.Appointment;
 import models.Customer;
 import utilities.ChangeScene;
 import utilities.PopUpBox;
@@ -26,23 +24,31 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class CustomersController implements Initializable {
-    public TableView customersTable;
+    public TableView<Customer> customersTable;
     public Button addButton;
     public Button backButton;
     public Button modifyButton;
     public Button deleteButton;
-    public TableColumn customeridCol;
-    public TableColumn nameCol;
-    public TableColumn telephoneCol;
-    public TableColumn addressCol;
-    public TableColumn divisionCol;
-    public TableColumn postalCodeCol;
-    public TableColumn countryCol;
+    public TableColumn<Object, Object> customeridCol;
+    public TableColumn<Object, Object> nameCol;
+    public TableColumn<Object, Object> telephoneCol;
+    public TableColumn<Object, Object> addressCol;
+    public TableColumn<Object, Object> divisionCol;
+    public TableColumn<Object, Object> postalCodeCol;
+    public TableColumn<Object, Object> countryCol;
 
+    /**
+     * this init method just refreshes the customer table
+     * @param url for initialize
+     * @param resourceBundle for initialize
+     */
     public void initialize(URL url, ResourceBundle resourceBundle) {
     refreshCustomersTable();
     }
 
+    /**
+     * This method refreshes  and displays data on the customers table.
+     */
     public void refreshCustomersTable(){
         try {
             ObservableList<Customer> allCustomersList = CustomerSQL.getAllCustomers();
@@ -61,21 +67,34 @@ public class CustomersController implements Initializable {
 
     }
 
+    /**
+     * this method takes the user back to the main menu
+     * @param actionEvent backButtonClicked
+     * @throws IOException for file errors
+     */
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {
         ChangeScene mainMenuScene = new ChangeScene();
         mainMenuScene.stringToSceneChange(actionEvent, "MainMenu");
     }
 
+    /**
+     * this method takes the user back to the main menu
+     * @param actionEvent addButtonClicked
+     * @throws IOException for file errors
+     */
     public void addButtonClicked(ActionEvent actionEvent) throws IOException {
         ChangeScene mainMenuScene = new ChangeScene();
         mainMenuScene.stringToSceneChange(actionEvent, "AddCustomer");
     }
 
+    /**
+     * this m
+     */
     public void modifyButtonClicked(ActionEvent actionEvent) {
         if (customersTable.getSelectionModel().getSelectedItem() == null) {
             PopUpBox.errorBox("Please select customer to edit");
         } else {
-            Customer selectedCustomer = (Customer) customersTable.getSelectionModel().getSelectedItem();
+            Customer selectedCustomer = customersTable.getSelectionModel().getSelectedItem();
             int currentIndex = customersTable.getSelectionModel().getSelectedIndex();
 
             try {
@@ -95,8 +114,8 @@ public class CustomersController implements Initializable {
         }
     }
 
-    public void deleteButtonClicked(ActionEvent actionEvent) throws SQLException {
-        Customer selectedCustomer = (Customer) customersTable.getSelectionModel().getSelectedItem();
+    public void deleteButtonClicked() throws SQLException {
+        Customer selectedCustomer = customersTable.getSelectionModel().getSelectedItem();
         if (selectedCustomer == null){
             PopUpBox.errorBox("Please select an the customer you would like to delete.");
         } else {

@@ -1,7 +1,6 @@
 package controllers;
 
 import DAO.AppointmentSQL;
-import DAO.DBConnection;
 import DAO.UserSQL;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,7 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import models.Appointment;
 import utilities.ChangeScene;
-import utilities.PopUpBox;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -42,8 +40,8 @@ public class LoginController implements Initializable {
     /**
      * This initialize method displays the text in the language that the user has set on their local machine and displays
      * their location.
-     * @param url
-     * @param resourceBundle
+     * @param url for init
+     * @param resourceBundle for init
      */
     public void initialize(URL url, ResourceBundle resourceBundle) {
         rb = ResourceBundle.getBundle("languages/login", Locale.getDefault());
@@ -77,9 +75,9 @@ public class LoginController implements Initializable {
         String passwordString = passwordTextField.getText();
         Boolean test = UserSQL.authenticateUser(userNameString, passwordString);
         // Input validation
-        if (userNameString == "") {
+        if (userNameString.equals("")) {
             errorBox(rb.getString("enterValidUsername"));
-        } else if (passwordString == "") {
+        } else if (passwordString.equals("")) {
             errorBox(rb.getString("enterValidPassword"));
             BufferedWriter log = new BufferedWriter(new FileWriter("login_activity.txt", true));
             log.append(String.valueOf(ZonedDateTime.now(ZoneOffset.UTC))).append("UTC-Login Attempt - USERNAME:" + userNameString + " NULL PASSWORD\n");

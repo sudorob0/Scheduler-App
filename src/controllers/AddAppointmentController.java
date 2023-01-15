@@ -107,24 +107,17 @@ public class AddAppointmentController implements Initializable {
      * their appointment time
      * @param enteredStartDT this is the entered start date/time
      * @param enteredEndDT this is the entered end date/time
-     * @return this returns true if there are NO overlapping appointments and false if there are overlapping appointments
+
      * @throws SQLException for sql errors
+     * @return
      */
-    private boolean checkForOverlap(LocalDateTime enteredStartDT, LocalDateTime enteredEndDT) throws SQLException {
-        ObservableList<Appointment> allAppointmentsList = AppointmentSQL.getAllAppointments();
-        for (Appointment appointment: allAppointmentsList){
-            LocalDateTime previousAppointmentStart = appointment.getAppointmentStartDateTime();
-            LocalDateTime previousAppointmentEnd = appointment.getAppointmentEndDateTime();
-            String errorMessage = ("This appointment overlaps with a previously scheduled appointment.\nOverlapping Appointment ID: " + appointment.getAppointmentID() + "\nStart time: " + previousAppointmentStart + "\nEnd time: " + previousAppointmentEnd);
-            if (previousAppointmentStart.isAfter(enteredStartDT) && previousAppointmentStart.isBefore(enteredEndDT)){
-                PopUpBox.errorBox(errorMessage);
-                return false;
-            } else if (previousAppointmentEnd.isAfter(enteredStartDT) && previousAppointmentEnd.isBefore(enteredEndDT)) {
-                PopUpBox.errorBox(errorMessage);
-                return false;
-            }
+    private boolean checkForOverlap(ZonedDateTime enteredStartDT, ZonedDateTime enteredEndDT) throws SQLException {
+        ObservableList<Appointment> overlappingAppointments = AppointmentSQL.findOverLappingAppointments(enteredStartDT, enteredEndDT);
+        if (overlappingAppointments.size() > 0) {
+            Appointment overlappingApp = overlappingAppointments.get(0);
+            PopUpBox.errorBox("This appointment overlaps with a previously scheduled appointment.\nOverlapping Appointment ID: " + overlappingApp.getAppointmentID() + "\nStart time: " + overlappingApp.getAppointmentStartDateTime() + "\nEnd time: " + overlappingApp.getAppointmentEndDateTime());
+            return false;
         }
-        // return true if no overlap is found
         return true;
     }
 
@@ -181,6 +174,12 @@ public class AddAppointmentController implements Initializable {
             LocalTime enteredStartTimeEst = convertToEst(enteredStartDT);
             LocalTime enteredEndTimeEst = convertToEst(enteredEndDT);
 
+            // Zoned the local time with the users default zone
+            ZoneId zoneid = ZoneId.systemDefault();
+            ZonedDateTime zonedStartDT = ZonedDateTime.of(LocalDateTime.of(startDatePicker.getValue(), enteredStartTime), zoneid);
+            ZonedDateTime zonedEndDT = ZonedDateTime.of(LocalDateTime.of(endDatePicker.getValue(), enteredEndTime), zoneid);
+
+
             // Validate that appointment is within business hours
             if (enteredStartTimeEst.isBefore(LocalTime.of(8,0)) || enteredEndTimeEst.isBefore(LocalTime.of(8, 0)) || enteredStartTimeEst.isAfter(LocalTime.of(22, 0)) || enteredEndTimeEst.isAfter(LocalTime.of(22, 0))) {
                 PopUpBox.errorBox("Appointments can only be scheduled within the business hours of 8am to 10pm EST.");
@@ -194,7 +193,7 @@ public class AddAppointmentController implements Initializable {
                 PopUpBox.errorBox("Appointments can not be scheduled in the past. Please select a time in the future.");
             }
             // Check for appointment overlapping
-            else if (checkForOverlap(enteredStartDT, enteredEndDT)) {
+            else if (checkForOverlap(zonedStartDT, zonedEndDT)) {
                 // add appointment
                 if (AppointmentSQL.addAppointment(enteredContact, enteredTitle, descriptionTextArea.getText(), enteredLocation, enteredType, enteredCustomerID, enteredUserID, enteredStartDT, enteredEndDT)) {
                     PopUpBox.infoBox("Appointment has been successfully saved");

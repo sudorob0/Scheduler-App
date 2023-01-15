@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.Appointment;
-import models.Customer;
 import utilities.ChangeScene;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -22,7 +21,7 @@ import DAO.AppointmentSQL;
 import utilities.PopUpBox;
 
 public class AppointmentsController implements Initializable {
-    public TableView appointmentsTable;
+    public TableView<Appointment> appointmentsTable;
     public Button addButton;
     public Button backButton;
     public Button modifyButton;
@@ -31,16 +30,16 @@ public class AppointmentsController implements Initializable {
     public ToggleGroup appointments;
     public RadioButton monthlyRadio;
     public RadioButton weeklyRadio;
-    public TableColumn appointmentidCol;
-    public TableColumn customeridCol;
-    public TableColumn useridCol;
-    public TableColumn titleCol;
-    public TableColumn descriptionCol;
-    public TableColumn locationCol;
-    public TableColumn contactidCol;
-    public TableColumn startDateTimeCol;
-    public TableColumn endDateTimeCol;
-    public TableColumn typeCol;
+    public TableColumn<Object, Object> appointmentidCol;
+    public TableColumn<Object, Object> customeridCol;
+    public TableColumn<Object, Object> useridCol;
+    public TableColumn<Object, Object> titleCol;
+    public TableColumn<Object, Object> descriptionCol;
+    public TableColumn<Object, Object> locationCol;
+    public TableColumn<Object, Object> contactidCol;
+    public TableColumn<Object, Object> startDateTimeCol;
+    public TableColumn<Object, Object> endDateTimeCol;
+    public TableColumn<Object, Object> typeCol;
 
     /**
      * This method checks which radio button is selected and then refreshes the appointmentTable.
@@ -72,8 +71,8 @@ public class AppointmentsController implements Initializable {
 
     /**
      * This initialize method loads the appointment table.
-     * @param url
-     * @param resourceBundle
+     * @param url for initialize
+     * @param resourceBundle for initialize
      */
     public void initialize(URL url, ResourceBundle resourceBundle){
         try {
@@ -83,22 +82,36 @@ public class AppointmentsController implements Initializable {
         }
     }
 
+    /**
+     * this method takes the user to the add appointment scene
+     * @param actionEvent add button clicked
+     * @throws IOException for file errors
+     */
     public void addButtonClicked(ActionEvent actionEvent) throws IOException {
         ChangeScene changeScene = new ChangeScene();
         changeScene.stringToSceneChange(actionEvent, "AddAppointment");
     }
 
+    /**
+     * this method takes the user to the main menu scene
+     * @param actionEvent add button clicked
+     * @throws IOException for file errors
+     */
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {
         ChangeScene currentChange = new ChangeScene();
         currentChange.stringToSceneChange(actionEvent, "MainMenu");
     }
 
+    /**
+     * this method sends the selected appointment to the modify appointment screen
+     * @param actionEvent modify button clicked
+     */
     public void modifyButtonClicked(ActionEvent actionEvent) {
 
         if (appointmentsTable.getSelectionModel().getSelectedItem() == null) {
             PopUpBox.errorBox("Please select an appointment to edit");
         } else {
-            Appointment selectedAppointment = (Appointment) appointmentsTable.getSelectionModel().getSelectedItem();
+            Appointment selectedAppointment = appointmentsTable.getSelectionModel().getSelectedItem();
             int currentIndex = appointmentsTable.getSelectionModel().getSelectedIndex();
 
             try {
@@ -118,8 +131,12 @@ public class AppointmentsController implements Initializable {
         }
     }
 
-    public void deleteButtonClicked(ActionEvent actionEvent) throws SQLException {
-        Appointment selectedAppointment = (Appointment) appointmentsTable.getSelectionModel().getSelectedItem();
+    /**
+     * this method deletes the selected appointment form the sql database
+     * @throws SQLException for sql errors
+     */
+    public void deleteButtonClicked() throws SQLException {
+        Appointment selectedAppointment = appointmentsTable.getSelectionModel().getSelectedItem();
         if (selectedAppointment == null){
             PopUpBox.errorBox("Please select an the appointment you would like to delete.");
         } else {
@@ -133,15 +150,25 @@ public class AppointmentsController implements Initializable {
         }
     }
 
-    public void allAppsRadioSelected(ActionEvent actionEvent) throws SQLException {
+    /**
+     * this method is just a trigger for the refresh table method
+     * @throws SQLException for sql errors
+     */
+    public void allAppsRadioSelected() throws SQLException {
         refreshAppointmentsTable();
     }
-
-    public void monthlyRadioSelected(ActionEvent actionEvent) throws SQLException {
+    /**
+     * this method is just a trigger for the refresh table method
+     * @throws SQLException for sql errors
+     */
+    public void monthlyRadioSelected() throws SQLException {
         refreshAppointmentsTable();
     }
-
-    public void weeklyRadioSelected(ActionEvent actionEvent) throws SQLException {
+    /**
+     * this method is just a trigger for the refresh table method
+     * @throws SQLException for sql errors
+     */
+    public void weeklyRadioSelected() throws SQLException {
         refreshAppointmentsTable();
     }
 }

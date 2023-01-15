@@ -163,28 +163,78 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/DAO/AppointmentSQL.java</url>
-          <line>52</line>
-          <option name="timeStamp" value="50" />
+          <line>68</line>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/DAO/AppointmentSQL.java</url>
+          <line>70</line>
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/DAO/AppointmentSQL.java</url>
+          <line>74</line>
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/DAO/AppointmentSQL.java</url>
+          <line>76</line>
+          <option name="timeStamp" value="60" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/controllers/AddAppointmentController.java</url>
-          <line>117</line>
-          <option name="timeStamp" value="53" />
+          <line>167</line>
+          <option name="timeStamp" value="61" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/controllers/AddAppointmentController.java</url>
-          <line>114</line>
-          <option name="timeStamp" value="54" />
+          <line>171</line>
+          <option name="timeStamp" value="62" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/controllers/AddAppointmentController.java</url>
-          <line>118</line>
-          <option name="timeStamp" value="55" />
+          <line>177</line>
+          <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/controllers/AddAppointmentController.java</url>
-          <line>121</line>
-          <option name="timeStamp" value="56" />
+          <line>179</line>
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/controllers/AddAppointmentController.java</url>
+          <line>178</line>
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/controllers/AddAppointmentController.java</url>
+          <line>172</line>
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/controllers/AddAppointmentController.java</url>
+          <line>173</line>
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/controllers/AddAppointmentController.java</url>
+          <line>174</line>
+          <option name="timeStamp" value="68" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/controllers/AddAppointmentController.java</url>
+          <line>168</line>
+          <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/controllers/AddAppointmentController.java</url>
+          <line>183</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/controllers/AddAppointmentController.java</url>
+          <line>195</line>
+          <option name="timeStamp" value="71" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.sql.SQLException" package="java.sql" />
