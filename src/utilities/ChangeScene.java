@@ -11,6 +11,9 @@ import java.io.IOException;
 
 public class ChangeScene {
 
+    /**
+     * this method is to change a scene given quite a few parameters I started using the stringToSceneChange more
+     */
     public void changeScene(ActionEvent actionEvent, String fxmlFile, int sceneWidth, int sceneHeight, String screenTitle) throws IOException {
         String path = "/views/" + fxmlFile;
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
@@ -22,58 +25,66 @@ public class ChangeScene {
         stage.show();
     }
 
+    /**
+     * This method changes the scene based on the string parameter
+     * @param actionEvent passed in from a button click
+     * @param sceneName a string of the scene to change to
+     * @throws IOException for directory errors
+     */
     public void stringToSceneChange(ActionEvent actionEvent, String sceneName) throws IOException {
         String path = "/views/" + sceneName + ".fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        if (sceneName == "Login"){
-            Scene scene = new Scene(root, 580, 390);
-            stage.setTitle(sceneName);
-            stage.setScene(scene);
-            stage.show();
-        }
-        else if (sceneName == "MainMenu"){
-            Scene scene = new Scene(root, 360, 370);
-            stage.setTitle("Main Menu");
-            stage.setScene(scene);
-            stage.show();
-        }
-        else if (sceneName == "Customers"){
-            Scene scene = new Scene(root, 1170, 600);
-            stage.setTitle(sceneName);
-            stage.setScene(scene);
-            stage.show();
-        }
-        else if (sceneName == "AddCustomer"){
-            Scene scene = new Scene(root, 500, 500);
-            stage.setTitle(sceneName);
-            stage.setScene(scene);
-            stage.show();
-        }
-        else if (sceneName == "Appointments"){
-            Scene scene = new Scene(root, 1150, 600);
-            stage.setTitle(sceneName);
-            stage.setScene(scene);
-            stage.show();
-        }
-        else if (sceneName == "AddAppointment"){
-            Scene scene = new Scene(root, 850, 500);
-            stage.setTitle(sceneName);
-            stage.setScene(scene);
-            stage.show();
-        }
-        else if (sceneName == "Reports"){
-            Scene scene = new Scene(root, 1200, 800);
-            stage.setTitle(sceneName);
-            stage.setScene(scene);
-            stage.show();
-        }
-        else {
-            Scene scene = new Scene(root, 1200, 600);
-            stage.setTitle(sceneName);
-            stage.setScene(scene);
-            stage.show();
+        switch (sceneName) {
+            case "Login" -> {
+                Scene scene = new Scene(root, 580, 390);
+                stage.setTitle(sceneName);
+                stage.setScene(scene);
+                stage.show();
+            }
+            case "MainMenu" -> {
+                Scene scene = new Scene(root, 360, 370);
+                stage.setTitle("Main Menu");
+                stage.setScene(scene);
+                stage.show();
+            }
+            case "Customers" -> {
+                Scene scene = new Scene(root, 1170, 600);
+                stage.setTitle(sceneName);
+                stage.setScene(scene);
+                stage.show();
+            }
+            case "AddCustomer" -> {
+                Scene scene = new Scene(root, 500, 500);
+                stage.setTitle(sceneName);
+                stage.setScene(scene);
+                stage.show();
+            }
+            case "Appointments" -> {
+                Scene scene = new Scene(root, 1150, 600);
+                stage.setTitle(sceneName);
+                stage.setScene(scene);
+                stage.show();
+            }
+            case "AddAppointment" -> {
+                Scene scene = new Scene(root, 850, 500);
+                stage.setTitle(sceneName);
+                stage.setScene(scene);
+                stage.show();
+            }
+            case "Reports" -> {
+                Scene scene = new Scene(root, 1200, 800);
+                stage.setTitle(sceneName);
+                stage.setScene(scene);
+                stage.show();
+            }
+            default -> {
+                Scene scene = new Scene(root, 1200, 600);
+                stage.setTitle(sceneName);
+                stage.setScene(scene);
+                stage.show();
+            }
         }
 
     }

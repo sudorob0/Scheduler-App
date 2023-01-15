@@ -66,18 +66,34 @@ public class AppointmentSQL {
         String startDateTime = String.valueOf(DBConnection.convertToDBTime(startDT));
         String endDateTime = String.valueOf(DBConnection.convertToDBTime(endDT));
         // EXAMPLE QUERY: SELECT * FROM client_schedule.appointments WHERE Start > ('2023-01-15 15:50:00') and Start < ('2023-01-15 16:10:00');
-        String sqlQuery = "SELECT * FROM appointments WHERE Start > ('"+startDateTime+"') and Start < ('"+endDateTime+"');";
+        String sqlQuery = "SELECT * FROM appointments WHERE Start > ('" + startDateTime + "') and Start < ('" + endDateTime + "');";
+        //System.out.print(sqlQuery+"\n");
         //EXAMPLE QUERY: SELECT * FROM Appointments WHERE Start between ('2023-01-14T20:41:16.298123900Z') and ('2023-01-14T20:56:16.298123900Z') and User_id = '1';
         ObservableList<Appointment> appointmentList = makeAppointmentQuery(sqlQuery);
         if (appointmentList.size() > 0) {
             return appointmentList;
-        } else {
-            sqlQuery = "SELECT * FROM appointments WHERE End > ('"+startDateTime+"') and End < ('"+endDateTime+"');";
-            //EXAMPLE QUERY: SELECT * FROM Appointments WHERE Start between ('2023-01-14T20:41:16.298123900Z') and ('2023-01-14T20:56:16.298123900Z') and User_id = '1';
-            appointmentList = makeAppointmentQuery(sqlQuery);
+        }
+        sqlQuery = "SELECT * FROM appointments WHERE End > ('" + startDateTime + "') and End < ('" + endDateTime + "');";
+        //System.out.print(sqlQuery+"\n");
+        //EXAMPLE QUERY: SELECT * FROM Appointments WHERE Start between ('2023-01-14T20:41:16.298123900Z') and ('2023-01-14T20:56:16.298123900Z') and User_id = '1';
+        appointmentList = makeAppointmentQuery(sqlQuery);
+        if (appointmentList.size() > 0) {
             return appointmentList;
         }
+        sqlQuery = "SELECT * FROM appointments WHERE Start < ('" + startDateTime + "') and End > ('" + startDateTime + "');";
+        //System.out.print(sqlQuery + "\n");
+        ////EXAMPLE QUERY: SELECT * FROM Appointments WHERE Start between ('2023-01-14T20:41:16.298123900Z') and ('2023-01-14T20:56:16.298123900Z') and User_id = '1';
+        appointmentList = makeAppointmentQuery(sqlQuery);
+        if (appointmentList.size() > 0) {
+            return appointmentList;
+        }
+        sqlQuery = "SELECT * FROM appointments WHERE Start < ('" + endDateTime + "') and End > ('" + endDateTime + "');";
+        //System.out.print(sqlQuery+"\n"+"\n");
+        //EXAMPLE QUERY: SELECT * FROM Appointments WHERE Start between ('2023-01-14T20:41:16.298123900Z') and ('2023-01-14T20:56:16.298123900Z') and User_id = '1';
+        appointmentList = makeAppointmentQuery(sqlQuery);
+        return appointmentList;
     }
+
 
     public static ObservableList<Appointment> getAppointmentsByMonth() throws SQLException {
         String thisYear = String.valueOf(LocalDate.now().getYear());

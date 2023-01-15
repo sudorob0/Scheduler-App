@@ -23,6 +23,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * controller class for the customers view
+ */
 public class CustomersController implements Initializable {
     public TableView<Customer> customersTable;
     public Button addButton;
@@ -88,7 +91,8 @@ public class CustomersController implements Initializable {
     }
 
     /**
-     * this m
+     * this method sends the selected customer to the modify scene to be edited
+     * @param actionEvent modifyButtonClicked
      */
     public void modifyButtonClicked(ActionEvent actionEvent) {
         if (customersTable.getSelectionModel().getSelectedItem() == null) {
@@ -101,7 +105,7 @@ public class CustomersController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ModifyCustomer.fxml"));
                 Parent root = loader.load();
                 ModifyCustomerController modifyCustomerController = loader.getController();
-                modifyCustomerController.customerToModify(currentIndex, selectedCustomer);
+                modifyCustomerController.customerToModify(selectedCustomer);
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root, 500, 500);
                 stage.setTitle("Modify Customer");
@@ -114,6 +118,10 @@ public class CustomersController implements Initializable {
         }
     }
 
+    /**
+     * this method deletes a selected customer
+     * @throws SQLException for sql errors
+     */
     public void deleteButtonClicked() throws SQLException {
         Customer selectedCustomer = customersTable.getSelectionModel().getSelectedItem();
         if (selectedCustomer == null){

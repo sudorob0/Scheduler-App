@@ -26,24 +26,22 @@ public class ModifyAppointmentController implements Initializable {
     public TextField appointmentidTextField;
     public TextField titleTextField;
     public TextField locationTextField;
-    public ComboBox useridComboBox;
-    public ComboBox customeridComboBox;
+    public ComboBox<Integer> useridComboBox;
+    public ComboBox<Integer> customeridComboBox;
     public Button saveButton;
     public Button backButton;
-    public ComboBox typeComboBox;
-    public ComboBox contactComboBox;
+    public ComboBox<String> typeComboBox;
+    public ComboBox<String> contactComboBox;
     public DatePicker startDatePicker;
     public DatePicker endDatePicker;
-    public ComboBox startTimeComboBox;
-    public ComboBox endTimeComboBox;
+    public ComboBox<String> startTimeComboBox;
+    public ComboBox<String> endTimeComboBox;
     public TextArea descriptionTextArea;
-    private Appointment selectedAppointment;
-    private int currentIndex = 0;
 
     /**
      * The initialize populates all of the combo boxes
-     * @param url
-     * @param resourceBundle
+     * @param url for init
+     * @param resourceBundle for init
      */
     public void initialize(URL url, ResourceBundle resourceBundle){
         // Populates the type combo box
@@ -95,21 +93,24 @@ public class ModifyAppointmentController implements Initializable {
 
     }
 
-    public void appointmentToModify(int currentIndex, Appointment appointment) throws SQLException {
-        this.selectedAppointment = appointment;
-        this.currentIndex = currentIndex;
-        appointmentidTextField.setText(String.valueOf(selectedAppointment.getAppointmentID()));
-        titleTextField.setText(selectedAppointment.getAppointmentTitle());
-        locationTextField.setText(selectedAppointment.getAppointmentLocation());
-        useridComboBox.setValue(selectedAppointment.getUserID());
-        customeridComboBox.setValue(selectedAppointment.getCustomerID());
-        typeComboBox.setValue(selectedAppointment.getAppointmentType());
-        contactComboBox.setValue(ContactSQL.getContactName(selectedAppointment.getContactID()));
-        startDatePicker.setValue(selectedAppointment.getAppointmentStartDateTime().toLocalDate());
-        endDatePicker.setValue(selectedAppointment.getAppointmentEndDateTime().toLocalDate());
-        startTimeComboBox.setValue(selectedAppointment.getAppointmentStartDateTime().toLocalTime().toString());
-        endTimeComboBox.setValue(selectedAppointment.getAppointmentEndDateTime().toLocalTime().toString());
-        descriptionTextArea.setText(selectedAppointment.getAppointmentDescription());
+    /**
+     * This method populates all of the fields with the appointment object sent over from the appointment controller
+     * @param appointment appointment object to be modified
+     * @throws SQLException for sql errors
+     */
+    public void appointmentToModify(Appointment appointment) throws SQLException {
+        appointmentidTextField.setText(String.valueOf(appointment.getAppointmentID()));
+        titleTextField.setText(appointment.getAppointmentTitle());
+        locationTextField.setText(appointment.getAppointmentLocation());
+        useridComboBox.setValue(appointment.getUserID());
+        customeridComboBox.setValue(appointment.getCustomerID());
+        typeComboBox.setValue(appointment.getAppointmentType());
+        contactComboBox.setValue(ContactSQL.getContactName(appointment.getContactID()));
+        startDatePicker.setValue(appointment.getAppointmentStartDateTime().toLocalDate());
+        endDatePicker.setValue(appointment.getAppointmentEndDateTime().toLocalDate());
+        startTimeComboBox.setValue(appointment.getAppointmentStartDateTime().toLocalTime().toString());
+        endTimeComboBox.setValue(appointment.getAppointmentEndDateTime().toLocalTime().toString());
+        descriptionTextArea.setText(appointment.getAppointmentDescription());
     }
 
 
@@ -130,23 +131,16 @@ public class ModifyAppointmentController implements Initializable {
      * @return this returns true if there are NO overlapping appointments and false if there are overlapping appointments
      * @throws SQLException for sql errors
      */
-    private boolean checkForOverlap(LocalDateTime enteredStartDT, LocalDateTime enteredEndDT) throws SQLException {
-        ObservableList<Appointment> allAppointmentsList = AppointmentSQL.getAllAppointments();
-        for (Appointment appointment: allAppointmentsList){
-            LocalDateTime previousAppointmentStart = appointment.getAppointmentStartDateTime();
-            LocalDateTime previousAppointmentEnd = appointment.getAppointmentEndDateTime();
-            String errorMessage = ("This appointment overlaps with a previously scheduled appointment.\nOverlapping Appointment ID: " + appointment.getAppointmentID() + "\nStart time: " + previousAppointmentStart + "\nEnd time: " + previousAppointmentEnd);
-            if (previousAppointmentStart.isAfter(enteredStartDT) && previousAppointmentStart.isBefore(enteredEndDT)){
-                PopUpBox.errorBox(errorMessage);
-                return false;
-            } else if (previousAppointmentEnd.isAfter(enteredStartDT) && previousAppointmentEnd.isBefore(enteredEndDT)) {
-                PopUpBox.errorBox(errorMessage);
-                return false;
-            }
+    private boolean checkForOverlap(ZonedDateTime enteredStartDT, ZonedDateTime enteredEndDT) throws SQLException {
+        ObservableList<Appointment> overlappingAppointments = AppointmentSQL.findOverLappingAppointments(enteredStartDT, enteredEndDT);
+        if (overlappingAppointments.size() > 0) {
+            Appointment overlappingApp = overlappingAppointments.get(0);
+            PopUpBox.errorBox("This appointment overlaps with a previously scheduled appointment.\nOverlapping Appointment ID: " + overlappingApp.getAppointmentID() + "\nStart time: " + overlappingApp.getAppointmentStartDateTime() + "\nEnd time: " + overlappingApp.getAppointmentEndDateTime());
+            return false;
         }
-        // return true if no overlap is found
         return true;
     }
+
 
     /**
      * this method takes the user back one screen when the back button is clicked
@@ -172,14 +166,14 @@ public class ModifyAppointmentController implements Initializable {
         // assign variables
         String enteredTitle = titleTextField.getText();
         String enteredLocation = locationTextField.getText();
-        Integer enteredUserID = (Integer) useridComboBox.getSelectionModel().getSelectedItem();
-        Integer enteredCustomerID = (Integer) customeridComboBox.getSelectionModel().getSelectedItem();
-        String enteredType = (String) typeComboBox.getSelectionModel().getSelectedItem();
-        String enteredContact = (String) contactComboBox.getSelectionModel().getSelectedItem();
+        Integer enteredUserID = useridComboBox.getSelectionModel().getSelectedItem();
+        Integer enteredCustomerID = customeridComboBox.getSelectionModel().getSelectedItem();
+        String enteredType = typeComboBox.getSelectionModel().getSelectedItem();
+        String enteredContact = contactComboBox.getSelectionModel().getSelectedItem();
 
         // Validating all required fields are filled out
-        if (enteredTitle == ""){PopUpBox.errorBox("The title field must be filled out to continue");}
-        else if (enteredLocation == ""){PopUpBox.errorBox("The location field must be filled out to continue");}
+        if (enteredTitle.equals("")){PopUpBox.errorBox("The title field must be filled out to continue");}
+        else if (enteredLocation.equals("")){PopUpBox.errorBox("The location field must be filled out to continue");}
         else if (enteredUserID == null){PopUpBox.errorBox("The user ID field must be filled out to continue");}
         else if (enteredCustomerID == null){PopUpBox.errorBox("The customer ID field must be filled out to continue");}
         else if (enteredType == null){PopUpBox.errorBox("The appointment type field must be filled out to continue");}
@@ -192,14 +186,19 @@ public class ModifyAppointmentController implements Initializable {
             if (endDatePicker.getValue() == null) {
                 endDatePicker.setValue(startDatePicker.getValue());
             }
-            LocalTime enteredStartTime = LocalTime.parse((CharSequence) startTimeComboBox.getSelectionModel().getSelectedItem());
-            LocalTime enteredEndTime = LocalTime.parse((CharSequence) endTimeComboBox.getSelectionModel().getSelectedItem());
+            LocalTime enteredStartTime = LocalTime.parse(startTimeComboBox.getSelectionModel().getSelectedItem());
+            LocalTime enteredEndTime = LocalTime.parse(endTimeComboBox.getSelectionModel().getSelectedItem());
 
             // Save full start and end date/times to one variable
             LocalDateTime enteredStartDT = LocalDateTime.of(startDatePicker.getValue(), enteredStartTime);
             LocalDateTime enteredEndDT = LocalDateTime.of(endDatePicker.getValue(), enteredEndTime);
             LocalTime enteredStartTimeEst = convertToEst(enteredStartDT);
             LocalTime enteredEndTimeEst = convertToEst(enteredEndDT);
+
+            // Zoned the local time with the users default zone
+            ZoneId zoneid = ZoneId.systemDefault();
+            ZonedDateTime zonedStartDT = ZonedDateTime.of(LocalDateTime.of(startDatePicker.getValue(), enteredStartTime), zoneid);
+            ZonedDateTime zonedEndDT = ZonedDateTime.of(LocalDateTime.of(endDatePicker.getValue(), enteredEndTime), zoneid);
 
             // Validate that appointment is within business hours
             if (enteredStartTimeEst.isBefore(LocalTime.of(8,0)) || enteredEndTimeEst.isBefore(LocalTime.of(8, 0)) || enteredStartTimeEst.isAfter(LocalTime.of(22, 0)) || enteredEndTimeEst.isAfter(LocalTime.of(22, 0))) {
@@ -214,7 +213,7 @@ public class ModifyAppointmentController implements Initializable {
                 PopUpBox.errorBox("Appointments can not be scheduled in the past. Please select a time in the future.");
             }
             // Check for appointment overlapping
-            else if (checkForOverlap(enteredStartDT, enteredEndDT)) {
+            else if (checkForOverlap(zonedStartDT, zonedEndDT)) {
                 // add appointment
                 if (AppointmentSQL.modifyAppointment(appointmentidTextField.getText(), ContactSQL.getContactID(enteredContact), enteredTitle, descriptionTextArea.getText(), enteredLocation, enteredType, enteredCustomerID, enteredUserID, enteredStartDT, enteredEndDT)) {
                     PopUpBox.infoBox("Appointment has been successfully saved");

@@ -49,8 +49,8 @@ public class ReportsController implements Initializable {
     }
 
     /**
-     * This method dynamicly displays data from the sql database to the table view
-     * @param sqlQuery
+     * This method dynamically displays data from the sql database to the table view
+     * @param sqlQuery string that will populate the display table
      */
     public void tableViewDisplayData(String sqlQuery) {
         Connection connection;
@@ -94,6 +94,11 @@ public class ReportsController implements Initializable {
     }
 
 
+    /**
+     * this method checks if there is data to populate the display table and
+     * if there is the it will call the the tableViewDisplayData to display the data
+     * @param actionEvent
+     */
     public void generateButtonClicked(ActionEvent actionEvent) {
         String sqlQuery = generateSQL();
         if (!sqlQuery.equals("")) {
@@ -104,11 +109,20 @@ public class ReportsController implements Initializable {
         }
     }
 
+    /**
+     * Changes the scene back to the main menu
+     * @param actionEvent backButtonClicked
+     * @throws IOException for file errors
+     */
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {
         ChangeScene currentChange = new ChangeScene();
         currentChange.stringToSceneChange(actionEvent, "MainMenu");
     }
 
+    /**
+     * clears all the combo boxes
+     * @param actionEvent clearButtonClicked
+     */
     public void clearButtonClicked(ActionEvent actionEvent) {
         reportTypeComboBox.getSelectionModel().clearSelection();
         firstFilterLabel.setText("Filter");
@@ -117,6 +131,10 @@ public class ReportsController implements Initializable {
         secondFilterComboBox.getSelectionModel().clearSelection();
     }
 
+    /**
+     * This method loads the filter combo boxes based on what the user selected in the report combo box
+     * @param actionEvent report combo box selected
+     */
     public void reportTypeSelected(ActionEvent actionEvent) {
         String reportTypeSelected = reportTypeComboBox.getSelectionModel().getSelectedItem();
         firstFilterComboBox.getSelectionModel().clearSelection();
@@ -157,6 +175,11 @@ public class ReportsController implements Initializable {
         }
     }
 
+    /**
+     * This generate the sql queries based on what is selected in the combo boxes
+     * its a lot of conditionals and combining strings together
+     * @return
+     */
     public String generateSQL(){
         Object reportType = reportTypeComboBox.getSelectionModel().getSelectedItem();
         String appointmentQuery = "SELECT * FROM Appointments";

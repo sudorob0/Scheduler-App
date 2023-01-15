@@ -118,7 +118,7 @@ public class AppointmentsController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ModifyAppointment.fxml"));
                 Parent root = loader.load();
                 ModifyAppointmentController modifyAppointmentController = loader.getController();
-                modifyAppointmentController.appointmentToModify(currentIndex, selectedAppointment);
+                modifyAppointmentController.appointmentToModify(selectedAppointment);
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root, 850, 500);
                 stage.setTitle("Modify Appointment");

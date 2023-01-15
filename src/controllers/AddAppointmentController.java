@@ -26,22 +26,22 @@ public class AddAppointmentController implements Initializable {
     public TextField appointmentidTextField;
     public TextField titleTextField;
     public TextField locationTextField;
-    public ComboBox useridComboBox;
-    public ComboBox customeridComboBox;
+    public ComboBox<Integer> useridComboBox;
+    public ComboBox<Integer> customeridComboBox;
     public Button addButton;
     public Button backButton;
-    public ComboBox typeComboBox;
-    public ComboBox contactComboBox;
+    public ComboBox<String> typeComboBox;
+    public ComboBox<String> contactComboBox;
     public DatePicker startDatePicker;
     public DatePicker endDatePicker;
-    public ComboBox startTimeComboBox;
-    public ComboBox endTimeComboBox;
+    public ComboBox<String> startTimeComboBox;
+    public ComboBox<String> endTimeComboBox;
     public TextArea descriptionTextArea;
 
     /**
      * The initialize populates all of the combo boxes
-     * @param url
-     * @param resourceBundle
+     * @param url for init
+     * @param resourceBundle for init
      */
     public void initialize(URL url, ResourceBundle resourceBundle){
         // Populates the type combo box
@@ -109,7 +109,7 @@ public class AddAppointmentController implements Initializable {
      * @param enteredEndDT this is the entered end date/time
 
      * @throws SQLException for sql errors
-     * @return
+     * @return true if there are no overlapping appointments and false otherwise
      */
     private boolean checkForOverlap(ZonedDateTime enteredStartDT, ZonedDateTime enteredEndDT) throws SQLException {
         ObservableList<Appointment> overlappingAppointments = AppointmentSQL.findOverLappingAppointments(enteredStartDT, enteredEndDT);
@@ -145,14 +145,14 @@ public class AddAppointmentController implements Initializable {
         // assign variables
         String enteredTitle = titleTextField.getText();
         String enteredLocation = locationTextField.getText();
-        Integer enteredUserID = (Integer) useridComboBox.getSelectionModel().getSelectedItem();
-        Integer enteredCustomerID = (Integer) customeridComboBox.getSelectionModel().getSelectedItem();
-        String enteredType = (String) typeComboBox.getSelectionModel().getSelectedItem();
-        String enteredContact = (String) contactComboBox.getSelectionModel().getSelectedItem();
+        Integer enteredUserID = useridComboBox.getSelectionModel().getSelectedItem();
+        Integer enteredCustomerID = customeridComboBox.getSelectionModel().getSelectedItem();
+        String enteredType = typeComboBox.getSelectionModel().getSelectedItem();
+        String enteredContact = contactComboBox.getSelectionModel().getSelectedItem();
 
         // Validating all required fields are filled out
-        if (enteredTitle == ""){PopUpBox.errorBox("The title field must be filled out to continue");}
-        else if (enteredLocation == ""){PopUpBox.errorBox("The location field must be filled out to continue");}
+        if (enteredTitle.equals("")){PopUpBox.errorBox("The title field must be filled out to continue");}
+        else if (enteredLocation.equals("")){PopUpBox.errorBox("The location field must be filled out to continue");}
         else if (enteredUserID == null){PopUpBox.errorBox("The user ID field must be filled out to continue");}
         else if (enteredCustomerID == null){PopUpBox.errorBox("The customer ID field must be filled out to continue");}
         else if (enteredType == null){PopUpBox.errorBox("The appointment type field must be filled out to continue");}
@@ -165,8 +165,8 @@ public class AddAppointmentController implements Initializable {
             if (endDatePicker.getValue() == null) {
                 endDatePicker.setValue(startDatePicker.getValue());
             }
-            LocalTime enteredStartTime = LocalTime.parse((CharSequence) startTimeComboBox.getSelectionModel().getSelectedItem());
-            LocalTime enteredEndTime = LocalTime.parse((CharSequence) endTimeComboBox.getSelectionModel().getSelectedItem());
+            LocalTime enteredStartTime = LocalTime.parse(startTimeComboBox.getSelectionModel().getSelectedItem());
+            LocalTime enteredEndTime = LocalTime.parse(endTimeComboBox.getSelectionModel().getSelectedItem());
 
             // Save full start and end date/times to one variable
             LocalDateTime enteredStartDT = LocalDateTime.of(startDatePicker.getValue(), enteredStartTime);
@@ -178,7 +178,6 @@ public class AddAppointmentController implements Initializable {
             ZoneId zoneid = ZoneId.systemDefault();
             ZonedDateTime zonedStartDT = ZonedDateTime.of(LocalDateTime.of(startDatePicker.getValue(), enteredStartTime), zoneid);
             ZonedDateTime zonedEndDT = ZonedDateTime.of(LocalDateTime.of(endDatePicker.getValue(), enteredEndTime), zoneid);
-
 
             // Validate that appointment is within business hours
             if (enteredStartTimeEst.isBefore(LocalTime.of(8,0)) || enteredEndTimeEst.isBefore(LocalTime.of(8, 0)) || enteredStartTimeEst.isAfter(LocalTime.of(22, 0)) || enteredEndTimeEst.isAfter(LocalTime.of(22, 0))) {
