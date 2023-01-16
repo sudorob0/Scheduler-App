@@ -1,15 +1,15 @@
 # Appointment-Management-Application
-Appointment Management Application is an desktop application that is able to schedule, store, and manage appoitments. 
-It has a SQL database backend and a GUI frontend.
+Appointment Management Application is an desktop application that is able to schedule, store, and manage appoitments.\n 
+It has a SQL database backend and a GUI frontend.\n
 
-Author Robert Uhl
-ruhl4@wgu.edu
-Version 1.0
-1/15/2023
-InteliJ IDE Community
-Java JDK 17.0.2
-JavaFX SDK 17.0.2
-mysql-connector-java-8.0.26.jar
+Author Robert Uhl\n
+ruhl4@wgu.edu\n
+Version 1.0\n
+1/15/2023\n
+InteliJ IDE Community\n
+Java JDK 17.0.2\n
+JavaFX SDK 17.0.2\n
+mysql-connector-java-8.0.26.jar\n
 
 How to run the program:
 - Connect application to SQL database
