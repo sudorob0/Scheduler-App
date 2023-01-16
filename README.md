@@ -12,7 +12,7 @@ JavaFX SDK 17.0.2
 mysql-connector-java-8.0.26.jar
 
 How to run the program:
--Connect application to SQL database
+- Connect application to SQL database
 - Launch Application
 - Login with username(test) and password(test)
 - Select an option on main menu, either appointments, customer, reports, or logout.
