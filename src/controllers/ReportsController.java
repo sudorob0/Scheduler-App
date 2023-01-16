@@ -100,7 +100,7 @@ public class ReportsController implements Initializable {
     /**
      * this method checks if there is data to populate the display table and
      * if there is the it will call the the tableViewDisplayData to display the data
-     * @param actionEvent
+     * @param actionEvent generateButtonClicked
      */
     public void generateButtonClicked(ActionEvent actionEvent) {
         String sqlQuery = generateSQL();
