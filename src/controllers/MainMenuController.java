@@ -5,6 +5,9 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 import utilities.ChangeScene;
 
+/**
+ * this class is to controller the main menu class
+ */
 public class MainMenuController {
     public Button customersButton;
     public Button appointmentsButton;

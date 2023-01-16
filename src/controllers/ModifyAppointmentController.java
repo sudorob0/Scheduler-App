@@ -22,6 +22,10 @@ import java.sql.SQLException;
 import java.time.*;
 import java.util.ResourceBundle;
 
+
+/**
+ * this class is to control the modify appointments screen
+ */
 public class ModifyAppointmentController implements Initializable {
     public TextField appointmentidTextField;
     public TextField titleTextField;

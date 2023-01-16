@@ -1,7 +1,7 @@
 package models;
 
 /**
- * Contact class for contact objects
+ * Appointment class to create contact objects. It also sets and gets contact attributes.
  */
 public class Contact {
 

@@ -1,7 +1,7 @@
 package models;
 
 /**
- * Class for the User object
+ * Customer user to create user objects. It also sets and gets the user attributes.
  */
 public class User {
 

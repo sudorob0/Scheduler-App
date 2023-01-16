@@ -3,7 +3,7 @@ package models;
 import java.time.LocalDateTime;
 
 /**
- * Appointment class for all appointments.
+ * Appointment class to create appointment objects. It also sets and gets appointment attributes.
  */
 public class Appointment {
 

@@ -18,6 +18,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * this class is to controller the AddCustomer screen
+ */
 public class AddCustomerController implements Initializable {
     public TextField customeridTextField;
     public TextField nameTextField;
@@ -30,7 +33,7 @@ public class AddCustomerController implements Initializable {
     public TextField postalCodeField;
 
     /**
-     * this init method loads the countries combobox
+     * this init method loads the countries combo box
      * @param url for initialize
      * @param resourceBundle for initialize
      */

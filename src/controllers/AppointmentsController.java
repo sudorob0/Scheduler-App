@@ -20,6 +20,9 @@ import java.util.ResourceBundle;
 import DAO.AppointmentSQL;
 import utilities.PopUpBox;
 
+/**
+ * This class is to control the appointments screen
+ */
 public class AppointmentsController implements Initializable {
     public TableView<Appointment> appointmentsTable;
     public Button addButton;
@@ -43,16 +46,36 @@ public class AppointmentsController implements Initializable {
 
     /**
      * This method checks which radio button is selected and then refreshes the appointmentTable.
+     *
      * @throws SQLException for any SQL errors
      */
     public void refreshAppointmentsTable() throws SQLException {
         /**
          * LAMBDA EXPRESSION: These lambda expressions call this method refreshAppointmentsTable() when one of the radio buttons are selected
+         * These expressions replaced 3 methods and make the code more readable by grouping them all together.
          */
-        allAppsRadio.setOnAction(e -> { try { refreshAppointmentsTable(); } catch (SQLException throwables) { throwables.printStackTrace(); } });
-        monthlyRadio.setOnAction(e -> { try { refreshAppointmentsTable(); } catch (SQLException throwables) { throwables.printStackTrace(); } });
-        weeklyRadio.setOnAction(e -> { try { refreshAppointmentsTable(); } catch (SQLException throwables) { throwables.printStackTrace(); } });
-        if (allAppsRadio.isSelected()){
+        allAppsRadio.setOnAction(e -> {
+            try {
+                refreshAppointmentsTable();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
+        monthlyRadio.setOnAction(e -> {
+            try {
+                refreshAppointmentsTable();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
+        weeklyRadio.setOnAction(e -> {
+            try {
+                refreshAppointmentsTable();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
+        if (allAppsRadio.isSelected()) {
             ObservableList<Appointment> appointmentsList = AppointmentSQL.getAllAppointments();
             appointmentsTable.setItems(appointmentsList);
         } else if (monthlyRadio.isSelected()) {
@@ -77,10 +100,11 @@ public class AppointmentsController implements Initializable {
 
     /**
      * This initialize method loads the appointment table.
-     * @param url for initialize
+     *
+     * @param url            for initialize
      * @param resourceBundle for initialize
      */
-    public void initialize(URL url, ResourceBundle resourceBundle){
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             refreshAppointmentsTable();
         } catch (SQLException throwables) {
@@ -90,6 +114,7 @@ public class AppointmentsController implements Initializable {
 
     /**
      * this method takes the user to the add appointment scene
+     *
      * @param actionEvent add button clicked
      * @throws IOException for file errors
      */
@@ -100,6 +125,7 @@ public class AppointmentsController implements Initializable {
 
     /**
      * this method takes the user to the main menu scene
+     *
      * @param actionEvent add button clicked
      * @throws IOException for file errors
      */
@@ -110,6 +136,7 @@ public class AppointmentsController implements Initializable {
 
     /**
      * this method sends the selected appointment to the modify appointment screen
+     *
      * @param actionEvent modify button clicked
      */
     public void modifyButtonClicked(ActionEvent actionEvent) {
@@ -139,45 +166,49 @@ public class AppointmentsController implements Initializable {
 
     /**
      * this method deletes the selected appointment form the sql database
+     *
      * @throws SQLException for sql errors
      */
     public void deleteButtonClicked() throws SQLException {
         Appointment selectedAppointment = appointmentsTable.getSelectionModel().getSelectedItem();
-        if (selectedAppointment == null){
+        if (selectedAppointment == null) {
             PopUpBox.errorBox("Please select an the appointment you would like to delete.");
         } else {
             String popUpString = "Are you sure you want to delete this Appointment?\nID: " + selectedAppointment.getAppointmentID() + "\nName: " + selectedAppointment.getAppointmentTitle();
-            if (PopUpBox.optionBox(popUpString)){
-                AppointmentSQL.deleteAppointment(selectedAppointment.getAppointmentID());
-                refreshAppointmentsTable();
-                //3a2
-                PopUpBox.infoBox("Appointment successfully canceled.\n Appointment ID: " + selectedAppointment.getAppointmentID() + ", Type: " + selectedAppointment.getAppointmentType());
+            if (PopUpBox.optionBox(popUpString)) {
+                if (AppointmentSQL.deleteAppointment(selectedAppointment.getAppointmentID())) {
+                    refreshAppointmentsTable();
+                    PopUpBox.infoBox("Appointment successfully canceled.\n Appointment ID: " + selectedAppointment.getAppointmentID() + ", Type: " + selectedAppointment.getAppointmentType());
+                } else {
+                    PopUpBox.errorBox("Error canceling appointment, please try again");
+                }
             }
         }
-    }
-// all this was replaced with a Lambda expression
-    /**
-     * this method is just a trigger for the refresh table method
-     * @throws SQLException for sql errors
 
-    public void allAppsRadioSelected() throws SQLException {
+        // all this was replaced with a Lambda expression
+        /**
+         * this method is just a trigger for the refresh table method
+         * @throws SQLException for sql errors
+
+        public void allAppsRadioSelected() throws SQLException {
         refreshAppointmentsTable();
-    }
-    /**
-     * this method is just a trigger for the refresh table method
-     * @throws SQLException for sql errors
+        }
+        /**
+         * this method is just a trigger for the refresh table method
+         * @throws SQLException for sql errors
 
 
-    public void monthlyRadioSelected() throws SQLException {
+        public void monthlyRadioSelected() throws SQLException {
         refreshAppointmentsTable();
-    }
-    /**
-     * this method is just a trigger for the refresh table method
-     * @throws SQLException for sql errors
+        }
+        /**
+         * this method is just a trigger for the refresh table method
+         * @throws SQLException for sql errors
 
-    public void weeklyRadioSelected() throws SQLException {
+        public void weeklyRadioSelected() throws SQLException {
         refreshAppointmentsTable();
+        }
+         */
     }
-*/
 }
 

@@ -130,10 +130,12 @@ public class CustomersController implements Initializable {
             String popUpString = "Are you sure you want to delete this Customer?\nID: " + selectedCustomer.getCustomerID() + "\nName: " + selectedCustomer.getCustomerName();
             if (PopUpBox.optionBox(popUpString)) {
                 AppointmentSQL.deleteCustomerAppointments(selectedCustomer.getCustomerID());
-                CustomerSQL.deleteCustomer(selectedCustomer.getCustomerID());
-                refreshCustomersTable();
-                //3a2
-                PopUpBox.infoBox("Customer and customer's appointments successfully deleted.\n Customer ID: " + selectedCustomer.getCustomerID() + ", Name: " + selectedCustomer.getCustomerName());
+                if (CustomerSQL.deleteCustomer(selectedCustomer.getCustomerID())) {
+                    PopUpBox.infoBox("Customer and customer's appointments successfully deleted.\n Customer ID: " + selectedCustomer.getCustomerID() + ", Name: " + selectedCustomer.getCustomerName());
+                    refreshCustomersTable();
+                } else {
+                    PopUpBox.infoBox("There was an error deleting appointment, please try again");
+                }
             }
         }
     }

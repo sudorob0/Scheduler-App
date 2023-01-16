@@ -1,7 +1,7 @@
 package models;
 
 /**
- * class for country objects
+ * Appointment class to create country objects. It also sets and gets country attributes.
  */
 public class Country {
     private final int countryID;

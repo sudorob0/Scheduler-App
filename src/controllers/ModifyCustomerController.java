@@ -19,6 +19,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * this class is to control the modify customers screen
+ */
 public class ModifyCustomerController implements Initializable {
     public TextField customeridTextField;
     public TextField nameTextField;

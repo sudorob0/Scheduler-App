@@ -2,7 +2,7 @@ package models;
 
 
 /**
- * Customer class for customer objects.
+ * Customer class to create customer objects. It also sets and gets the customer attributes.
  */
 public class Customer {
 

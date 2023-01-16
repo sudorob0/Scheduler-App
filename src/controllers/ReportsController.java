@@ -24,6 +24,9 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+/**
+ * this class is for all the methods that control the reports screen
+ */
 public class ReportsController implements Initializable {
     public Button generateButton;
     public Button backButton;

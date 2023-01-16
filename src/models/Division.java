@@ -1,7 +1,7 @@
 package models;
 
 /**
- * Class for the Division object
+ * Division class to create customer division. It also sets and gets the division attributes.
  */
 public class Division {
 

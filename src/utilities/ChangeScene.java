@@ -9,6 +9,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * This ChangeScene class is a helper class that makes it easier to change scenes
+ */
 public class ChangeScene {
 
     /**

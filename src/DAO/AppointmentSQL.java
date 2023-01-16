@@ -7,6 +7,9 @@ import java.sql.*;
 import java.sql.PreparedStatement;
 import java.time.*;
 
+/**
+ * this class handles all the SQL Queries and statement made to the appointment database
+ */
 public class AppointmentSQL {
     /**
      * This method makes sql queries and returns a list of appointment objects

@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+/**
+ * This class is for the connection to the SQL database
+ */
 public abstract class DBConnection {
     private static final String protocol = "jdbc";
     private static final String vendor = ":mysql:";

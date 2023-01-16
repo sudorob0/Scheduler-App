@@ -11,6 +11,9 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+/**
+ * This class handles all the SQL Queries and statements made to the customer database.
+ */
 public class CustomerSQL {
 
     /**

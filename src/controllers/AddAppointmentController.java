@@ -22,6 +22,9 @@ import java.sql.SQLException;
 import java.time.*;
 import java.util.ResourceBundle;
 
+/**
+ * This class is to control the add appointments screen
+ */
 public class AddAppointmentController implements Initializable {
     public TextField appointmentidTextField;
     public TextField titleTextField;
@@ -55,6 +58,7 @@ public class AddAppointmentController implements Initializable {
             /**
              * LAMBDA EXPRESSION: created a lambda expression to loop through the contacts list and get the contact name
              * in String format to add to the contactStringList. This list will be used to populate the combo boxes.
+             * It greatly reduced the amount of code I had to write since I didnt have to make a multiline for loop.
              */
             contactsList.forEach(contact -> contactStringList.add(contact.getContactName()));
             contactComboBox.setItems(contactStringList);

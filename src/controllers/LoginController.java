@@ -5,12 +5,10 @@ import DAO.UserSQL;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import models.Appointment;
 import utilities.ChangeScene;
 
@@ -25,6 +23,9 @@ import java.time.ZonedDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * This class is to controller the login screen
+ */
 public class LoginController implements Initializable {
     public ResourceBundle rb;
     public TextField usernameTextField;
@@ -51,7 +52,11 @@ public class LoginController implements Initializable {
         loginButton.setText(rb.getString("loginButton"));
         exitButton.setText(rb.getString("exitButton"));
         locationTextField.setText(ZoneId.systemDefault().toString());
-        // LAMBDA FUNCTION: this lambda function exits the application, before I added this I had a hold method for the exit button
+        /**
+         * LAMBDA FUNCTION: this lambda function exits the application,
+         * before I added this I had a hold method for the exit button
+         * which help reduce the amount of code an make it more readable
+          */
         exitButton.setOnAction(e-> System.exit(0));
     }
 
