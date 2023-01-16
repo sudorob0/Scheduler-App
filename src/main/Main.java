@@ -30,7 +30,7 @@ public class Main extends Application {
     }
     /**
      * Launches application and establishes a database connection
-     * @param args
+     * @param args all arguments
      */
     public static void main(String[] args) {
         // language testing

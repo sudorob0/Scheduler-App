@@ -36,11 +36,21 @@ public class AppointmentSQL {
         return appointmentsList;
     }
 
+    /**
+     * gets a list of Appointment Objects
+     * @return list of appointment objects
+     * @throws SQLException for sql errors
+     */
     public static ObservableList<Appointment> getAllAppointments() throws SQLException {
-        ObservableList<Appointment> appointmentList = makeAppointmentQuery("SELECT * FROM appointments ORDER BY Appointment_ID");
-        return appointmentList;
+        return makeAppointmentQuery("SELECT * FROM appointments ORDER BY Appointment_ID");
     }
 
+    /**
+     * gets a list of appointments for a user withing 15minutes of the query
+     * @param userID userID that is logging in
+     * @return list of appointment objects with in 15mins
+     * @throws SQLException for sql errors
+     */
     public static ObservableList<Appointment> getAppointmentsWithinFifteenMins(Integer userID) throws SQLException {
         //convert to UTC-0 since that is what the database is on
         ZonedDateTime currentDBtime = DBConnection.convertToDBTime(ZonedDateTime.now());
@@ -48,12 +58,12 @@ public class AppointmentSQL {
         String inFifteenMins = String.valueOf(currentDBtime.plusMinutes(15));
         String sqlQuery = "SELECT * FROM Appointments WHERE Start between ('"+rightNow+"') and ('"+inFifteenMins+"') and User_id = '"+userID+"';";
         //EXAMPLE QUERY: SELECT * FROM Appointments WHERE Start between ('2023-01-14T20:41:16.298123900Z') and ('2023-01-14T20:56:16.298123900Z') and User_id = '1';
-        ObservableList<Appointment> appointmentList = makeAppointmentQuery(sqlQuery);
-        return appointmentList;
+        return makeAppointmentQuery(sqlQuery);
     }
 
     /**
      * This method does a query to find overlapping appointments and returns any overlapping appointments
+     * It runs 4 total queries if it doesn't find any overlapping appointments it returns an empty list
      * @param startDT provide start date time of the appointment
      * @param endDT provide end date time of the appointment
      * @return a list of appointment that overlap
@@ -92,44 +102,51 @@ public class AppointmentSQL {
         return appointmentList;
     }
 
-
+    /**
+     * get all appointments within the current month
+     * @return list of all appointments within the current month
+     * @throws SQLException for sql error
+     */
     public static ObservableList<Appointment> getAppointmentsByMonth() throws SQLException {
         String thisYear = String.valueOf(LocalDate.now().getYear());
         String thisMonth = String.valueOf(LocalDate.now().getMonthValue());
         String nextMonth = String.valueOf(LocalDate.now().getMonthValue() + 1);
         String sqlQuery = "SELECT * FROM appointments WHERE Start between ('"+thisYear+"-"+thisMonth+"-1') and ('"+thisYear+"-"+nextMonth+"-1 01:00:00');";
         // EXAMPLE: SELECT * FROM client_schedule.appointments WHERE Start between ('2023-1-1') and ('2023-2-1 01:00:00');
-        ObservableList<Appointment> appointmentList = makeAppointmentQuery(sqlQuery);
-        return appointmentList;
+        return makeAppointmentQuery(sqlQuery);
     }
 
+    /**
+     * Gets a a list of appointment objects for the current week
+     * @return list of appointments objects in the current week
+     * @throws SQLException for sql errors
+     */
     public static ObservableList<Appointment> getAppointmentsByWeek() throws SQLException {
         String dayOfWeek = LocalDate.now().getDayOfWeek().toString();
-        int daysUntilEndOfWeek = 0;
-            switch (dayOfWeek) {
-                case "Sunday":  daysUntilEndOfWeek=6;
-                    break;
-                case "Monday":  daysUntilEndOfWeek=5;
-                    break;
-                case "Tuesday":  daysUntilEndOfWeek=4;
-                    break;
-                case "Wednesday":  daysUntilEndOfWeek=3;
-                    break;
-                case "Thursday":  daysUntilEndOfWeek=2;
-                    break;
-                case "Friday":  daysUntilEndOfWeek=1;
-                    break;
-                case "Saturday":  daysUntilEndOfWeek=0;
-                    break;
-            }
+        // change the current weekday to an integer
+        int daysUntilEndOfWeek = switch (dayOfWeek) {
+            case "Sunday" -> 6;
+            case "Monday" -> 5;
+            case "Tuesday" -> 4;
+            case "Wednesday" -> 3;
+            case "Thursday" -> 2;
+            case "Friday" -> 1;
+            case "Saturday" -> 0;
+            default -> 0;
+        };
         String endOfWeek = String.valueOf(LocalDate.now().plusDays(daysUntilEndOfWeek));
         String beginningOfWeek = String.valueOf(LocalDate.now().plusDays(daysUntilEndOfWeek-6));
         // EXAMPLE VALUE: SELECT * FROM client_schedule.appointments WHERE Start between ('2023-01-08') and ('2023-01-14');
         String sqlQuery = "SELECT * FROM appointments WHERE Start between ('"+beginningOfWeek+"') and ('"+endOfWeek+"');";
-        ObservableList<Appointment> appointmentList = makeAppointmentQuery(sqlQuery);
-        return appointmentList;
+        return makeAppointmentQuery(sqlQuery);
     }
 
+    /**
+     * deletes one appointment from the sql database
+     * @param appointmentID appointment ID to be deleted
+     * @return true if the delete was successful
+     * @throws SQLException for sql error
+     */
     public static boolean deleteAppointment(int appointmentID) throws SQLException {
         try {
             String deleteStatement = "DELETE from appointments WHERE Appointment_ID=" + appointmentID;
@@ -142,6 +159,12 @@ public class AppointmentSQL {
         }
     }
 
+    /**
+     * This deletes all appointments for a customer
+     * @param customerID customerID that is getting deleted
+     * @return true if statement was successful
+     * @throws SQLException for sql errors
+     */
     public static boolean deleteCustomerAppointments(int customerID) throws SQLException {
         try {
             String deleteStatement = "DELETE from appointments WHERE Customer_ID=" + customerID;
@@ -154,6 +177,20 @@ public class AppointmentSQL {
         }
     }
 
+    /**
+     * This method adds one new appointment
+     * @param contactName name of contact
+     * @param title title of the appointment
+     * @param description description for appointment
+     * @param location location of appointment
+     * @param type type of appointment
+     * @param customerId customer id that the appointment is for
+     * @param userID userID seeing customer
+     * @param start start time of appointment
+     * @param end end time of appointment
+     * @return true if successful
+     * @throws SQLException for sql errors
+     */
     public static boolean addAppointment(String contactName, String title, String description, String location, String type, Integer customerId, Integer userID, LocalDateTime start, LocalDateTime end) throws SQLException {
         Integer contactID = ContactSQL.getContactID(contactName);
         String insertStatement = "INSERT INTO appointments(Title, Description, Location, Type, Start, End, Create_Date, Customer_ID, Contact_ID, User_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -177,7 +214,20 @@ public class AppointmentSQL {
         }
     }
 
-
+    /**
+     * This method adds one new appointment
+     * @param contact name of contact
+     * @param title title of the appointment
+     * @param description description for appointment
+     * @param location location of appointment
+     * @param type type of appointment
+     * @param customerID customer id that the appointment is for
+     * @param userID userID seeing customer
+     * @param startDateTime start time of appointment
+     * @param endDateTime end time of appointment
+     * @return true if successful
+     * @throws SQLException for sql errors
+     */
     public static boolean modifyAppointment(String appointmentID, Integer contact, String title, String description, String location, String type, Integer customerID, Integer userID, LocalDateTime startDateTime, LocalDateTime endDateTime) throws SQLException {
         String insertStatement = "UPDATE Appointments SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Last_Update = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
         PreparedStatement ps = DBConnection.getConnection().prepareStatement(insertStatement);

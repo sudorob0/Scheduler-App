@@ -25,7 +25,8 @@ public class Customer {
      *  @param customerPhone sets the customer phone number.
      *  @param customerDivision sets the customer division using the country selection.
      *  @param divisionID sets the customer division ID using the division selection as an integer.
-     *  @param customerCountry sets the customer country. */
+     *  @param customerCountry sets the customer country.
+     *  */
     public Customer(int customerID, String customerName, String customerAddress, String customerZipCode,
                     String customerPhone, String customerDivision, int divisionID, String customerCountry) {
         this.customerID = customerID;

@@ -48,7 +48,7 @@ public class Division {
 
     /**
      * Getter to return a string of the division Name
-     * @return The string the combobox uses to display the division in the list
+     * @return The string the combo box uses to display the division in the list
      */
     public String toString() {
         return division;

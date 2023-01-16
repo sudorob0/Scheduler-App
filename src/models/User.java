@@ -11,9 +11,9 @@ public class User {
 
     /**
      * Create user object
-     * @param userID
-     * @param userName is a string that sets the userName
-     * @param password Is a string that sets the users Password
+     * @param userID integer that sets the userID
+     * @param userName string that sets the userName
+     * @param password string that sets the users Password
      */
     public User(int userID, String userName, String password) {
         this.userID = userID;

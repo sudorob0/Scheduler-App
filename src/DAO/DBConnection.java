@@ -51,6 +51,11 @@ public abstract class DBConnection {
         }
     }
 
+    /**
+     * this method converts the local default time on the users computer to the UTC time used by the sql database
+     * @param localZonedTime local time that is to be converted, it has to be Zoned
+     * @return the UTC time
+     */
     public static ZonedDateTime convertToDBTime(ZonedDateTime localZonedTime) {
         ZonedDateTime dbTime = localZonedTime.withZoneSameInstant(ZoneId.of("-00:00"));
         return dbTime;

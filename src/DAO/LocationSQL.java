@@ -10,7 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-
+/**
+ * The LocationSQL class is for both the country and division sql queries.
+ */
 public class LocationSQL {
 
     /**
@@ -39,12 +41,17 @@ public class LocationSQL {
         return countriesList;
     }
 
+    /**
+     * gets countryID when provided with the country name
+     * @param countryName name of the country you want an id for
+     * @return country id
+     * @throws SQLException for sql errors
+     */
     public static Integer getCountryID(String countryName) throws SQLException {
         PreparedStatement ps = DBConnection.getConnection().prepareStatement("SELECT * from countries WHERE Country = '" + countryName + "';");
         ResultSet rs = ps.executeQuery();
         while (rs.next()){
-            Integer countryID = rs.getInt("Country_ID");
-            return countryID;
+            return rs.getInt("Country_ID");
         }
         return null;
     }
@@ -53,12 +60,17 @@ public class LocationSQL {
         PreparedStatement ps = DBConnection.getConnection().prepareStatement("SELECT * from first_level_divisions WHERE Division = '" + divisionName + "';");
         ResultSet rs = ps.executeQuery();
         while (rs.next()){
-            String divisionID = rs.getString("Division_ID");
-            return divisionID;
+            return rs.getString("Division_ID");
         }
         return null;
     }
 
+    /**
+     * get all the division names for a specified country
+     * @param countryID the you need the division names for
+     * @return a list of division names
+     * @throws SQLException sql errors
+     */
     public static ObservableList<String> getDivisionNames(Integer countryID) throws SQLException {
         ObservableList<String> divisionNames = FXCollections.observableArrayList();
         PreparedStatement ps = DBConnection.getConnection().prepareStatement("SELECT * from first_level_divisions WHERE Country_ID = '" + countryID + "';");

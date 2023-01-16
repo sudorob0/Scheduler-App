@@ -37,6 +37,11 @@ public class UserSQL {
         return Boolean.FALSE;
     }
 
+    /**
+     * get all the users from database
+     * @return a list of all the user objects
+     * @throws SQLException sql errors
+     */
     public static ObservableList<User> getAllUsers() throws SQLException {
         ObservableList<User> usersList = FXCollections.observableArrayList();
         String sqlFindUser = "SELECT * FROM users;";
@@ -56,6 +61,12 @@ public class UserSQL {
         return usersList;
     }
 
+    /**
+     * get user id of the provided user name
+     * @param userName user name of the id you need
+     * @return username string
+     * @throws SQLException sql errors
+     */
     public static Integer getUserID(String userName) throws SQLException {
         PreparedStatement ps = DBConnection.getConnection().prepareStatement("SELECT * from users WHERE User_Name = '" + userName + "';");
         ResultSet rs = ps.executeQuery();

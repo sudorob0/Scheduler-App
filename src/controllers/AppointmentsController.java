@@ -47,7 +47,7 @@ public class AppointmentsController implements Initializable {
      */
     public void refreshAppointmentsTable() throws SQLException {
         /**
-         * LAMBDA EXPRESSION: These lambda expressions call this method when one of the radio buttons are selected
+         * LAMBDA EXPRESSION: These lambda expressions call this method refreshAppointmentsTable() when one of the radio buttons are selected
          */
         allAppsRadio.setOnAction(e -> { try { refreshAppointmentsTable(); } catch (SQLException throwables) { throwables.printStackTrace(); } });
         monthlyRadio.setOnAction(e -> { try { refreshAppointmentsTable(); } catch (SQLException throwables) { throwables.printStackTrace(); } });
