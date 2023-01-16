@@ -127,11 +127,14 @@ public class ReportsController implements Initializable {
      * @param actionEvent clearButtonClicked
      */
     public void clearButtonClicked(ActionEvent actionEvent) {
-        reportTypeComboBox.getSelectionModel().clearSelection();
-        firstFilterLabel.setText("Filter");
-        firstFilterComboBox.getSelectionModel().clearSelection();
-        secondFilterLabel.setText("Filter");
-        secondFilterComboBox.getSelectionModel().clearSelection();
+        try {
+            reportTypeComboBox.getSelectionModel().clearSelection();
+            firstFilterLabel.setText("Filter");
+            firstFilterComboBox.getSelectionModel().clearSelection();
+            secondFilterLabel.setText("Filter");
+            secondFilterComboBox.getSelectionModel().clearSelection();
+        } catch (Exception e){
+        }
     }
 
     /**
@@ -175,7 +178,7 @@ public class ReportsController implements Initializable {
                 throwables.printStackTrace();
             }
             secondFilterLabel.setText("No Filter");
-        }
+        } else {}
     }
 
     /**

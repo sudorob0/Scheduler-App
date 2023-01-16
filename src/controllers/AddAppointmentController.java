@@ -89,7 +89,7 @@ public class AddAppointmentController implements Initializable {
 
         // Populate the start and end times with available appointment times with 15 minute increments
         ObservableList<String> time = FXCollections.observableArrayList();
-        LocalTime startTime = LocalTime.of(7,0);
+        LocalTime startTime = LocalTime.of(5,0);
         LocalTime endTime = LocalTime.of(23, 0);
         time.add(startTime.toString());
         while (startTime.isBefore(endTime)){
@@ -100,15 +100,6 @@ public class AddAppointmentController implements Initializable {
         endTimeComboBox.setItems(time);
 
 
-    }
-
-    /**
-     * this method converts from the users local time to eastern time
-     * @param time provide local time
-     * @return time converted to eastern
-     */
-    private LocalTime convertToEst(LocalDateTime time) {
-        return LocalTime.from(ZonedDateTime.of(time, ZoneId.of("America/New_York")));
     }
 
     /**
@@ -143,6 +134,15 @@ public class AddAppointmentController implements Initializable {
     }
 
     /**
+     * this method converts from the users local time to eastern time
+     * @param time provide local time
+     * @return time converted to eastern
+     */
+    private LocalTime convertToEst(ZonedDateTime time) {
+        return LocalTime.from(time.withZoneSameInstant(ZoneId.of("America/New_York")));
+    }
+
+    /**
      * This method first validates that all fields are filled out, it then validates that the appointment start and end
      * date/times are valid. If everything is correct it will create an appointment in the sql database.
      * @param actionEvent add button clicked
@@ -174,32 +174,35 @@ public class AddAppointmentController implements Initializable {
             if (endDatePicker.getValue() == null) {
                 endDatePicker.setValue(startDatePicker.getValue());
             }
+            // Save local time variable
             LocalTime enteredStartTime = LocalTime.parse(startTimeComboBox.getSelectionModel().getSelectedItem());
             LocalTime enteredEndTime = LocalTime.parse(endTimeComboBox.getSelectionModel().getSelectedItem());
 
             // Save full start and end date/times to one variable
             LocalDateTime enteredStartDT = LocalDateTime.of(startDatePicker.getValue(), enteredStartTime);
             LocalDateTime enteredEndDT = LocalDateTime.of(endDatePicker.getValue(), enteredEndTime);
-            LocalTime enteredStartTimeEst = convertToEst(enteredStartDT);
-            LocalTime enteredEndTimeEst = convertToEst(enteredEndDT);
 
             // Zoned the local time with the users default zone
             ZoneId zoneid = ZoneId.systemDefault();
             ZonedDateTime zonedStartDT = ZonedDateTime.of(LocalDateTime.of(startDatePicker.getValue(), enteredStartTime), zoneid);
             ZonedDateTime zonedEndDT = ZonedDateTime.of(LocalDateTime.of(endDatePicker.getValue(), enteredEndTime), zoneid);
 
-            // Validate that appointment is within business hours
-            if (enteredStartTimeEst.isBefore(LocalTime.of(8,0)) || enteredEndTimeEst.isBefore(LocalTime.of(8, 0)) || enteredStartTimeEst.isAfter(LocalTime.of(22, 0)) || enteredEndTimeEst.isAfter(LocalTime.of(22, 0))) {
-                PopUpBox.errorBox("Appointments can only be scheduled within the business hours of 8am to 10pm EST.");
+            // converted to eastern time
+            LocalTime easternStart = convertToEst(zonedStartDT);
+            LocalTime easternEnd = convertToEst(zonedEndDT);
+
+            // Validate that appointment is within the eastern times business hours
+            if (easternStart.isBefore(LocalTime.of(8,0)) || easternEnd.isBefore(LocalTime.of(8, 0)) || easternStart.isAfter(LocalTime.of(22, 0)) || easternEnd.isAfter(LocalTime.of(22, 0))) {
+                PopUpBox.errorBox("Appointments can only be scheduled within the business hours of 8am to 10pm EST.\n Your local zone id is "+zoneid.toString()+"\n Your local time is "+LocalTime.now()+"\nEastern time is "+ LocalTime.from(ZonedDateTime.now().withZoneSameInstant(ZoneId.of("America/New_York"))) +"\n Please adjust your time accordingly");
             }
             // Validate end date/time is after start date/time
             else if (enteredStartDT.isAfter(enteredEndDT) || enteredStartDT.isEqual(enteredEndDT)) {
                 PopUpBox.errorBox("The end date/time has to be after the start data/time");
             }
             // Validate that appointment does not take place in the past
-            else if (enteredStartDT.isBefore(LocalDateTime.now())) {
-                PopUpBox.errorBox("Appointments can not be scheduled in the past. Please select a time in the future.");
-            }
+            //else if (enteredStartDT.isBefore(LocalDateTime.now())) {
+                //PopUpBox.errorBox("Appointments can not be scheduled in the past. Please select a time in the future.");
+            //}
             // Check for appointment overlapping
             else if (checkForOverlap(zonedStartDT, zonedEndDT)) {
                 // add appointment

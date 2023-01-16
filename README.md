@@ -1,15 +1,24 @@
 # Appointment-Management-Application
-Appointment Management Application is an desktop application that is able to schedule, store, and manage appoitments.<br /> 
-It has a SQL database backend and a GUI frontend.<br /> 
+Appointment Management Application is a desktop application that is able to schedule, store, and manage appoitments.<br /> 
+It has an SQL database backend and a GUI frontend.<br /> 
 
 Author Robert Uhl<br /> 
 ruhl4@wgu.edu<br /> 
 Version 1.0<br /> 
 1/15/2023<br /> 
-InteliJ IDE Community<br /> 
-Java JDK 17.0.2<br /> 
-JavaFX SDK 17.0.2<br /> 
-mysql-connector-java-8.0.26.jar<br /> 
+InteliJ IDE Community<br />
+IntelliJ IDEA 2021.1.3 (Community Edition)
+Build #IC-211.7628.21, built on June 30, 2021<br />
+Runtime version: 11.0.11+9-b1341.60 amd64<br />
+VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.<br />
+Windows 10 10.0<br />
+GC: G1 Young Generation, G1 Old Generation<br />
+Memory: 768M<br />
+Cores: 4<br />
+Kotlin: 211-1.4.32-release-IJ7628.19<br />
+Java JDK 17.0.1<br /> 
+JavaFX SDK 17.0.1<br /> 
+mysql-connector-java-8.0.25.jar<br /> 
 <br /> 
 How to run the program:
 - Connect application to SQL database
@@ -21,4 +30,4 @@ How to run the program:
 - The reports screen will allow you to generate a report by selecting one or more filters.
 <br /> 
 <br /> 
-The additional report I created is 
+The additional report I created filters the appointment based on the userID, so the employees can check their schedules for the day.
