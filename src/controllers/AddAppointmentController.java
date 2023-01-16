@@ -43,6 +43,9 @@ public class AddAppointmentController implements Initializable {
 
     /**
      * The initialize populates all of the combo boxes
+     * LAMBDA EXPRESSION: created a lambda expression to loop through the contacts list and get the contact name
+     * in String format to add to the contactStringList. This list will be used to populate the combo boxes.
+     * It greatly reduced the amount of code I had to write since I didnt have to make a multiline for loop.
      * @param url for init
      * @param resourceBundle for init
      */
@@ -55,11 +58,9 @@ public class AddAppointmentController implements Initializable {
         try {
             ObservableList<Contact>contactsList = ContactSQL.getAllContacts();
             ObservableList<String> contactStringList = FXCollections.observableArrayList();
-            /**
-             * LAMBDA EXPRESSION: created a lambda expression to loop through the contacts list and get the contact name
-             * in String format to add to the contactStringList. This list will be used to populate the combo boxes.
-             * It greatly reduced the amount of code I had to write since I didnt have to make a multiline for loop.
-             */
+            // LAMBDA EXPRESSION: created a lambda expression to loop through the contacts list and get the contact name
+            // in String format to add to the contactStringList. This list will be used to populate the combo boxes.
+            // It greatly reduced the amount of code I had to write since I didnt have to make a multiline for loop.
             contactsList.forEach(contact -> contactStringList.add(contact.getContactName()));
             contactComboBox.setItems(contactStringList);
         } catch (SQLException throwables) {

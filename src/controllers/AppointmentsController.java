@@ -46,14 +46,13 @@ public class AppointmentsController implements Initializable {
 
     /**
      * This method checks which radio button is selected and then refreshes the appointmentTable.
-     *
+     *  LAMBDA EXPRESSION: These lambda expressions call this method refreshAppointmentsTable() when one of the radio buttons are selected
+     *  These expressions replaced 3 methods and make the code more readable by grouping them all together.
      * @throws SQLException for any SQL errors
      */
     public void refreshAppointmentsTable() throws SQLException {
-        /**
-         * LAMBDA EXPRESSION: These lambda expressions call this method refreshAppointmentsTable() when one of the radio buttons are selected
-         * These expressions replaced 3 methods and make the code more readable by grouping them all together.
-         */
+         // LAMBDA EXPRESSION: These lambda expressions call this method refreshAppointmentsTable() when one of the radio buttons are selected
+         // These expressions replaced 3 methods and make the code more readable by grouping them all together.
         allAppsRadio.setOnAction(e -> {
             try {
                 refreshAppointmentsTable();

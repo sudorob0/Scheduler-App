@@ -41,6 +41,9 @@ public class LoginController implements Initializable {
     /**
      * This initialize method displays the text in the language that the user has set on their local machine and displays
      * their location.
+     * LAMBDA FUNCTION: this lambda function exits the application,
+     * before I added this I had a hold method for the exit button
+     * which help reduce the amount of code an make it more readable
      * @param url for init
      * @param resourceBundle for init
      */
@@ -52,11 +55,9 @@ public class LoginController implements Initializable {
         loginButton.setText(rb.getString("loginButton"));
         exitButton.setText(rb.getString("exitButton"));
         locationTextField.setText(ZoneId.systemDefault().toString());
-        /**
-         * LAMBDA FUNCTION: this lambda function exits the application,
-         * before I added this I had a hold method for the exit button
-         * which help reduce the amount of code an make it more readable
-          */
+        //LAMBDA FUNCTION: this lambda function exits the application,
+        //before I added this I had a hold method for the exit button
+        //which help reduce the amount of code an make it more readable
         exitButton.setOnAction(e-> System.exit(0));
     }
 

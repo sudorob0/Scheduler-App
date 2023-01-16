@@ -2,17 +2,15 @@ package main;
 
 import DAO.DBConnection;
 
-import controllers.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.Locale;
 
 /**
- *
+ * Main class launched application
  * Author Robert Uhl
  */
 public class Main extends Application {

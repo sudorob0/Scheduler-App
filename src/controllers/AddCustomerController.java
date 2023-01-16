@@ -38,16 +38,14 @@ public class AddCustomerController implements Initializable {
      * @param resourceBundle for initialize
      */
     public void initialize(URL url, ResourceBundle resourceBundle){
-
         ObservableList<String> countryNames = FXCollections.observableArrayList();
         ObservableList<Country> countriesObjectList = LocationSQL.getAllCountries();
         countriesObjectList.forEach(country -> countryNames.add(country.getCountry()));
         countryComboBox.setItems(countryNames);
-
     }
 
     /**
-     * This method does entry validation for adding customers, it then addes the customer if everything is valid
+     * This method does entry validation for adding customers, it then adds the customer if everything is valid
      * @param actionEvent add button clicked
      * @throws SQLException for sql errors
      * @throws IOException for file errors
@@ -81,7 +79,7 @@ public class AddCustomerController implements Initializable {
     }
 
     /**
-     * This method populates the division combobox
+     * This method populates the division combo box
      * @throws SQLException for sql errors
      */
     public void countrySelected() throws SQLException {
