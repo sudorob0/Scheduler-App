@@ -79,7 +79,11 @@ public class ReportsController implements Initializable {
                 for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                     // Conditional statement to handle null entries
                     if (rs.getString(i) != null){
-                        row.add(rs.getString(i));
+                        try {    
+                            row.add(String.valueOf(rs.getTimestamp(i)));
+                        } catch (Exception e){    
+                            row.add(rs.getString(i));
+                        }
                     } else {
                         row.add("");
                     }
