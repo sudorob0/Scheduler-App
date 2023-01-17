@@ -101,8 +101,13 @@ public class AppointmentSQL {
         sqlQuery = "SELECT * FROM appointments WHERE Start < ('" + endDateTime + "') and End > ('" + endDateTime + "');";
         //System.out.print(sqlQuery+"\n"+"\n");
         //EXAMPLE QUERY: SELECT * FROM Appointments WHERE Start between ('2023-01-14T20:41:16.298123900Z') and ('2023-01-14T20:56:16.298123900Z') and User_id = '1';
-        appointmentList = makeAppointmentQuery(sqlQuery);
+        if (appointmentList.size() > 0) {    
+            return appointmentList;
+        }
+        sqlQuery = "SELECT * FROM appointments WHERE Start = ('" + startDateTime + "') and End = ('" + endDateTime + "');";
+        //System.out.print(sqlQuery+"\n"+"\n");//EXAMPLE QUERY: SELECT * FROM Appointments WHERE Start between ('2023-01-14T20:41:16.298123900Z') and ('2023-01-14T20:56:16.298123900Z') and User_id = '1';appointmentList = makeAppointmentQuery(sqlQuery);
         return appointmentList;
+
     }
 
     /**
