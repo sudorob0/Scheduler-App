@@ -31,4 +31,4 @@ How to run the program:
 <br /> 
 
 
-![alt text](https://github.com/sudorob0/Appointment-Manager-App/tree/master/screen_shots/loginScreen.jpg?raw=true)
+![alt text](https://github.com/sudorob0/Appointment-Manager-App/tree/master/screen_shots/loginScreen.png?raw=true)
