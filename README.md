@@ -46,6 +46,15 @@ Add and modify appointment screen:
 
 ![alt text](https://github.com/sudorob0/Appointment-Manager-App/blob/master/screen_shots/addAppointment.png?raw=true)
 
-Customer screen the screen displays all customers:
+Customer screen, this screen displays all customers:
 
 ![alt text](https://github.com/sudorob0/Appointment-Manager-App/blob/master/screen_shots/customerScreen.png?raw=true)
+
+This screen you can add or modify customers:
+
+![alt text](https://github.com/sudorob0/Appointment-Manager-App/blob/master/screen_shots/addCustomer.png?raw=true)
+
+This is the report screen were you can create customer reports and select up to 2 filters.
+The table view dynamicly builds the table based of the sql database queries.
+
+![alt text](https://github.com/sudorob0/Appointment-Manager-App/blob/master/screen_shots/reportScreen.png?raw=true)
