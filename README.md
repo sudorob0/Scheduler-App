@@ -30,7 +30,22 @@ How to run the program:
 <br /> 
 <br /> 
 
+Login Screen, with user authentication:
 
 ![alt text](https://github.com/sudorob0/Appointment-Manager-App/blob/master/screen_shots/loginScreen.png?raw=true)
 
-![alt text](https://github.com/sudorob0/Appointment-Manager-App/blob/main/screen_shots/mainMenu.png?raw=true)
+Main Menu:
+
+![alt text](https://github.com/sudorob0/Appointment-Manager-App/blob/master/screen_shots/mainMenu.png?raw=true)
+
+Appointment Screen, here you can view all scheduled appointment and delete any appointments:
+
+![alt text](https://github.com/sudorob0/Appointment-Manager-App/blob/master/screen_shots/appointmentScreen.png?raw=true)
+
+Add and modify appointment screen:
+
+![alt text](https://github.com/sudorob0/Appointment-Manager-App/blob/master/screen_shots/addAppointment.png?raw=true)
+
+Customer screen the screen displays all customers:
+
+![alt text](https://github.com/sudorob0/Appointment-Manager-App/blob/master/screen_shots/customerScreen.png?raw=true)
