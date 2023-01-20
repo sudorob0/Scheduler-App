@@ -1,9 +1,8 @@
-# Appointment-Management-Application
-Appointment Management Application is a desktop application that is able to schedule, store, and manage appoitments.<br /> 
+# Appointment-Manger-App
+Appointment Manager App is a desktop application that is able to schedule, store, and manage appoitments.<br /> 
 It has an SQL database backend and a GUI frontend.<br /> 
 
 Author Robert Uhl<br /> 
-ruhl4@wgu.edu<br /> 
 Version 1.0<br /> 
 1/15/2023<br /> 
 InteliJ IDE Community<br />
@@ -30,4 +29,6 @@ How to run the program:
 - The reports screen will allow you to generate a report by selecting one or more filters.
 <br /> 
 <br /> 
-The additional report I created filters the appointment based on the userID, so the employees can check their schedules for the day.
+
+
+![alt text](https://github.com/sudorob0/Appointment-Manager-App/tree/master/screen_shots/loginScreen.jpg?raw=true)
