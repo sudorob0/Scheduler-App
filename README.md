@@ -1,5 +1,5 @@
-# Appointment-Manger-App
-Appointment Manager App is a desktop application that is able to schedule, store, and manage appoitments.<br /> 
+# Scheduler-App
+This Appointment manager app is a desktop application that is able to schedule, store, and manage appoitments.<br /> 
 It has an SQL database backend and a GUI frontend.<br /> 
 
 Author Robert Uhl<br /> 
